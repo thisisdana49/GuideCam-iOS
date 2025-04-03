@@ -13,16 +13,8 @@
 		3EE1EBB82D9E778300681B6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB02D9E778300681B6B /* Main.storyboard */; };
 		3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */; };
 		3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */; };
-		3EE1EBC22D9E781900681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC12D9E781300681B6B /* .gitkeep */; };
-		3EE1EBC42D9E782A00681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC32D9E782A00681B6B /* .gitkeep */; };
-		3EE1EBC62D9E783600681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC52D9E783600681B6B /* .gitkeep */; };
 		3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */; };
-		3EE1EBCD2D9E78EE00681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBCC2D9E78EE00681B6B /* .gitkeep */; };
-		3EE1EBCF2D9E78EF00681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBCE2D9E78EF00681B6B /* .gitkeep */; };
-		3EE1EBD12D9E78F000681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBD02D9E78F000681B6B /* .gitkeep */; };
-		3EE1EBD62D9E7DA700681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBD52D9E7DA700681B6B /* .gitkeep */; };
-		3EE1EBD82D9E7DA800681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBD72D9E7DA800681B6B /* .gitkeep */; };
-		3EE1EBDA2D9E7DA900681B6B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBD92D9E7DA900681B6B /* .gitkeep */; };
+		3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBDC2D9E821000681B6B /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +36,7 @@
 		3EE1EBD52D9E7DA700681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD72D9E7DA800681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD92D9E7DA900681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBDC2D9E821000681B6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				3EE1EBDB2D9E7DB600681B6B /* Base */,
+				3EE1EBDC2D9E821000681B6B /* ViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -304,17 +298,8 @@
 			files = (
 				3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */,
 				3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */,
-				3EE1EBD62D9E7DA700681B6B /* .gitkeep in Resources */,
-				3EE1EBD82D9E7DA800681B6B /* .gitkeep in Resources */,
-				3EE1EBC22D9E781900681B6B /* .gitkeep in Resources */,
-				3EE1EBCF2D9E78EF00681B6B /* .gitkeep in Resources */,
-				3EE1EBC42D9E782A00681B6B /* .gitkeep in Resources */,
 				3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */,
-				3EE1EBDA2D9E7DA900681B6B /* .gitkeep in Resources */,
 				3EE1EBB82D9E778300681B6B /* Main.storyboard in Resources */,
-				3EE1EBD12D9E78F000681B6B /* .gitkeep in Resources */,
-				3EE1EBC62D9E783600681B6B /* .gitkeep in Resources */,
-				3EE1EBCD2D9E78EE00681B6B /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +312,7 @@
 			files = (
 				3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */,
 				3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */,
+				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +356,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CP9THWX4QS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GuideCam/Info.plist;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -403,7 +389,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CP9THWX4QS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GuideCam/Info.plist;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -479,6 +465,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -536,6 +523,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
