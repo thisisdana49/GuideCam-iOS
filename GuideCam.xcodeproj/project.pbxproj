@@ -15,7 +15,26 @@
 		3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */; };
 		3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */; };
 		3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBDC2D9E821000681B6B /* ViewController.swift */; };
+		3EE1EBE02D9E840900681B6B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBDF2D9E840900681B6B /* SnapKit */; };
+		3EE1EBE32D9E841900681B6B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE22D9E841900681B6B /* RxCocoa */; };
+		3EE1EBE52D9E841900681B6B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE42D9E841900681B6B /* RxSwift */; };
+		3EE1EBE82D9E844E00681B6B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE72D9E844E00681B6B /* RealmSwift */; };
+		3EE1EBE92D9E845C00681B6B /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE72D9E844E00681B6B /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3EE1EBEA2D9E845C00681B6B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3EE1EBE92D9E845C00681B6B /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +63,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE1EBE82D9E844E00681B6B /* RealmSwift in Frameworks */,
+				3EE1EBE52D9E841900681B6B /* RxSwift in Frameworks */,
+				3EE1EBE32D9E841900681B6B /* RxCocoa in Frameworks */,
+				3EE1EBE02D9E840900681B6B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +268,7 @@
 				3EE1EB692D9E47B000681B6B /* Sources */,
 				3EE1EB6A2D9E47B000681B6B /* Frameworks */,
 				3EE1EB6B2D9E47B000681B6B /* Resources */,
+				3EE1EBEA2D9E845C00681B6B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +276,10 @@
 			);
 			name = GuideCam;
 			packageProductDependencies = (
+				3EE1EBDF2D9E840900681B6B /* SnapKit */,
+				3EE1EBE22D9E841900681B6B /* RxCocoa */,
+				3EE1EBE42D9E841900681B6B /* RxSwift */,
+				3EE1EBE72D9E844E00681B6B /* RealmSwift */,
 			);
 			productName = GuideCam;
 			productReference = 3EE1EB6D2D9E47B000681B6B /* GuideCam.app */;
@@ -281,6 +309,11 @@
 			);
 			mainGroup = 3EE1EB642D9E47B000681B6B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3EE1EB6E2D9E47B000681B6B /* Products */;
 			projectDirPath = "";
@@ -556,6 +589,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
+		3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3EE1EBDF2D9E840900681B6B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		3EE1EBE22D9E841900681B6B /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		3EE1EBE42D9E841900681B6B /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		3EE1EBE72D9E844E00681B6B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3EE1EB652D9E47B000681B6B /* Project object */;
 }
