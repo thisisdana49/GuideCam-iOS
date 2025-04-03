@@ -1,0 +1,644 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
+		3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA82D9E778300681B6B /* Localizable.strings */; };
+		3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAE2D9E778300681B6B /* LaunchScreen.storyboard */; };
+		3EE1EBB82D9E778300681B6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB02D9E778300681B6B /* Main.storyboard */; };
+		3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */; };
+		3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */; };
+		3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */; };
+		3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBDC2D9E821000681B6B /* ViewController.swift */; };
+		3EE1EBE02D9E840900681B6B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBDF2D9E840900681B6B /* SnapKit */; };
+		3EE1EBE32D9E841900681B6B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE22D9E841900681B6B /* RxCocoa */; };
+		3EE1EBE52D9E841900681B6B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE42D9E841900681B6B /* RxSwift */; };
+		3EE1EBE82D9E844E00681B6B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE72D9E844E00681B6B /* RealmSwift */; };
+		3EE1EBE92D9E845C00681B6B /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE72D9E844E00681B6B /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3EE1EBEA2D9E845C00681B6B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3EE1EBE92D9E845C00681B6B /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EE1EBA62D9E778300681B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3EE1EBA72D9E778300681B6B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3EE1EBAA2D9E778300681B6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3EE1EBAD2D9E778300681B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3EE1EBAF2D9E778300681B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3EE1EBC12D9E781300681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBC32D9E782A00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBC52D9E783600681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		3EE1EBCC2D9E78EE00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBCE2D9E78EF00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBD02D9E78F000681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBD52D9E7DA700681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBD72D9E7DA800681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBD92D9E7DA900681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		3EE1EBDC2D9E821000681B6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3EE1EB6A2D9E47B000681B6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE1EBE82D9E844E00681B6B /* RealmSwift in Frameworks */,
+				3EE1EBE52D9E841900681B6B /* RxSwift in Frameworks */,
+				3EE1EBE32D9E841900681B6B /* RxCocoa in Frameworks */,
+				3EE1EBE02D9E840900681B6B /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3EE1EB642D9E47B000681B6B = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBB32D9E778300681B6B /* GuideCam */,
+				3EE1EB6E2D9E47B000681B6B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3EE1EB6E2D9E47B000681B6B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EB6D2D9E47B000681B6B /* GuideCam.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3EE1EBA02D9E778300681B6B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */,
+				3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		3EE1EBA12D9E778300681B6B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		3EE1EBA22D9E778300681B6B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBBE2D9E77AE00681B6B /* Extension */,
+				3EE1EBBF2D9E77B300681B6B /* Utils */,
+				3EE1EBC02D9E77B800681B6B /* Constants */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3EE1EBA32D9E778300681B6B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBC92D9E78C700681B6B /* RepositoryImpl */,
+				3EE1EBCA2D9E78D100681B6B /* Realm */,
+				3EE1EBCB2D9E78DA00681B6B /* Storage */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3EE1EBA42D9E778300681B6B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBD22D9E78FC00681B6B /* Model */,
+				3EE1EBD32D9E790200681B6B /* Repository */,
+				3EE1EBD42D9E790900681B6B /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		3EE1EBA52D9E778300681B6B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBDB2D9E7DB600681B6B /* Base */,
+				3EE1EBDC2D9E821000681B6B /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		3EE1EBA92D9E778300681B6B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBAE2D9E778300681B6B /* LaunchScreen.storyboard */,
+				3EE1EBA62D9E778300681B6B /* Assets.xcassets */,
+				3EE1EBA82D9E778300681B6B /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3EE1EBAB2D9E778300681B6B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBAA2D9E778300681B6B /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		3EE1EBB32D9E778300681B6B /* GuideCam */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBA02D9E778300681B6B /* Application */,
+				3EE1EBA52D9E778300681B6B /* Presentation */,
+				3EE1EBA42D9E778300681B6B /* Domain */,
+				3EE1EBA32D9E778300681B6B /* Data */,
+				3EE1EBA12D9E778300681B6B /* Coordinator */,
+				3EE1EBA22D9E778300681B6B /* Core */,
+				3EE1EBA92D9E778300681B6B /* Resources */,
+				3EE1EBAB2D9E778300681B6B /* Support */,
+				3EE1EBB02D9E778300681B6B /* Main.storyboard */,
+			);
+			path = GuideCam;
+			sourceTree = "<group>";
+		};
+		3EE1EBBE2D9E77AE00681B6B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBC12D9E781300681B6B /* .gitkeep */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3EE1EBBF2D9E77B300681B6B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBC32D9E782A00681B6B /* .gitkeep */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3EE1EBC02D9E77B800681B6B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBC52D9E783600681B6B /* .gitkeep */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		3EE1EBC92D9E78C700681B6B /* RepositoryImpl */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBCC2D9E78EE00681B6B /* .gitkeep */,
+			);
+			path = RepositoryImpl;
+			sourceTree = "<group>";
+		};
+		3EE1EBCA2D9E78D100681B6B /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBCE2D9E78EF00681B6B /* .gitkeep */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		3EE1EBCB2D9E78DA00681B6B /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBD02D9E78F000681B6B /* .gitkeep */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		3EE1EBD22D9E78FC00681B6B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBD92D9E7DA900681B6B /* .gitkeep */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3EE1EBD32D9E790200681B6B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBD72D9E7DA800681B6B /* .gitkeep */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		3EE1EBD42D9E790900681B6B /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				3EE1EBD52D9E7DA700681B6B /* .gitkeep */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		3EE1EBDB2D9E7DB600681B6B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3EE1EB6C2D9E47B000681B6B /* GuideCam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EE1EB802D9E47B200681B6B /* Build configuration list for PBXNativeTarget "GuideCam" */;
+			buildPhases = (
+				3EE1EB692D9E47B000681B6B /* Sources */,
+				3EE1EB6A2D9E47B000681B6B /* Frameworks */,
+				3EE1EB6B2D9E47B000681B6B /* Resources */,
+				3EE1EBEA2D9E845C00681B6B /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GuideCam;
+			packageProductDependencies = (
+				3EE1EBDF2D9E840900681B6B /* SnapKit */,
+				3EE1EBE22D9E841900681B6B /* RxCocoa */,
+				3EE1EBE42D9E841900681B6B /* RxSwift */,
+				3EE1EBE72D9E844E00681B6B /* RealmSwift */,
+			);
+			productName = GuideCam;
+			productReference = 3EE1EB6D2D9E47B000681B6B /* GuideCam.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3EE1EB652D9E47B000681B6B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					3EE1EB6C2D9E47B000681B6B = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 3EE1EB682D9E47B000681B6B /* Build configuration list for PBXProject "GuideCam" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3EE1EB642D9E47B000681B6B;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3EE1EB6E2D9E47B000681B6B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3EE1EB6C2D9E47B000681B6B /* GuideCam */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3EE1EB6B2D9E47B000681B6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */,
+				3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */,
+				3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */,
+				3EE1EBB82D9E778300681B6B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3EE1EB692D9E47B000681B6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */,
+				3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */,
+				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
+				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3EE1EBA82D9E778300681B6B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EE1EBA72D9E778300681B6B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3EE1EBAE2D9E778300681B6B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EE1EBAD2D9E778300681B6B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3EE1EBB02D9E778300681B6B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EE1EBAF2D9E778300681B6B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3EE1EB812D9E47B200681B6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CP9THWX4QS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dana.GuideCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3EE1EB822D9E47B200681B6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CP9THWX4QS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dana.GuideCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		3EE1EB832D9E47B200681B6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3EE1EB842D9E47B200681B6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3EE1EB682D9E47B000681B6B /* Build configuration list for PBXProject "GuideCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EE1EB832D9E47B200681B6B /* Debug */,
+				3EE1EB842D9E47B200681B6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EE1EB802D9E47B200681B6B /* Build configuration list for PBXNativeTarget "GuideCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EE1EB812D9E47B200681B6B /* Debug */,
+				3EE1EB822D9E47B200681B6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
+		3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3EE1EBDF2D9E840900681B6B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		3EE1EBE22D9E841900681B6B /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		3EE1EBE42D9E841900681B6B /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		3EE1EBE72D9E844E00681B6B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3EE1EB652D9E47B000681B6B /* Project object */;
+}
