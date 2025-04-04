@@ -18,6 +18,10 @@ final class CreateGuideView: BaseView {
     let imageModeButton = UIButton()
     let undoButton = UIButton()
     let redoButton = UIButton()
+    
+    var selectedRatio: String = "9:16"
+    var ratioButtons: [UIButton] = []
+    var canvasHeightConstraint: Constraint?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,10 +56,10 @@ final class CreateGuideView: BaseView {
             $0.width.equalTo(64)
         }
 
-        canvasView.snp.makeConstraints {
-            $0.top.equalTo(ratioStackView.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(80)
+        canvasView.snp.makeConstraints { make in
+            make.top.equalTo(ratioStackView.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview()
+            canvasHeightConstraint = make.height.equalTo(500).constraint
         }
 
         drawModeButton.snp.makeConstraints {
@@ -84,8 +88,10 @@ final class CreateGuideView: BaseView {
     }
 
     override func configureView() {
-        backgroundColor = .black
+        backgroundColor = .systemBackground
 
+        canvasView.backgroundColor = .systemPink
+        
         // 비율 스택 뷰 설정
         ratioStackView.axis = .horizontal
         ratioStackView.spacing = 8
@@ -102,6 +108,7 @@ final class CreateGuideView: BaseView {
             button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
             button.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
             ratioStackView.addArrangedSubview(button)
+            ratioButtons.append(button)
         }
 
         // 상단 저장 버튼
@@ -123,6 +130,37 @@ final class CreateGuideView: BaseView {
 
         redoButton.setImage(UIImage(systemName: "arrow.uturn.forward"), for: .normal)
         redoButton.tintColor = .white
+        
+        setSelectedRatio("9:16")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setSelectedRatio(selectedRatio)
+    }
+
+    func setSelectedRatio(_ ratio: String) {
+        selectedRatio = ratio
+        ratioButtons.forEach { button in
+            button.isSelected = button.title(for: .normal) == ratio
+        }
+        
+        let width = UIScreen.main.bounds.width - 32
+        var newHeight: CGFloat = 500 // Default height
+        
+        switch ratio {
+        case "1:1":
+            newHeight = width
+        case "3:4":
+            newHeight = width * 4 / 3
+        case "9:16":
+            newHeight = width * 16 / 9
+        default:
+            break
+        }
+        
+        canvasHeightConstraint?.update(offset: newHeight)
+        layoutIfNeeded()
     }
     
 }

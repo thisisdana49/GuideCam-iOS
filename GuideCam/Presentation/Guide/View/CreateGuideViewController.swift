@@ -16,6 +16,19 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
 
     override func configure() {
-        view.backgroundColor = .systemBackground
+        
+    }
+    
+    override func bind() {
+        super.bind()
+        
+        for button in mainView.ratioButtons {
+            button.addTarget(self, action: #selector(ratioButtonTapped(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func ratioButtonTapped(_ sender: UIButton) {
+        guard let ratio = sender.titleLabel?.text else { return }
+        mainView.setSelectedRatio(ratio)
     }
 }
