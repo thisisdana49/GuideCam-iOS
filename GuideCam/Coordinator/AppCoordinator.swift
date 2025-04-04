@@ -5,4 +5,21 @@
 //  Created by 조다은 on 4/3/25.
 //
 
-import Foundation
+import UIKit
+
+final class AppCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+    let window: UIWindow
+
+    init(window: UIWindow) {
+        self.window = window
+    }
+
+    func start() {
+        let tabBarCoordinator = TabBarCoordinator()
+        childCoordinators.append(tabBarCoordinator)
+        tabBarCoordinator.start()
+        window.rootViewController = tabBarCoordinator.tabBarController
+        window.makeKeyAndVisible()
+    }
+}
