@@ -36,6 +36,9 @@
 		3EFA02FD2D9FF0A90087A708 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02FC2D9FF0A90087A708 /* AlbumViewModel.swift */; };
 		3EFA03002D9FF7CD0087A708 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02FF2D9FF7CD0087A708 /* CustomTabBarController.swift */; };
 		3EFA03032D9FF7FB0087A708 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03022D9FF7FB0087A708 /* CustomTabBarView.swift */; };
+		3EFA03052D9FFE480087A708 /* GuideListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03042D9FFE480087A708 /* GuideListView.swift */; };
+		3EFA03072DA000160087A708 /* GuideThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03062DA000160087A708 /* GuideThumbnailCell.swift */; };
+		3EFA03092DA000910087A708 /* Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03082DA000910087A708 /* Guide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,7 +73,6 @@
 		3EE1EBD02D9E78F000681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD52D9E7DA700681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD72D9E7DA800681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		3EE1EBD92D9E7DA900681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBDC2D9E821000681B6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3EFA02CD2D9E87870087A708 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		3EFA02CF2D9E87CD0087A708 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,9 @@
 		3EFA02FC2D9FF0A90087A708 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		3EFA02FF2D9FF7CD0087A708 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		3EFA03022D9FF7FB0087A708 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
+		3EFA03042D9FFE480087A708 /* GuideListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideListView.swift; sourceTree = "<group>"; };
+		3EFA03062DA000160087A708 /* GuideThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideThumbnailCell.swift; sourceTree = "<group>"; };
+		3EFA03082DA000910087A708 /* Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guide.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,7 +276,7 @@
 		3EE1EBD22D9E78FC00681B6B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3EE1EBD92D9E7DA900681B6B /* .gitkeep */,
+				3EFA03082DA000910087A708 /* Guide.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,6 +338,8 @@
 			isa = PBXGroup;
 			children = (
 				3EFA02E22D9FEFD10087A708 /* GuideListViewController.swift */,
+				3EFA03042D9FFE480087A708 /* GuideListView.swift */,
+				3EFA03062DA000160087A708 /* GuideThumbnailCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -480,12 +487,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EFA02FD2D9FF0A90087A708 /* AlbumViewModel.swift in Sources */,
+				3EFA03072DA000160087A708 /* GuideThumbnailCell.swift in Sources */,
 				3EFA02D42D9FECE90087A708 /* CoordinatorProtocol.swift in Sources */,
 				3EFA03002D9FF7CD0087A708 /* CustomTabBarController.swift in Sources */,
 				3EFA02E42D9FEFD10087A708 /* GuideListViewController.swift in Sources */,
 				3EFA02F52D9FF0130087A708 /* CameraViewController.swift in Sources */,
 				3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */,
 				3EFA02DC2D9FEF3A0087A708 /* AlbumCoordinator.swift in Sources */,
+				3EFA03092DA000910087A708 /* Guide.swift in Sources */,
 				3EFA02DA2D9FEF200087A708 /* CameraCoordinator.swift in Sources */,
 				3EFA02CE2D9E87870087A708 /* BaseViewModel.swift in Sources */,
 				3EFA02D82D9FEF080087A708 /* GuideListCoordinator.swift in Sources */,
@@ -495,6 +504,7 @@
 				3EFA02D22D9E8A080087A708 /* BaseView.swift in Sources */,
 				3EFA02D62D9FED270087A708 /* TabBarCoordinator.swift in Sources */,
 				3EFA02F72D9FF02F0087A708 /* AlbumViewController.swift in Sources */,
+				3EFA03052D9FFE480087A708 /* GuideListView.swift in Sources */,
 				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
 				3EFA02FB2D9FF0900087A708 /* CameraViewModel.swift in Sources */,
