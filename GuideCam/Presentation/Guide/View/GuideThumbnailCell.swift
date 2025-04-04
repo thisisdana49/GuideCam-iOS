@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class GuideCell: UICollectionViewCell {
+final class GuideThumbnailCell: UICollectionViewCell {
 
     private let guideImageView = UIImageView()
     private let titleLabel = UILabel()

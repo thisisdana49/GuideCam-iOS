@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol GuideListCoordinating: AnyObject {
+    func showCreateGuide()
+}
+
 final class GuideListCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     let navigationController: UINavigationController
@@ -18,6 +22,16 @@ final class GuideListCoordinator: Coordinator {
     func start() {
         let viewModel = GuideListViewModel()
         let viewController = GuideListViewController(viewModel: viewModel)
+        viewController.coordinator = self
         navigationController.viewControllers = [viewController]
+    }
+}
+
+extension GuideListCoordinator: GuideListCoordinating {
+    func showCreateGuide() {
+        print(#function)
+        let createViewModel = CreateGuideViewModel()
+        let createVC = CreateGuideViewController(viewModel: createViewModel)
+        navigationController.pushViewController(createVC, animated: true)
     }
 }

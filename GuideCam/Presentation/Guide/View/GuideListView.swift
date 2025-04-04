@@ -19,7 +19,7 @@ final class GuideListView: BaseView {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
-        collectionView.register(GuideCell.self, forCellWithReuseIdentifier: "GuideCell")
+        collectionView.register(GuideThumbnailCell.self, forCellWithReuseIdentifier: "GuideThumbnailCell")
         return collectionView
     }()
 
