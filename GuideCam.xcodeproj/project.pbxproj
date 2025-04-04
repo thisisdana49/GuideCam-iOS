@@ -41,6 +41,7 @@
 		3EFA03092DA000910087A708 /* Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03082DA000910087A708 /* Guide.swift */; };
 		3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA030A2DA008AA0087A708 /* CreateGuideViewController.swift */; };
 		3EFA030D2DA008BE0087A708 /* CreateGuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA030C2DA008BE0087A708 /* CreateGuideViewModel.swift */; };
+		3EFA030F2DA018180087A708 /* CreateGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA030E2DA018180087A708 /* CreateGuideView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -97,6 +98,7 @@
 		3EFA03082DA000910087A708 /* Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guide.swift; sourceTree = "<group>"; };
 		3EFA030A2DA008AA0087A708 /* CreateGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGuideViewController.swift; sourceTree = "<group>"; };
 		3EFA030C2DA008BE0087A708 /* CreateGuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGuideViewModel.swift; sourceTree = "<group>"; };
+		3EFA030E2DA018180087A708 /* CreateGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGuideView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +347,7 @@
 				3EFA03042D9FFE480087A708 /* GuideListView.swift */,
 				3EFA03062DA000160087A708 /* GuideThumbnailCell.swift */,
 				3EFA030A2DA008AA0087A708 /* CreateGuideViewController.swift */,
+				3EFA030E2DA018180087A708 /* CreateGuideView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				3EFA03032D9FF7FB0087A708 /* CustomTabBarView.swift in Sources */,
 				3EFA02F92D9FF03E0087A708 /* GuideListViewModel.swift in Sources */,
 				3EFA02D22D9E8A080087A708 /* BaseView.swift in Sources */,
+				3EFA030F2DA018180087A708 /* CreateGuideView.swift in Sources */,
 				3EFA02D62D9FED270087A708 /* TabBarCoordinator.swift in Sources */,
 				3EFA02F72D9FF02F0087A708 /* AlbumViewController.swift in Sources */,
 				3EFA03052D9FFE480087A708 /* GuideListView.swift in Sources */,

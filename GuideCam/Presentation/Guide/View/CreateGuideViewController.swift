@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateGuideViewController: BaseViewController<BaseView, CreateGuideViewModel> {
+final class CreateGuideViewController: BaseViewController<CreateGuideView, CreateGuideViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
