@@ -32,6 +32,7 @@ extension GuideListCoordinator: GuideListCoordinating {
         print(#function)
         let createViewModel = CreateGuideViewModel()
         let createVC = CreateGuideViewController(viewModel: createViewModel)
+        createVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(createVC, animated: true)
     }
 }

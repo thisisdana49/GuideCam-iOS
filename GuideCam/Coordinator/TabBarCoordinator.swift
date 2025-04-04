@@ -15,6 +15,10 @@ final class TabBarCoordinator: Coordinator {
         let guideNav = UINavigationController()
         let cameraNav = UINavigationController()
         let albumNav = UINavigationController()
+        
+        guideNav.delegate = tabBarController
+        cameraNav.delegate = tabBarController
+        albumNav.delegate = tabBarController
 
         let guideCoordinator = GuideListCoordinator(navigationController: guideNav)
         let cameraCoordinator = CameraCoordinator(navigationController: cameraNav)
