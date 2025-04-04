@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CustomTabBarController: UITabBarController {
+final class CustomTabBarController: UITabBarController, UINavigationControllerDelegate {
 
     private let customTabBar = CustomTabBarView()
 
@@ -17,7 +17,7 @@ final class CustomTabBarController: UITabBarController {
     }
 
     private func setupCustomTabBar() {
-        tabBar.isHidden = true  // 기본 탭바 숨김
+        tabBar.isHidden = true
         view.addSubview(customTabBar)
 
         customTabBar.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +33,11 @@ final class CustomTabBarController: UITabBarController {
 
     func selectTab(index: Int) {
         self.selectedIndex = index
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let shouldHideTabBar = viewController.hidesBottomBarWhenPushed
+        customTabBar.isHidden = shouldHideTabBar
     }
 }
 

@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class BaseViewController<View: BaseView, ViewModel>: UIViewController {
 
     let mainView = View()
     let viewModel: ViewModel
+    let disposeBag = DisposeBag()
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
