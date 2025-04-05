@@ -1,4 +1,3 @@
-//
 //  CreateGuideView.swift
 //  GuideCam
 //
@@ -15,6 +14,8 @@ final class CreateGuideView: BaseView {
     let saveButton = UIButton()
     let canvasView = UIView()
     let editableImageView = UIImageView()
+    
+    let drawingCanvasView = DrawingCanvasView() // Added DrawingCanvasView
 
     let drawModeButton = UIButton()
     let imageModeButton = UIButton()
@@ -61,6 +62,7 @@ final class CreateGuideView: BaseView {
         drawingStackView.addArrangedSubview(imageModeButton)
         
         canvasView.addSubview(editableImageView)
+        canvasView.addSubview(drawingCanvasView)
     }
 
     override func configureLayout() {
@@ -107,6 +109,9 @@ final class CreateGuideView: BaseView {
             $0.width.height.equalTo(40)
         }
         
+        drawingCanvasView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     override func configureView() {
