@@ -32,6 +32,7 @@ final class CreateGuideView: BaseView {
     var drawingToolButtons: [UIButton] = []
     var canvasHeightConstraint: Constraint?
     var isDrawingMode: Bool = false
+    var isImageEditMode: Bool = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)

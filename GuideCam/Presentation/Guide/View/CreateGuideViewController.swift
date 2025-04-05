@@ -18,6 +18,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         mainView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         mainView.drawModeButton.addTarget(self, action: #selector(toggleDrawingMode), for: .touchUpInside)
+        mainView.imageModeButton.addTarget(self, action: #selector(toggleImageEditMode), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,5 +54,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         print(#function)
         mainView.isDrawingMode.toggle()
         mainView.drawingToolButtons.forEach { $0.isHidden = !mainView.isDrawingMode }
+    }
+    
+    @objc private func toggleImageEditMode() {
+        print(#function)
+        mainView.isImageEditMode.toggle()
+        mainView.isDrawingMode = false
+        mainView.drawingToolButtons.forEach { $0.isHidden = true }
     }
 }
