@@ -9,6 +9,8 @@ import UIKit
 
 protocol GuideListCoordinating: AnyObject {
     func showCreateGuide()
+    func showSaveConfirm()
+    func didFinishCreateGuide()
 }
 
 final class GuideListCoordinator: Coordinator {
@@ -29,10 +31,23 @@ final class GuideListCoordinator: Coordinator {
 
 extension GuideListCoordinator: GuideListCoordinating {
     func showCreateGuide() {
-        print(#function)
         let createViewModel = CreateGuideViewModel()
         let createVC = CreateGuideViewController(viewModel: createViewModel)
+        createVC.coordinator = self
         createVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(createVC, animated: true)
+    }
+    
+    func showSaveConfirm() {
+        let confirmViewModel = ConfirmSaveGuideViewModel()
+        let confirmVC = ConfirmSaveGuideViewController(viewModel: confirmViewModel)
+        confirmVC.hidesBottomBarWhenPushed = true
+        navigationController.setNavigationBarHidden(false, animated: false)
+        navigationController.pushViewController(confirmVC, animated: true)
+    }
+    
+    func didFinishCreateGuide() {
+        navigationController.setNavigationBarHidden(false, animated: false)
+        navigationController.popViewController(animated: true)
     }
 }

@@ -36,8 +36,6 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
     }
 
     override func configure() {
-        title = "Guides"
-
         let createAction = UIAction(title: "생성", image: UIImage(systemName: "plus")) { [weak self] _ in
             print("가이드 생성 버튼 클릭됨")
             print(self?.coordinator)
