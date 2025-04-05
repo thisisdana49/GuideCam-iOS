@@ -28,6 +28,8 @@ class BaseViewController<View: BaseView, ViewModel>: UIViewController {
         configure()
         bind()
     }
+    
+    deinit { print(self, "is deinit")}
 
     func configure() { }
 

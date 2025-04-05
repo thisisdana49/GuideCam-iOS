@@ -11,6 +11,7 @@ import SnapKit
 final class CreateGuideView: BaseView {
 
     let ratioStackView = UIStackView()
+    let backButton = UIButton()
     let saveButton = UIButton()
     let canvasView = UIView()
 
@@ -37,6 +38,7 @@ final class CreateGuideView: BaseView {
         addSubview(imageModeButton)
         addSubview(undoButton)
         addSubview(redoButton)
+        addSubview(backButton)
         addSubview(ratioStackView)
         addSubview(saveButton)
     }
@@ -50,16 +52,22 @@ final class CreateGuideView: BaseView {
         }
 
         ratioStackView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(8)
-            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(8)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(32)
         }
-
-        saveButton.snp.makeConstraints {
+        
+        backButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(16)
             $0.centerY.equalTo(ratioStackView)
+            $0.width.height.equalTo(32)
+        }
+
+        saveButton.snp.remakeConstraints {
             $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(32)
+            $0.centerY.equalTo(ratioStackView)
             $0.width.equalTo(64)
+            $0.height.equalTo(32)
         }
 
         drawModeButton.snp.makeConstraints {
@@ -112,11 +120,12 @@ final class CreateGuideView: BaseView {
         }
 
         // 상단 저장 버튼
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.tintColor = .white
+
         saveButton.setTitle("Save", for: .normal)
-        saveButton.setTitleColor(.black, for: .normal)
         saveButton.backgroundColor = .lightGray
         saveButton.layer.cornerRadius = 16
-        saveButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
 
         // 하단 툴바 버튼들 (아이콘은 시스템 아이콘 예시)
         drawModeButton.setImage(UIImage(systemName: "pencil.and.outline"), for: .normal)

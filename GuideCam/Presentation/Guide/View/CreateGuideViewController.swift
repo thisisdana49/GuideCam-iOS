@@ -9,10 +9,17 @@ import UIKit
 
 final class CreateGuideViewController: BaseViewController<CreateGuideView, CreateGuideViewModel> {
 
+    weak var coordinator: GuideListCoordinating?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(#function, self)
-        title = "가이드 생성"
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        mainView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func configure() {
@@ -30,5 +37,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     @objc private func ratioButtonTapped(_ sender: UIButton) {
         guard let ratio = sender.titleLabel?.text else { return }
         mainView.setSelectedRatio(ratio)
+    }
+    
+    @objc private func backButtonTapped() {
+        coordinator?.didFinishCreateGuide()
     }
 }
