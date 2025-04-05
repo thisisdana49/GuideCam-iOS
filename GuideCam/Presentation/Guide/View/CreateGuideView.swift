@@ -70,10 +70,6 @@ final class CreateGuideView: BaseView {
             make.width.equalToSuperview()
             canvasHeightConstraint = make.height.equalTo(500).constraint
         }
-        
-        editableImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
 
         ratioStackView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(8)
@@ -210,8 +206,19 @@ final class CreateGuideView: BaseView {
             break
         }
         
+        // Save absolute center position in screen coordinates
+        let globalCenter = editableImageView.superview?.convert(editableImageView.center, to: nil)
+        let savedTransform = editableImageView.transform
+
         canvasHeightConstraint?.update(offset: newHeight)
         layoutIfNeeded()
+
+        // Restore center using global to local conversion
+        if let global = globalCenter {
+            let local = canvasView.convert(global, from: nil)
+            editableImageView.center = local
+        }
+        editableImageView.transform = savedTransform
     }
     
 }

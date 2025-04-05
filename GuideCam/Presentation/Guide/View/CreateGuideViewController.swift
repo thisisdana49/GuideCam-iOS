@@ -58,8 +58,23 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
     
     @objc private func ratioButtonTapped(_ sender: UIButton) {
+        print(#function)
         guard let ratio = sender.titleLabel?.text else { return }
+        
+        // Save absolute center position in screen coordinates
+        let globalCenter = mainView.editableImageView.superview?.convert(mainView.editableImageView.center, to: nil)
+        let savedTransform = mainView.editableImageView.transform
+
         mainView.setSelectedRatio(ratio)
+        
+        mainView.layoutIfNeeded()
+
+        // Restore center using global to local conversion
+        if let global = globalCenter {
+            let local = mainView.canvasView.convert(global, from: nil)
+            mainView.editableImageView.center = local
+        }
+        mainView.editableImageView.transform = savedTransform
     }
     
     @objc private func backButtonTapped() {
@@ -117,6 +132,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
             guard let image = object as? UIImage else { return }
             DispatchQueue.main.async {
+                let canvas = self?.mainView.canvasView
+                let imageView = self?.mainView.editableImageView
+                let size: CGFloat = 200
+                let x = ((canvas?.bounds.width ?? 0) - size) / 2
+                let y = ((canvas?.bounds.height ?? 0) - size) / 2
+                imageView?.frame = CGRect(x: x, y: y, width: size, height: size)
                 self?.mainView.editableImageView.image = image
                 self?.mainView.editableImageView.isHidden = false
             }
