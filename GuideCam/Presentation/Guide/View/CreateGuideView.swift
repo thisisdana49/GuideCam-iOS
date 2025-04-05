@@ -32,17 +32,23 @@ final class CreateGuideView: BaseView {
     }
     
     override func configureHierarchy() {
-        addSubview(ratioStackView)
-        addSubview(saveButton)
         addSubview(canvasView)
-
         addSubview(drawModeButton)
         addSubview(imageModeButton)
         addSubview(undoButton)
         addSubview(redoButton)
+        addSubview(ratioStackView)
+        addSubview(saveButton)
     }
 
     override func configureLayout() {
+        canvasView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalToSuperview()
+            canvasHeightConstraint = make.height.equalTo(500).constraint
+        }
+
         ratioStackView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide.snp.top).offset(8)
             $0.leading.equalToSuperview().offset(16)
@@ -54,12 +60,6 @@ final class CreateGuideView: BaseView {
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(32)
             $0.width.equalTo(64)
-        }
-
-        canvasView.snp.makeConstraints { make in
-            make.top.equalTo(ratioStackView.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview()
-            canvasHeightConstraint = make.height.equalTo(500).constraint
         }
 
         drawModeButton.snp.makeConstraints {
@@ -88,9 +88,9 @@ final class CreateGuideView: BaseView {
     }
 
     override func configureView() {
-        backgroundColor = .systemBackground
+        backgroundColor = .black
 
-        canvasView.backgroundColor = .systemPink
+        canvasView.backgroundColor = .white
         
         // 비율 스택 뷰 설정
         ratioStackView.axis = .horizontal
