@@ -17,6 +17,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         navigationController?.setNavigationBarHidden(true, animated: false)
         mainView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         mainView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        mainView.drawModeButton.addTarget(self, action: #selector(toggleDrawingMode), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,5 +47,11 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     
     @objc private func saveButtonTapped() {
         coordinator?.showSaveConfirm()
+    }
+    
+    @objc private func toggleDrawingMode() {
+        print(#function)
+        mainView.isDrawingMode.toggle()
+        mainView.drawingToolButtons.forEach { $0.isHidden = !mainView.isDrawingMode }
     }
 }

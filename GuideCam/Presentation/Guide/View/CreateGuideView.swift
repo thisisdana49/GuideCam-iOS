@@ -20,9 +20,18 @@ final class CreateGuideView: BaseView {
     let undoButton = UIButton()
     let redoButton = UIButton()
     
+    let penButton = UIButton()
+    let eraserButton = UIButton()
+    let shapeButton = UIButton()
+    let colorButton = UIButton()
+    
+    let drawingStackView = UIStackView()
+    
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
+    var drawingToolButtons: [UIButton] = []
     var canvasHeightConstraint: Constraint?
+    var isDrawingMode: Bool = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,13 +43,19 @@ final class CreateGuideView: BaseView {
     
     override func configureHierarchy() {
         addSubview(canvasView)
-        addSubview(drawModeButton)
-        addSubview(imageModeButton)
+        addSubview(drawingStackView)
         addSubview(undoButton)
         addSubview(redoButton)
         addSubview(backButton)
         addSubview(ratioStackView)
         addSubview(saveButton)
+        
+        drawingStackView.addArrangedSubview(drawModeButton)
+        drawingStackView.addArrangedSubview(penButton)
+        drawingStackView.addArrangedSubview(eraserButton)
+        drawingStackView.addArrangedSubview(shapeButton)
+        drawingStackView.addArrangedSubview(colorButton)
+        drawingStackView.addArrangedSubview(imageModeButton)
     }
 
     override func configureLayout() {
@@ -70,21 +85,14 @@ final class CreateGuideView: BaseView {
             $0.height.equalTo(32)
         }
 
-        drawModeButton.snp.makeConstraints {
+        drawingStackView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.width.height.equalTo(40)
-        }
-
-        imageModeButton.snp.makeConstraints {
-            $0.leading.equalTo(drawModeButton.snp.trailing).offset(16)
-            $0.centerY.equalTo(drawModeButton)
-            $0.width.height.equalTo(40)
         }
 
         redoButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
-            $0.centerY.equalTo(drawModeButton)
+            $0.centerY.equalTo(drawingStackView)
             $0.width.height.equalTo(40)
         }
 
@@ -93,6 +101,7 @@ final class CreateGuideView: BaseView {
             $0.centerY.equalTo(redoButton)
             $0.width.height.equalTo(40)
         }
+        
     }
 
     override func configureView() {
@@ -139,6 +148,25 @@ final class CreateGuideView: BaseView {
 
         redoButton.setImage(UIImage(systemName: "arrow.uturn.forward"), for: .normal)
         redoButton.tintColor = .white
+        
+        // New drawing tool buttons configuration
+        penButton.setImage(UIImage(systemName: "applepencil"), for: .normal)
+        penButton.tintColor = .white
+        penButton.isHidden = true
+        
+        eraserButton.setImage(UIImage(systemName: "eraser"), for: .normal)
+        eraserButton.tintColor = .white
+        eraserButton.isHidden = true
+        
+        shapeButton.setImage(UIImage(systemName: "square.on.circle"), for: .normal)
+        shapeButton.tintColor = .white
+        shapeButton.isHidden = true
+        
+        colorButton.setImage(UIImage(systemName: "paintbrush"), for: .normal)
+        colorButton.tintColor = .white
+        colorButton.isHidden = true
+        
+        drawingToolButtons = [penButton, eraserButton, shapeButton, colorButton]
         
         setSelectedRatio("9:16")
     }
