@@ -16,6 +16,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         print(#function, self)
         navigationController?.setNavigationBarHidden(true, animated: false)
         mainView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        mainView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,5 +42,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     
     @objc private func backButtonTapped() {
         coordinator?.didFinishCreateGuide()
+    }
+    
+    @objc private func saveButtonTapped() {
+        coordinator?.showSaveConfirm()
     }
 }
