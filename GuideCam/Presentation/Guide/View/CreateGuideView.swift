@@ -14,6 +14,7 @@ final class CreateGuideView: BaseView {
     let backButton = UIButton()
     let saveButton = UIButton()
     let canvasView = UIView()
+    let editableImageView = UIImageView()
 
     let drawModeButton = UIButton()
     let imageModeButton = UIButton()
@@ -33,6 +34,7 @@ final class CreateGuideView: BaseView {
     var canvasHeightConstraint: Constraint?
     var isDrawingMode: Bool = false
     var isImageEditMode: Bool = false
+    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,6 +59,8 @@ final class CreateGuideView: BaseView {
         drawingStackView.addArrangedSubview(shapeButton)
         drawingStackView.addArrangedSubview(colorButton)
         drawingStackView.addArrangedSubview(imageModeButton)
+        
+        canvasView.addSubview(editableImageView)
     }
 
     override func configureLayout() {
@@ -65,6 +69,10 @@ final class CreateGuideView: BaseView {
             make.centerY.equalToSuperview()
             make.width.equalToSuperview()
             canvasHeightConstraint = make.height.equalTo(500).constraint
+        }
+        
+        editableImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
 
         ratioStackView.snp.makeConstraints {
@@ -109,6 +117,11 @@ final class CreateGuideView: BaseView {
         backgroundColor = .black
 
         canvasView.backgroundColor = .white
+        canvasView.clipsToBounds = true
+        
+        editableImageView.contentMode = .scaleAspectFit
+        editableImageView.isHidden = true
+        editableImageView.isUserInteractionEnabled = true
         
         // 비율 스택 뷰 설정
         ratioStackView.axis = .horizontal
