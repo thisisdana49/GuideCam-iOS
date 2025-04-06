@@ -58,10 +58,36 @@ final class DrawingCanvasView: UIView {
         switch shapeType {
         case .free:
             currentPath?.addLine(to: point)
-        default:
-            break
-        }
+        case .line, .circle, .square, .triangle:
+            let path = UIBezierPath()
+            path.lineWidth = 3.0
+            path.lineCapStyle = .round
 
+            guard let start = startPoint else { break }
+
+            switch shapeType {
+            case .line:
+                path.move(to: start)
+                path.addLine(to: point)
+            case .circle:
+                let rect = CGRect(origin: start, size: CGSize(width: point.x - start.x, height: point.y - start.y))
+                path.append(UIBezierPath(ovalIn: rect))
+            case .square:
+                let rect = CGRect(origin: start, size: CGSize(width: point.x - start.x, height: point.y - start.y))
+                path.append(UIBezierPath(rect: rect))
+            case .triangle:
+                let third = CGPoint(x: start.x + (point.x - start.x) / 2, y: start.y)
+                path.move(to: third)
+                path.addLine(to: CGPoint(x: start.x, y: point.y))
+                path.addLine(to: CGPoint(x: point.x, y: point.y))
+                path.close()
+            default:
+                break
+            }
+
+            currentPath = path
+        }
+        
         setNeedsDisplay()
     }
 
@@ -114,6 +140,10 @@ final class DrawingCanvasView: UIView {
     // MARK: - Drawing
 
     override func draw(_ rect: CGRect) {
+        if let current = currentPath {
+            currentColor.setStroke()
+            current.stroke()
+        }
         for (path, color) in coloredPaths {
             color.setStroke()
             path.stroke()

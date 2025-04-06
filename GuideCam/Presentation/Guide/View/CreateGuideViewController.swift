@@ -1,4 +1,3 @@
-//
 //  CreateGuideViewController.swift
 //  GuideCam
 //
