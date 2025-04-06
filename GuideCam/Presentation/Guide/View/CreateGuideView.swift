@@ -66,6 +66,9 @@ final class CreateGuideView: BaseView {
     }
 
     override func configureLayout() {
+        let width = UIScreen.main.bounds.width
+        let fixedDrawingHeight = width * 16 / 9
+        
         canvasView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
@@ -109,8 +112,10 @@ final class CreateGuideView: BaseView {
             $0.width.height.equalTo(40)
         }
         
-        drawingCanvasView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        drawingCanvasView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(fixedDrawingHeight)
         }
     }
 

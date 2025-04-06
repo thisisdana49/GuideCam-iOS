@@ -15,7 +15,7 @@ final class DrawingCanvasView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         isMultipleTouchEnabled = false
-        backgroundColor = .clear
+        backgroundColor = .gray
         print(#function)
     }
 
