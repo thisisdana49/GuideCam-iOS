@@ -1,4 +1,3 @@
-//
 //  DrawingCanvasView.swift
 //  GuideCam
 //

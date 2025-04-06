@@ -10,6 +10,12 @@ import PhotosUI
 
 final class CreateGuideViewController: BaseViewController<CreateGuideView, CreateGuideViewModel>, PHPickerViewControllerDelegate {
 
+    private var selectedShape: ShapeType = .line
+    
+    enum ShapeType {
+        case line, circle, square, triangle
+    }
+
     weak var coordinator: GuideListCoordinating?
     
     override func viewDidLoad() {
@@ -34,6 +40,15 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         
         for case let button as UIButton in mainView.colorPaletteView.arrangedSubviews {
             button.addTarget(self, action: #selector(colorButtonTapped(_:)), for: .touchUpInside)
+        }
+        
+        mainView.shapeButton.addTarget(self, action: #selector(toggleShapePalette), for: .touchUpInside)
+
+        for (index, view) in mainView.shapePaletteView.arrangedSubviews.enumerated() {
+            if let button = view as? UIButton {
+                button.tag = index
+                button.addTarget(self, action: #selector(shapeButtonTapped(_:)), for: .touchUpInside)
+            }
         }
     }
     
@@ -152,6 +167,23 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         let translation = gesture.translation(in: view.superview)
         view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
         gesture.setTranslation(.zero, in: view.superview)
+    }
+    
+    @objc private func toggleShapePalette() {
+        mainView.shapePaletteView.isHidden.toggle()
+    }
+
+    @objc private func shapeButtonTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 0: selectedShape = .line
+        case 1: selectedShape = .circle
+        case 2: selectedShape = .square
+        case 3: selectedShape = .triangle
+        default: break
+        }
+
+        mainView.shapePaletteView.isHidden = true
+        print("Selected shape:", selectedShape)
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

@@ -30,7 +30,8 @@ final class CreateGuideView: BaseView {
     let drawingStackView = UIStackView()
     
     let colorPaletteView = UIStackView() // Added colorPaletteView
-    
+    let shapePaletteView = UIStackView() // Added shapePaletteView
+
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
     var drawingToolButtons: [UIButton] = []
@@ -39,6 +40,11 @@ final class CreateGuideView: BaseView {
     var isImageEditMode: Bool = false
     
     var selectedColor: UIColor = .red // Added selected color property
+    private var selectedShape: ShapeType = .line // Added selected shape property
+
+    enum ShapeType { // Added ShapeType enum
+        case line, circle, square, triangle
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,6 +63,7 @@ final class CreateGuideView: BaseView {
         addSubview(ratioStackView)
         addSubview(saveButton)
         addSubview(colorPaletteView) // Added colorPaletteView to hierarchy
+        addSubview(shapePaletteView) // Added shapePaletteView to hierarchy
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
@@ -125,6 +132,12 @@ final class CreateGuideView: BaseView {
         colorPaletteView.snp.makeConstraints {
             $0.bottom.equalTo(colorButton.snp.top).offset(-12)
             $0.centerX.equalTo(colorButton)
+            $0.height.equalTo(32)
+        }
+        
+        shapePaletteView.snp.makeConstraints {
+            $0.bottom.equalTo(shapeButton.snp.top).offset(-12)
+            $0.centerX.equalTo(shapeButton)
             $0.height.equalTo(32)
         }
     }
@@ -217,6 +230,27 @@ final class CreateGuideView: BaseView {
             button.clipsToBounds = true
             colorPaletteView.addArrangedSubview(button)
         }
+        
+        // Setup shapePaletteView
+        shapePaletteView.axis = .horizontal
+        shapePaletteView.spacing = 12
+        shapePaletteView.alignment = .center
+        shapePaletteView.isHidden = true
+        
+        shapePaletteView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let shapes = ["line", "circle", "square", "triangle"]
+        shapes.forEach { name in
+            let button = UIButton()
+            button.setImage(UIImage(systemName: name), for: .normal)
+            button.tintColor = .white
+            button.backgroundColor = .darkGray
+            button.layer.cornerRadius = 8
+            button.clipsToBounds = true
+            button.widthAnchor.constraint(equalToConstant: 32).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 32).isActive = true
+            shapePaletteView.addArrangedSubview(button)
+        }
     }
     
     override func layoutSubviews() {
@@ -257,6 +291,23 @@ final class CreateGuideView: BaseView {
             editableImageView.center = local
         }
         editableImageView.transform = savedTransform
+    }
+    
+    @objc private func toggleShapePalette() { // Added toggleShapePalette method
+        shapePaletteView.isHidden.toggle()
+    }
+
+    @objc private func shapeButtonTapped(_ sender: UIButton) { // Added shapeButtonTapped method
+        switch sender.tag {
+        case 0: selectedShape = .line
+        case 1: selectedShape = .circle
+        case 2: selectedShape = .square
+        case 3: selectedShape = .triangle
+        default: break
+        }
+
+        shapePaletteView.isHidden = true
+        print("Selected shape:", selectedShape)
     }
     
 }
