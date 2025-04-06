@@ -124,6 +124,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         print(#function)
         mainView.isDrawingMode.toggle()
         mainView.drawingToolButtons.forEach { $0.isHidden = !mainView.isDrawingMode }
+        mainView.drawingCanvasView.isUserInteractionEnabled = mainView.isDrawingMode
     }
     
     @objc private func toggleColorPalette() {
@@ -143,6 +144,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.isImageEditMode.toggle()
         mainView.isDrawingMode = false
         mainView.drawingToolButtons.forEach { $0.isHidden = true }
+        mainView.drawingCanvasView.isUserInteractionEnabled = false
         
         if mainView.isImageEditMode {
             presentImagePicker()

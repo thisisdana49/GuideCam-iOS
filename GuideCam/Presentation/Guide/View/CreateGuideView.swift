@@ -239,7 +239,7 @@ final class CreateGuideView: BaseView {
         
         shapePaletteView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        let shapes = ["line", "circle", "square", "triangle"]
+        let shapes = ["line.diagonal", "circle", "square", "triangle"]
         shapes.forEach { name in
             let button = UIButton()
             button.setImage(UIImage(systemName: name), for: .normal)
