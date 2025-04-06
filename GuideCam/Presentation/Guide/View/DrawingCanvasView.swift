@@ -6,11 +6,17 @@
 
 import UIKit
 
+enum DrawingShapeType {
+    case free, line, circle, square, triangle
+}
+
 final class DrawingCanvasView: UIView {
     
     private var coloredPaths: [(UIBezierPath, UIColor)] = []
     private var currentPath: UIBezierPath?
     private var currentColor: UIColor = .red
+    var shapeType: DrawingShapeType = .free
+    private var startPoint: CGPoint?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,30 +34,81 @@ final class DrawingCanvasView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(#function)
         guard let point = touches.first?.location(in: self) else { return }
+        startPoint = point
 
-        let path = UIBezierPath()
-        path.lineWidth = 3.0
-        path.lineCapStyle = .round
-        path.move(to: point)
-
-        currentPath = path
-        coloredPaths.append((path, currentColor))
+        switch shapeType {
+        case .free:
+            let path = UIBezierPath()
+            path.lineWidth = 3.0
+            path.lineCapStyle = .round
+            path.move(to: point)
+            currentPath = path
+            coloredPaths.append((path, currentColor))
+        default:
+            break
+        }
 
         setNeedsDisplay()
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(#function)
-        guard let point = touches.first?.location(in: self),
-              let path = currentPath else { return }
+        guard let point = touches.first?.location(in: self) else { return }
 
-        path.addLine(to: point)
+        switch shapeType {
+        case .free:
+            currentPath?.addLine(to: point)
+        default:
+            break
+        }
+
         setNeedsDisplay()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(#function)
+        guard let start = startPoint,
+              let end = touches.first?.location(in: self) else {
+            currentPath = nil
+            return
+        }
+
+        let path = UIBezierPath()
+        path.lineWidth = 3.0
+        path.lineCapStyle = .round
+
+        switch shapeType {
+        case .line:
+            path.move(to: start)
+            path.addLine(to: end)
+
+        case .circle:
+            let rect = CGRect(origin: start, size: CGSize(width: end.x - start.x, height: end.y - start.y))
+            path.append(UIBezierPath(ovalIn: rect))
+
+        case .square:
+            let rect = CGRect(origin: start, size: CGSize(width: end.x - start.x, height: end.y - start.y))
+            path.append(UIBezierPath(rect: rect))
+
+        case .triangle:
+            let third = CGPoint(x: start.x + (end.x - start.x) / 2, y: start.y)
+            path.move(to: third)
+            path.addLine(to: CGPoint(x: start.x, y: end.y))
+            path.addLine(to: CGPoint(x: end.x, y: end.y))
+            path.close()
+
+        default:
+            break
+        }
+
+        if shapeType != .free {
+            currentPath = path
+            coloredPaths.append((path, currentColor))
+        }
+
         currentPath = nil
+        startPoint = nil
+        setNeedsDisplay()
     }
 
     // MARK: - Drawing
@@ -72,5 +129,9 @@ final class DrawingCanvasView: UIView {
     
     func setStrokeColor(_ color: UIColor) {
         currentColor = color
+    }
+    
+    func setShapeType(_ type: DrawingShapeType) {
+        shapeType = type
     }
 }

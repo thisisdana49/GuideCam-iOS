@@ -175,10 +175,18 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
 
     @objc private func shapeButtonTapped(_ sender: UIButton) {
         switch sender.tag {
-        case 0: selectedShape = .line
-        case 1: selectedShape = .circle
-        case 2: selectedShape = .square
-        case 3: selectedShape = .triangle
+        case 0:
+            selectedShape = .line
+            mainView.drawingCanvasView.setShapeType(.line)
+        case 1:
+            selectedShape = .circle
+            mainView.drawingCanvasView.setShapeType(.circle)
+        case 2:
+            selectedShape = .square
+            mainView.drawingCanvasView.setShapeType(.square)
+        case 3:
+            selectedShape = .triangle
+            mainView.drawingCanvasView.setShapeType(.triangle)
         default: break
         }
 
