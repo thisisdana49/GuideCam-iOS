@@ -29,6 +29,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.editableImageView.addGestureRecognizer(pinch)
         mainView.editableImageView.addGestureRecognizer(rotate)
         mainView.editableImageView.addGestureRecognizer(pan)
+
+        mainView.colorButton.addTarget(self, action: #selector(toggleColorPalette), for: .touchUpInside)
+        
+        for case let button as UIButton in mainView.colorPaletteView.arrangedSubviews {
+            button.addTarget(self, action: #selector(colorButtonTapped(_:)), for: .touchUpInside)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +42,22 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
 
     override func configure() {
+        mainView.colorPaletteView.axis = .horizontal
+        mainView.colorPaletteView.spacing = 8
+        mainView.colorPaletteView.alignment = .center
+        mainView.colorPaletteView.isHidden = true
         
+        mainView.colorPaletteView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let colors: [UIColor] = AppColor.Drawing.palette
+        
+        colors.forEach { color in
+            let button = UIButton()
+            button.backgroundColor = color
+            button.layer.cornerRadius = 16
+            button.clipsToBounds = true
+            mainView.colorPaletteView.addArrangedSubview(button)
+        }
     }
     
     override func bind() {
@@ -89,6 +110,18 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         print(#function)
         mainView.isDrawingMode.toggle()
         mainView.drawingToolButtons.forEach { $0.isHidden = !mainView.isDrawingMode }
+    }
+    
+    @objc private func toggleColorPalette() {
+        print(#function)
+        mainView.colorPaletteView.isHidden.toggle()
+    }
+    
+    @objc private func colorButtonTapped(_ sender: UIButton) {
+        let color = sender.backgroundColor ?? .red
+        mainView.selectedColor = color
+        mainView.drawingCanvasView.setStrokeColor(color)
+        mainView.colorPaletteView.isHidden = true
     }
     
     @objc private func toggleImageEditMode() {

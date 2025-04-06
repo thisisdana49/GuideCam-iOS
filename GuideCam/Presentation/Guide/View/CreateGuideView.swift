@@ -29,6 +29,8 @@ final class CreateGuideView: BaseView {
     
     let drawingStackView = UIStackView()
     
+    let colorPaletteView = UIStackView() // Added colorPaletteView
+    
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
     var drawingToolButtons: [UIButton] = []
@@ -36,6 +38,7 @@ final class CreateGuideView: BaseView {
     var isDrawingMode: Bool = false
     var isImageEditMode: Bool = false
     
+    var selectedColor: UIColor = .red // Added selected color property
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +56,7 @@ final class CreateGuideView: BaseView {
         addSubview(backButton)
         addSubview(ratioStackView)
         addSubview(saveButton)
+        addSubview(colorPaletteView) // Added colorPaletteView to hierarchy
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
@@ -116,6 +120,12 @@ final class CreateGuideView: BaseView {
             $0.center.equalToSuperview()
             $0.width.equalToSuperview()
             $0.height.equalTo(fixedDrawingHeight)
+        }
+        
+        colorPaletteView.snp.makeConstraints {
+            $0.bottom.equalTo(colorButton.snp.top).offset(-12)
+            $0.centerX.equalTo(colorButton)
+            $0.height.equalTo(32)
         }
     }
 
@@ -189,6 +199,24 @@ final class CreateGuideView: BaseView {
         drawingToolButtons = [penButton, eraserButton, shapeButton, colorButton]
         
         setSelectedRatio("9:16")
+        
+        // Setup colorPaletteView
+        colorPaletteView.axis = .horizontal
+        colorPaletteView.spacing = 8
+        colorPaletteView.alignment = .center
+        colorPaletteView.isHidden = true
+        
+        colorPaletteView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        let colors: [UIColor] = AppColor.Drawing.palette
+        colors.forEach { [weak self] color in
+            print("색상 추가 확인======")
+            let button = UIButton()
+            button.backgroundColor = color
+            button.layer.cornerRadius = 16
+            button.clipsToBounds = true
+            colorPaletteView.addArrangedSubview(button)
+        }
     }
     
     override func layoutSubviews() {

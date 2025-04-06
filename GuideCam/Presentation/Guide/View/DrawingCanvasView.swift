@@ -9,8 +9,9 @@ import UIKit
 
 final class DrawingCanvasView: UIView {
     
-    private var paths: [UIBezierPath] = []
+    private var coloredPaths: [(UIBezierPath, UIColor)] = []
     private var currentPath: UIBezierPath?
+    private var currentColor: UIColor = .red
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +36,7 @@ final class DrawingCanvasView: UIView {
         path.move(to: point)
 
         currentPath = path
-        paths.append(path)
+        coloredPaths.append((path, currentColor))
 
         setNeedsDisplay()
     }
@@ -57,8 +58,8 @@ final class DrawingCanvasView: UIView {
     // MARK: - Drawing
 
     override func draw(_ rect: CGRect) {
-        UIColor.red.setStroke()
-        for path in paths {
+        for (path, color) in coloredPaths {
+            color.setStroke()
             path.stroke()
         }
     }
@@ -66,7 +67,11 @@ final class DrawingCanvasView: UIView {
     // MARK: - Public Controls
 
     func clear() {
-        paths.removeAll()
+        coloredPaths.removeAll()
         setNeedsDisplay()
+    }
+    
+    func setStrokeColor(_ color: UIColor) {
+        currentColor = color
     }
 }
