@@ -51,7 +51,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         }
         
         mainView.imageTrashButton.addTarget(self, action: #selector(trashButtonTapped), for: .touchUpInside)
-        mainView.reselectButton.addTarget(self, action: #selector(toggleImageEditMode), for: .touchUpInside)
+        mainView.reselectButton.addTarget(self, action: #selector(reselectImage), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,6 +133,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         if mainView.isImageEditMode {
             if mainView.editableImageView.image == nil {
                 presentImagePicker()
+            } else {
+                mainView.editableImageView.addImageFrameBorder() // ✅ 테두리 복구
             }
         }
 
@@ -227,6 +229,10 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
                 self?.mainView.editableImageView.isHidden = false
             }
         }
+    }
+    
+    @objc private func reselectImage() {
+        presentImagePicker()
     }
     
 }
