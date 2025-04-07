@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */; };
 		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
 		3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA82D9E778300681B6B /* Localizable.strings */; };
 		3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAE2D9E778300681B6B /* LaunchScreen.storyboard */; };
@@ -64,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE1EBA62D9E778300681B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3EE1EBA72D9E778300681B6B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 		3EE1EBBE2D9E77AE00681B6B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				3EFA02F72D9FF02F0087A708 /* AlbumViewController.swift in Sources */,
 				3EFA03052D9FFE480087A708 /* GuideListView.swift in Sources */,
 				3EFA03112DA123CC0087A708 /* ConfirmSaveGuideViewController.swift in Sources */,
+				3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */,
 				3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */,
 				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,

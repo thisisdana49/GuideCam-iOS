@@ -132,6 +132,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         }
         
         mainView.photoEditMaskView.isHidden = !mainView.isImageEditMode
+        if !mainView.isImageEditMode {
+            mainView.editableImageView.removeImageFrameBorder()
+        }
         mainView.reselectButton.isHidden = !mainView.isImageEditMode
         mainView.finalSaveButton.isHidden = !mainView.isImageEditMode
 
@@ -195,6 +198,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
             guard let image = object as? UIImage else { return }
             DispatchQueue.main.async {
+                self?.mainView.editableImageView.transform = .identity
                 let canvas = self?.mainView.canvasView
                 let imageView = self?.mainView.editableImageView
                 let size: CGFloat = 200
@@ -202,6 +206,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
                 let y = ((canvas?.bounds.height ?? 0) - size) / 2
                 imageView?.frame = CGRect(x: x, y: y, width: size, height: size)
                 self?.mainView.editableImageView.image = image
+                self?.mainView.editableImageView.removeImageFrameBorder()
+                self?.mainView.editableImageView.addImageFrameBorder()
                 self?.mainView.editableImageView.isHidden = false
             }
         }
