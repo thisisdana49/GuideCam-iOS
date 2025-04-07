@@ -38,6 +38,8 @@ final class CreateGuideView: BaseView {
     let imageDeleteButton = UIButton() // Added imageDeleteButton
     let imageTrashButton = UIButton() // Added imageTrashButton
 
+    let reselectButton = UIButton() // Added reselectButton
+
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
     var drawingToolButtons: [UIButton] = []
@@ -72,6 +74,7 @@ final class CreateGuideView: BaseView {
         addSubview(shapePaletteView) // Added shapePaletteView to hierarchy
         addSubview(finalSaveButton) // Added finalSaveButton to hierarchy
         addSubview(imageTrashButton) // Added to hierarchy
+        addSubview(reselectButton) // Added reselectButton to hierarchy
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
@@ -167,7 +170,14 @@ final class CreateGuideView: BaseView {
             $0.height.equalTo(44)
             $0.width.equalTo(80)
         }
-//        
+        
+        reselectButton.snp.makeConstraints { // Added constraints for reselectButton
+            $0.trailing.equalTo(finalSaveButton.snp.leading).offset(-8)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.height.equalTo(44)
+            $0.width.equalTo(120)
+        }
+//
 //        imageDeleteButton.snp.makeConstraints { // Updated constraints for imageDeleteButton
 //            $0.centerX.equalToSuperview()
 //            $0.bottom.equalToSuperview().offset(32)
@@ -284,16 +294,23 @@ final class CreateGuideView: BaseView {
             button.heightAnchor.constraint(equalToConstant: 32).isActive = true
             shapePaletteView.addArrangedSubview(button)
         }
-
+        
+        photoEditMaskView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         photoEditMaskView.isUserInteractionEnabled = false
         photoEditMaskView.isHidden = true
 
-        finalSaveButton.setTitle("Save", for: .normal) // Added finalSaveButton configuration
+        finalSaveButton.setTitle("Apply", for: .normal)
         finalSaveButton.setTitleColor(.black, for: .normal)
         finalSaveButton.backgroundColor = .yellow
         finalSaveButton.layer.cornerRadius = 22
         finalSaveButton.isHidden = true
         
+        reselectButton.setTitle("Reselect", for: .normal) // Added reselectButton configuration
+        reselectButton.setTitleColor(.white, for: .normal)
+        reselectButton.backgroundColor = .black
+        reselectButton.layer.cornerRadius = 22
+        reselectButton.isHidden = true
+
         imageDeleteButton.setImage(UIImage(systemName: "xmark.app.fill"), for: .normal)
         imageDeleteButton.tintColor = .yellow
         imageDeleteButton.isHidden = true
@@ -370,19 +387,8 @@ final class CreateGuideView: BaseView {
     }
 
     func updatePhotoEditMask() { // Added updatePhotoEditMask method
-        let path = UIBezierPath(rect: photoEditMaskView.bounds)
-        let imageFrame = convert(editableImageView.frame, to: photoEditMaskView)
-        let transparentPath = UIBezierPath(roundedRect: imageFrame, cornerRadius: 0)
-        path.append(transparentPath)
-        path.usesEvenOddFillRule = true
-
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        maskLayer.fillRule = .evenOdd
-        maskLayer.fillColor = UIColor.black.withAlphaComponent(0.7).cgColor
-
-        photoEditMaskView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        photoEditMaskView.layer.addSublayer(maskLayer)
+//        photoEditMaskView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+//        photoEditMaskView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
     }
     
 }

@@ -51,6 +51,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         }
         
         mainView.imageTrashButton.addTarget(self, action: #selector(trashButtonTapped), for: .touchUpInside)
+        mainView.reselectButton.addTarget(self, action: #selector(toggleImageEditMode), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,29 +124,32 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
     
     @objc private func toggleImageEditMode() {
-        print(#function)
         mainView.isImageEditMode.toggle()
         mainView.isDrawingMode = false
         mainView.drawingToolButtons.forEach { $0.isHidden = true }
         mainView.drawingCanvasView.isUserInteractionEnabled = false
-        
+
+        // ✨ 분기 추가
         if mainView.isImageEditMode {
-            presentImagePicker()
+            if mainView.editableImageView.image == nil {
+                presentImagePicker()
+            }
         }
-        
+
         mainView.photoEditMaskView.isHidden = !mainView.isImageEditMode
         if !mainView.isImageEditMode {
             mainView.editableImageView.removeImageFrameBorder()
         }
+
+        // 버튼, 모드 UI 처리
         mainView.finalSaveButton.isHidden = !mainView.isImageEditMode
         mainView.saveButton.isHidden = mainView.isImageEditMode
-
         mainView.ratioStackView.isHidden = mainView.isImageEditMode
         mainView.undoButton.isHidden = mainView.isImageEditMode
         mainView.redoButton.isHidden = mainView.isImageEditMode
-        
 //        mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
         mainView.imageTrashButton.isHidden = !mainView.isImageEditMode
+        mainView.reselectButton.isHidden = !mainView.isImageEditMode
     }
     
     @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {
