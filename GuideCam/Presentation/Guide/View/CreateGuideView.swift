@@ -33,7 +33,7 @@ final class CreateGuideView: BaseView {
     let shapePaletteView = UIStackView() // Added shapePaletteView
 
     let photoEditMaskView = UIView() // Added photoEditMaskView
-    let finalSaveButton = UIButton() // Added finalSaveButton
+    let imageApplyButton = UIButton()
 
     let imageDeleteButton = UIButton() // Added imageDeleteButton
     let imageTrashButton = UIButton() // Added imageTrashButton
@@ -72,7 +72,7 @@ final class CreateGuideView: BaseView {
         addSubview(saveButton)
         addSubview(colorPaletteView) // Added colorPaletteView to hierarchy
         addSubview(shapePaletteView) // Added shapePaletteView to hierarchy
-        addSubview(finalSaveButton) // Added finalSaveButton to hierarchy
+        addSubview(imageApplyButton)
         addSubview(imageTrashButton) // Added to hierarchy
         addSubview(reselectButton) // Added reselectButton to hierarchy
         
@@ -164,7 +164,7 @@ final class CreateGuideView: BaseView {
             $0.edges.equalToSuperview()
         }
 
-        finalSaveButton.snp.makeConstraints {
+        imageApplyButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(44)
@@ -172,7 +172,7 @@ final class CreateGuideView: BaseView {
         }
         
         reselectButton.snp.makeConstraints { // Added constraints for reselectButton
-            $0.trailing.equalTo(finalSaveButton.snp.leading).offset(-8)
+            $0.trailing.equalTo(imageApplyButton.snp.leading).offset(-8)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(44)
             $0.width.equalTo(120)
@@ -299,16 +299,18 @@ final class CreateGuideView: BaseView {
         photoEditMaskView.isUserInteractionEnabled = false
         photoEditMaskView.isHidden = true
 
-        finalSaveButton.setTitle("Apply", for: .normal)
-        finalSaveButton.setTitleColor(.black, for: .normal)
-        finalSaveButton.backgroundColor = .yellow
-        finalSaveButton.layer.cornerRadius = 22
-        finalSaveButton.isHidden = true
+        imageApplyButton.setTitle("Apply", for: .normal)
+        imageApplyButton.setTitleColor(.black, for: .normal)
+        imageApplyButton.backgroundColor = .yellow
+        imageApplyButton.layer.cornerRadius = 22
+        imageApplyButton.isHidden = true
         
         reselectButton.setTitle("Reselect", for: .normal) // Added reselectButton configuration
         reselectButton.setTitleColor(.white, for: .normal)
         reselectButton.backgroundColor = .black
         reselectButton.layer.cornerRadius = 22
+        reselectButton.layer.borderColor = UIColor.white.cgColor
+        reselectButton.layer.borderWidth = 1
         reselectButton.isHidden = true
 
         imageDeleteButton.setImage(UIImage(systemName: "xmark.app.fill"), for: .normal)

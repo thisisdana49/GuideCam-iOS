@@ -25,6 +25,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         mainView.drawModeButton.addTarget(self, action: #selector(toggleDrawingMode), for: .touchUpInside)
         mainView.imageModeButton.addTarget(self, action: #selector(toggleImageEditMode), for: .touchUpInside)
+        mainView.imageApplyButton.addTarget(self, action: #selector(applyImageEdit), for: .touchUpInside)
         
         // 제스처 등록
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
@@ -107,8 +108,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     @objc private func toggleDrawingMode() {
         print(#function)
         mainView.isDrawingMode.toggle()
+        let drawTint: UIColor = mainView.isDrawingMode ? .yellow : .white
+        mainView.drawModeButton.tintColor = drawTint
         mainView.drawingToolButtons.forEach { $0.isHidden = !mainView.isDrawingMode }
         mainView.drawingCanvasView.isUserInteractionEnabled = mainView.isDrawingMode
+        mainView.imageModeButton.isEnabled = !mainView.isDrawingMode
+        mainView.imageModeButton.alpha = mainView.isDrawingMode ? 0.4 : 1.0
     }
     
     @objc private func toggleColorPalette() {
@@ -125,6 +130,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     
     @objc private func toggleImageEditMode() {
         mainView.isImageEditMode.toggle()
+        let imageTint: UIColor = mainView.isImageEditMode ? .yellow : .white
+        mainView.imageModeButton.tintColor = imageTint
         mainView.isDrawingMode = false
         mainView.drawingToolButtons.forEach { $0.isHidden = true }
         mainView.drawingCanvasView.isUserInteractionEnabled = false
@@ -144,7 +151,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         }
 
         // 버튼, 모드 UI 처리
-        mainView.finalSaveButton.isHidden = !mainView.isImageEditMode
+        mainView.imageApplyButton.isHidden = !mainView.isImageEditMode
         mainView.saveButton.isHidden = mainView.isImageEditMode
         mainView.ratioStackView.isHidden = mainView.isImageEditMode
         mainView.undoButton.isHidden = mainView.isImageEditMode
@@ -152,6 +159,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
 //        mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
         mainView.imageTrashButton.isHidden = !mainView.isImageEditMode
         mainView.reselectButton.isHidden = !mainView.isImageEditMode
+        mainView.drawModeButton.isEnabled = !mainView.isImageEditMode
+        mainView.drawModeButton.alpha = mainView.isImageEditMode ? 0.4 : 1.0
+    }
+
+    @objc private func applyImageEdit() {
+        toggleImageEditMode()
     }
     
     @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {
