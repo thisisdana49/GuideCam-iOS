@@ -72,6 +72,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
             button.clipsToBounds = true
             mainView.colorPaletteView.addArrangedSubview(button)
         }
+        
+        mainView.canvasView.addSubview(mainView.editableImageView)
+        mainView.canvasView.addSubview(mainView.photoEditMaskView)
+        mainView.canvasView.addSubview(mainView.drawingCanvasView)
+        mainView.addSubview(mainView.reselectButton)
+        mainView.addSubview(mainView.finalSaveButton)
     }
     
     override func bind() {
@@ -149,6 +155,14 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         if mainView.isImageEditMode {
             presentImagePicker()
         }
+        
+        mainView.photoEditMaskView.isHidden = !mainView.isImageEditMode
+        mainView.reselectButton.isHidden = !mainView.isImageEditMode
+        mainView.finalSaveButton.isHidden = !mainView.isImageEditMode
+
+        mainView.ratioStackView.isHidden = mainView.isImageEditMode
+        mainView.undoButton.isHidden = mainView.isImageEditMode
+        mainView.redoButton.isHidden = mainView.isImageEditMode
     }
     
     @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {

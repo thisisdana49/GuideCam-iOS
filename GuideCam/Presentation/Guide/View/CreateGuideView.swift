@@ -32,6 +32,10 @@ final class CreateGuideView: BaseView {
     let colorPaletteView = UIStackView() // Added colorPaletteView
     let shapePaletteView = UIStackView() // Added shapePaletteView
 
+    let photoEditMaskView = UIView() // Added photoEditMaskView
+    let reselectButton = UIButton() // Added reselectButton
+    let finalSaveButton = UIButton() // Added finalSaveButton
+
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
     var drawingToolButtons: [UIButton] = []
@@ -64,6 +68,8 @@ final class CreateGuideView: BaseView {
         addSubview(saveButton)
         addSubview(colorPaletteView) // Added colorPaletteView to hierarchy
         addSubview(shapePaletteView) // Added shapePaletteView to hierarchy
+        addSubview(reselectButton) // Added reselectButton to hierarchy
+        addSubview(finalSaveButton) // Added finalSaveButton to hierarchy
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
@@ -72,6 +78,7 @@ final class CreateGuideView: BaseView {
         drawingStackView.addArrangedSubview(colorButton)
         drawingStackView.addArrangedSubview(imageModeButton)
         
+        canvasView.addSubview(photoEditMaskView) // Moved photoEditMaskView here
         canvasView.addSubview(editableImageView)
         canvasView.addSubview(drawingCanvasView)
     }
@@ -139,6 +146,24 @@ final class CreateGuideView: BaseView {
             $0.bottom.equalTo(shapeButton.snp.top).offset(-12)
             $0.centerX.equalTo(shapeButton)
             $0.height.equalTo(32)
+        }
+
+        photoEditMaskView.snp.makeConstraints { // Changed constraint for photoEditMaskView
+            $0.edges.equalToSuperview()
+        }
+
+        finalSaveButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.height.equalTo(44)
+            $0.width.equalTo(80)
+        }
+        
+        reselectButton.snp.makeConstraints {
+            $0.trailing.equalTo(finalSaveButton.snp.leading).offset(8)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.height.equalTo(44)
+            $0.width.equalTo(120)
         }
     }
 
@@ -251,11 +276,28 @@ final class CreateGuideView: BaseView {
             button.heightAnchor.constraint(equalToConstant: 32).isActive = true
             shapePaletteView.addArrangedSubview(button)
         }
+
+        photoEditMaskView.backgroundColor = UIColor.black.withAlphaComponent(0.7) // Added photoEditMaskView configuration
+        photoEditMaskView.isUserInteractionEnabled = false
+        photoEditMaskView.isHidden = true
+
+        reselectButton.setTitle("Reselect", for: .normal) // Added reselectButton configuration
+        reselectButton.setTitleColor(.white, for: .normal)
+        reselectButton.backgroundColor = .black
+        reselectButton.layer.cornerRadius = 22
+        reselectButton.isHidden = true
+
+        finalSaveButton.setTitle("Save", for: .normal) // Added finalSaveButton configuration
+        finalSaveButton.setTitleColor(.black, for: .normal)
+        finalSaveButton.backgroundColor = .yellow
+        finalSaveButton.layer.cornerRadius = 22
+        finalSaveButton.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         setSelectedRatio(selectedRatio)
+        updatePhotoEditMask() // Added updatePhotoEditMask call
     }
 
     func setSelectedRatio(_ ratio: String) {
@@ -316,6 +358,21 @@ final class CreateGuideView: BaseView {
 
         shapePaletteView.isHidden = true
         print("Selected shape:", selectedShape)
+    }
+
+    func updatePhotoEditMask() { // Added updatePhotoEditMask method
+        let path = UIBezierPath(rect: photoEditMaskView.bounds)
+        let imageFrame = convert(editableImageView.frame, to: photoEditMaskView)
+        let transparentPath = UIBezierPath(roundedRect: imageFrame, cornerRadius: 0)
+        path.append(transparentPath)
+        path.usesEvenOddFillRule = true
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        maskLayer.fillRule = .evenOdd
+
+        photoEditMaskView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        photoEditMaskView.layer.addSublayer(maskLayer)
     }
     
 }
