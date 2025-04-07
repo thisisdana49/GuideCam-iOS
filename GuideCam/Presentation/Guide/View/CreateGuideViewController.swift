@@ -141,6 +141,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.ratioStackView.isHidden = mainView.isImageEditMode
         mainView.undoButton.isHidden = mainView.isImageEditMode
         mainView.redoButton.isHidden = mainView.isImageEditMode
+        
+        mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
     }
     
     @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {

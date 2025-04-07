@@ -36,6 +36,8 @@ final class CreateGuideView: BaseView {
     let reselectButton = UIButton() // Added reselectButton
     let finalSaveButton = UIButton() // Added finalSaveButton
 
+    let imageDeleteButton = UIButton() // Added imageDeleteButton
+
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
     var drawingToolButtons: [UIButton] = []
@@ -81,6 +83,7 @@ final class CreateGuideView: BaseView {
         canvasView.addSubview(photoEditMaskView) // Moved photoEditMaskView here
         canvasView.addSubview(editableImageView)
         canvasView.addSubview(drawingCanvasView)
+        editableImageView.addSubview(imageDeleteButton) // Added imageDeleteButton to editableImageView
     }
 
     override func configureLayout() {
@@ -164,6 +167,12 @@ final class CreateGuideView: BaseView {
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(44)
             $0.width.equalTo(120)
+        }
+        
+        imageDeleteButton.snp.makeConstraints { // Updated constraints for imageDeleteButton
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(32)
+            $0.width.height.equalTo(32)
         }
     }
 
@@ -291,12 +300,22 @@ final class CreateGuideView: BaseView {
         finalSaveButton.backgroundColor = .yellow
         finalSaveButton.layer.cornerRadius = 22
         finalSaveButton.isHidden = true
+        
+        imageDeleteButton.setImage(UIImage(systemName: "xmark.app.fill"), for: .normal) // Added imageDeleteButton configuration
+        imageDeleteButton.tintColor = .yellow
+        imageDeleteButton.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         setSelectedRatio(selectedRatio)
-        updatePhotoEditMask() // Added updatePhotoEditMask call
+        updatePhotoEditMask()
+
+//        imageDeleteButton.snp.remakeConstraints {
+//            $0.top.equalTo(editableImageView.snp.top).offset(0)
+//            $0.leading.equalTo(editableImageView.snp.leading).offset(0)
+//            $0.width.height.equalTo(24)
+//        }
     }
 
     func setSelectedRatio(_ ratio: String) {
