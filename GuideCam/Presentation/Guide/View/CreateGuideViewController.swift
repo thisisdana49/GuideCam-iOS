@@ -49,6 +49,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
                 button.addTarget(self, action: #selector(shapeButtonTapped(_:)), for: .touchUpInside)
             }
         }
+        
+        mainView.imageTrashButton.addTarget(self, action: #selector(trashButtonTapped), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,14 +137,15 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         if !mainView.isImageEditMode {
             mainView.editableImageView.removeImageFrameBorder()
         }
-        mainView.reselectButton.isHidden = !mainView.isImageEditMode
         mainView.finalSaveButton.isHidden = !mainView.isImageEditMode
+        mainView.saveButton.isHidden = mainView.isImageEditMode
 
         mainView.ratioStackView.isHidden = mainView.isImageEditMode
         mainView.undoButton.isHidden = mainView.isImageEditMode
         mainView.redoButton.isHidden = mainView.isImageEditMode
         
-        mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
+//        mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
+        mainView.imageTrashButton.isHidden = !mainView.isImageEditMode
     }
     
     @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -187,6 +190,13 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
 
         mainView.shapePaletteView.isHidden = true
         print("Selected shape:", selectedShape)
+    }
+    
+    @objc private func trashButtonTapped() {
+        mainView.editableImageView.image = nil
+        mainView.editableImageView.isHidden = true
+        mainView.editableImageView.removeImageFrameBorder()
+        mainView.updatePhotoEditMask()
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

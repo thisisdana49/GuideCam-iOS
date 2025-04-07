@@ -33,10 +33,10 @@ final class CreateGuideView: BaseView {
     let shapePaletteView = UIStackView() // Added shapePaletteView
 
     let photoEditMaskView = UIView() // Added photoEditMaskView
-    let reselectButton = UIButton() // Added reselectButton
     let finalSaveButton = UIButton() // Added finalSaveButton
 
     let imageDeleteButton = UIButton() // Added imageDeleteButton
+    let imageTrashButton = UIButton() // Added imageTrashButton
 
     var selectedRatio: String = "9:16"
     var ratioButtons: [UIButton] = []
@@ -70,8 +70,8 @@ final class CreateGuideView: BaseView {
         addSubview(saveButton)
         addSubview(colorPaletteView) // Added colorPaletteView to hierarchy
         addSubview(shapePaletteView) // Added shapePaletteView to hierarchy
-        addSubview(reselectButton) // Added reselectButton to hierarchy
         addSubview(finalSaveButton) // Added finalSaveButton to hierarchy
+        addSubview(imageTrashButton) // Added to hierarchy
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
@@ -120,6 +120,12 @@ final class CreateGuideView: BaseView {
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
         }
+        
+        imageTrashButton.snp.makeConstraints {
+            $0.leading.equalTo(drawingStackView.snp.trailing).offset(12)
+            $0.centerY.equalTo(drawingStackView)
+            $0.width.height.equalTo(32)
+        }
 
         redoButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
@@ -161,19 +167,12 @@ final class CreateGuideView: BaseView {
             $0.height.equalTo(44)
             $0.width.equalTo(80)
         }
-        
-        reselectButton.snp.makeConstraints {
-            $0.trailing.equalTo(finalSaveButton.snp.leading).offset(8)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.height.equalTo(44)
-            $0.width.equalTo(120)
-        }
-        
-        imageDeleteButton.snp.makeConstraints { // Updated constraints for imageDeleteButton
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(32)
-            $0.width.height.equalTo(32)
-        }
+//        
+//        imageDeleteButton.snp.makeConstraints { // Updated constraints for imageDeleteButton
+//            $0.centerX.equalToSuperview()
+//            $0.bottom.equalToSuperview().offset(32)
+//            $0.width.height.equalTo(32)
+//        }
     }
 
     override func configureView() {
@@ -289,33 +288,25 @@ final class CreateGuideView: BaseView {
         photoEditMaskView.isUserInteractionEnabled = false
         photoEditMaskView.isHidden = true
 
-        reselectButton.setTitle("Reselect", for: .normal) // Added reselectButton configuration
-        reselectButton.setTitleColor(.white, for: .normal)
-        reselectButton.backgroundColor = .black
-        reselectButton.layer.cornerRadius = 22
-        reselectButton.isHidden = true
-
         finalSaveButton.setTitle("Save", for: .normal) // Added finalSaveButton configuration
         finalSaveButton.setTitleColor(.black, for: .normal)
         finalSaveButton.backgroundColor = .yellow
         finalSaveButton.layer.cornerRadius = 22
         finalSaveButton.isHidden = true
         
-        imageDeleteButton.setImage(UIImage(systemName: "xmark.app.fill"), for: .normal) // Added imageDeleteButton configuration
+        imageDeleteButton.setImage(UIImage(systemName: "xmark.app.fill"), for: .normal)
         imageDeleteButton.tintColor = .yellow
         imageDeleteButton.isHidden = true
+
+        imageTrashButton.setImage(UIImage(systemName: "trash.circle.fill"), for: .normal)
+        imageTrashButton.tintColor = .white
+        imageTrashButton.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         setSelectedRatio(selectedRatio)
         updatePhotoEditMask()
-
-//        imageDeleteButton.snp.remakeConstraints {
-//            $0.top.equalTo(editableImageView.snp.top).offset(0)
-//            $0.leading.equalTo(editableImageView.snp.leading).offset(0)
-//            $0.width.height.equalTo(24)
-//        }
     }
 
     func setSelectedRatio(_ ratio: String) {

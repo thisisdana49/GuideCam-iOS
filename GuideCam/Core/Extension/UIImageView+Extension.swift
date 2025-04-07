@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func addImageFrameBorder(color: UIColor = .yellow, lineWidth: CGFloat = 2) {
+    func addImageFrameBorder(color: UIColor = .yellow, lineWidth: CGFloat = 1) {
         // 기존 border 레이어 제거
         layer.sublayers?.filter { $0.name == "ImageFrameBorder" }.forEach { $0.removeFromSuperlayer() }
         
