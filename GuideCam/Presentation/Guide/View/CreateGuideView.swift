@@ -277,7 +277,6 @@ final class CreateGuideView: BaseView {
             shapePaletteView.addArrangedSubview(button)
         }
 
-        photoEditMaskView.backgroundColor = UIColor.black.withAlphaComponent(0.7) // Added photoEditMaskView configuration
         photoEditMaskView.isUserInteractionEnabled = false
         photoEditMaskView.isHidden = true
 
@@ -370,6 +369,7 @@ final class CreateGuideView: BaseView {
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.cgPath
         maskLayer.fillRule = .evenOdd
+        maskLayer.fillColor = UIColor.black.withAlphaComponent(0.7).cgColor
 
         photoEditMaskView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         photoEditMaskView.layer.addSublayer(maskLayer)

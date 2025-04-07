@@ -54,31 +54,6 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
-    override func configure() {
-        mainView.colorPaletteView.axis = .horizontal
-        mainView.colorPaletteView.spacing = 8
-        mainView.colorPaletteView.alignment = .center
-        mainView.colorPaletteView.isHidden = true
-        
-        mainView.colorPaletteView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
-        let colors: [UIColor] = AppColor.Drawing.palette
-        
-        colors.forEach { color in
-            let button = UIButton()
-            button.backgroundColor = color
-            button.layer.cornerRadius = 16
-            button.clipsToBounds = true
-            mainView.colorPaletteView.addArrangedSubview(button)
-        }
-        
-        mainView.canvasView.addSubview(mainView.editableImageView)
-        mainView.canvasView.addSubview(mainView.photoEditMaskView)
-        mainView.canvasView.addSubview(mainView.drawingCanvasView)
-        mainView.addSubview(mainView.reselectButton)
-        mainView.addSubview(mainView.finalSaveButton)
-    }
     
     override func bind() {
         super.bind()
