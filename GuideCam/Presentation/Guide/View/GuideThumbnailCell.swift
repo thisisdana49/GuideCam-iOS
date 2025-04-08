@@ -1,4 +1,3 @@
-//
 //  GuideThumbnailCell.swift
 //  GuideCam
 //
@@ -85,6 +84,12 @@ final class GuideThumbnailCell: UICollectionViewCell {
         tagLabel.text = "Recent"
         tagLabel.textAlignment = .center
         tagLabel.isHidden = true
+    }
+    
+    func updateSelectedState(_ isSelected: Bool) {
+        print(#function)
+        layer.borderWidth = isSelected ? 2 : 0
+        layer.borderColor = isSelected ? UIColor.red.cgColor : UIColor.clear.cgColor
     }
     
 }

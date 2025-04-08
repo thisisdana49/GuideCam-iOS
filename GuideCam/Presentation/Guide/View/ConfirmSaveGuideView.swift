@@ -1,4 +1,3 @@
-//
 //  ConfirmSaveGuideView.swift
 //  GuideCam
 //

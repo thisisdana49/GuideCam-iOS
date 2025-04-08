@@ -21,6 +21,7 @@ final class GuideEntity: Object {
 extension GuideEntity {
     func toModel() -> Guide {
         return Guide(
+            id: self.id,
             title: self.title,
             thumbnailPath: self.thumbnailPath,
             isFavorite: self.isFavorite,

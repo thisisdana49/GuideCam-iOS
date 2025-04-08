@@ -11,6 +11,7 @@ import RealmSwift
 protocol GuideRepository {
     func save(_ guide: GuideEntity)
     func fetchAll() -> [GuideEntity]
+    func delete(by id: String)
     func delete(_ guide: GuideEntity)
     func update(_ guide: GuideEntity)
 }
@@ -37,6 +38,13 @@ final class GuideRepositoryImpl: GuideRepository {
         return Array(realm.objects(GuideEntity.self).sorted(byKeyPath: "createdAt", ascending: false))
     }
 
+    func delete(by id: String) {
+        guard let object = realm.object(ofType: GuideEntity.self, forPrimaryKey: id) else { return }
+        try? realm.write {
+            realm.delete(object)
+        }
+    }
+    
     func delete(_ guide: GuideEntity) {
         do {
             try realm.write {

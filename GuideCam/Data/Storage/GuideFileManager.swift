@@ -43,6 +43,7 @@ final class GuideFileManager {
 
     func loadImage(from filename: String) -> UIImage? {
         let url = documentsDirectory.appendingPathComponent(filename)
+        print(url)
         return UIImage(contentsOfFile: url.path)
     }
 
