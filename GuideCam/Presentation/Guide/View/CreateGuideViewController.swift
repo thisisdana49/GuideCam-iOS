@@ -119,7 +119,25 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
     
     @objc private func saveButtonTapped() {
-        coordinator?.showSaveConfirm()
+        guard let thumbnailImage = mainView.canvasView.asImage() else { return }
+
+        let filename = GuideFileManager.shared.makeImageFilename()
+        guard let imagePath = GuideFileManager.shared.saveImage(thumbnailImage, withName: filename) else {
+            print("❌ 이미지 저장 실패")
+            return
+        }
+
+        let newGuide = GuideEntity()
+        newGuide.title = "내 가이드 \(Date().timeIntervalSince1970)"
+        newGuide.thumbnailPath = imagePath
+        newGuide.isFavorite = false
+        newGuide.isRecent = true
+
+        let repository = GuideRepositoryImpl()
+        repository.save(newGuide)
+
+        print("이미지 저장 완료")
+        coordinator?.didFinishCreateGuide()
     }
     
     @objc private func toggleDrawingMode() {
