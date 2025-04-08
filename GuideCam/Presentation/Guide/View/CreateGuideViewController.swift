@@ -54,6 +54,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.imageTrashButton.addTarget(self, action: #selector(trashButtonTapped), for: .touchUpInside)
         mainView.reselectButton.addTarget(self, action: #selector(reselectImage), for: .touchUpInside)
         mainView.eraserButton.addTarget(self, action: #selector(activateEraserMode), for: .touchUpInside)
+        mainView.penButton.addTarget(self, action: #selector(activatePenMode), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -253,6 +254,16 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.drawingCanvasView.setEraserMode(true)
         mainView.drawingCanvasView.setShapeType(.free)
         mainView.penButton.isSelected = false
+        mainView.shapeButton.isSelected = false
+        mainView.colorButton.isSelected = false
+        mainView.colorPaletteView.isHidden = true
+        mainView.shapePaletteView.isHidden = true
+    }
+
+    @objc private func activatePenMode() {
+        mainView.drawingCanvasView.setEraserMode(false)
+        mainView.drawingCanvasView.setShapeType(.free)
+        mainView.penButton.isSelected = true
         mainView.shapeButton.isSelected = false
         mainView.colorButton.isSelected = false
         mainView.colorPaletteView.isHidden = true

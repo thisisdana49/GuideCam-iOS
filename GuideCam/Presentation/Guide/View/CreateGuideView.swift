@@ -51,7 +51,7 @@ final class CreateGuideView: BaseView {
     private var selectedShape: ShapeType = .line // Added selected shape property
 
     enum ShapeType { // Added ShapeType enum
-        case line, circle, square, triangle
+        case line, circle, square, triangle, free
     }
 
     override init(frame: CGRect) {
