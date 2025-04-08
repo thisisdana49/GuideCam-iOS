@@ -10,14 +10,24 @@ import RxSwift
 import RxCocoa
 
 final class GuideListViewModel: BaseViewModel {
+    private let repository: GuideRepository
     let guides = BehaviorRelay<[Guide]>(value: [])
 
-    func loadDummyData() {
-        let dummy = [
-            Guide(title: "Pose A", thumbnailPath: "", isFavorite: true, isRecent: true),
-            Guide(title: "Pose B", thumbnailPath: "", isFavorite: false, isRecent: false),
-            Guide(title: "Pose C", thumbnailPath: "", isFavorite: true, isRecent: false)
-        ]
-        guides.accept(dummy)
+    init(repository: GuideRepository = GuideRepositoryImpl()) {
+        self.repository = repository
     }
+
+    func loadGuides() {
+        let allGuides = repository.fetchAll().map { $0.toModel() }
+        guides.accept(allGuides)
+    }
+
+    // func loadDummyData() {
+    //     let dummy = [
+    //         Guide(title: "Pose A", thumbnailPath: "", isFavorite: true, isRecent: true),
+    //         Guide(title: "Pose B", thumbnailPath: "", isFavorite: false, isRecent: false),
+    //         Guide(title: "Pose C", thumbnailPath: "", isFavorite: true, isRecent: false)
+    //     ]
+    //     guides.accept(dummy)
+    // }
 }

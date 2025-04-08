@@ -15,7 +15,7 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadDummyData()
+        viewModel.loadGuides()
     }
 
     override func bind() {
@@ -54,4 +54,3 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
     }
     
 }
-

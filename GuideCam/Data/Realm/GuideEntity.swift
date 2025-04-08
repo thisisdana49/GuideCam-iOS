@@ -16,3 +16,15 @@ final class GuideEntity: Object {
     @Persisted var isRecent: Bool
     @Persisted var createdAt: Date = Date()
 }
+
+
+extension GuideEntity {
+    func toModel() -> Guide {
+        return Guide(
+            title: self.title,
+            thumbnailPath: self.thumbnailPath,
+            isFavorite: self.isFavorite,
+            isRecent: self.isRecent
+        )
+    }
+}

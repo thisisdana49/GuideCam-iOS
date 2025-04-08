@@ -26,6 +26,7 @@ final class GuideFileManager {
     // MARK: - Save
 
     func saveImage(_ image: UIImage, withName name: String) -> String? {
+        printDocumentsDirectoryPath()
         let url = documentsDirectory.appendingPathComponent(name)
         guard let data = image.pngData() else { return nil }
 
