@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ConfirmSaveGuideViewController: BaseViewController<BaseView, ConfirmSaveGuideViewModel> {
+final class ConfirmSaveGuideViewController: BaseViewController<ConfirmSaveGuideView, ConfirmSaveGuideViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
