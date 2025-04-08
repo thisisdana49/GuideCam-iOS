@@ -25,6 +25,15 @@ final class GuideThumbnailCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(with guide: Guide) {
+        print("***ThumnailPath,", guide.thumbnailPath)
+        guideImageView.image = GuideFileManager.shared.loadImage(from: guide.thumbnailPath)
+        titleLabel.text = guide.title
+        favoriteButton.setImage(guide.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"), for: .normal)
+        favoriteButton.tintColor = guide.isFavorite ? .yellow : .lightGray
+        tagLabel.isHidden = !guide.isRecent
+    }
 
     private func setupViews() {
         contentView.addSubview(guideImageView)
@@ -77,14 +86,5 @@ final class GuideThumbnailCell: UICollectionViewCell {
         tagLabel.textAlignment = .center
         tagLabel.isHidden = true
     }
-
-    func configure(with guide: Guide) {
-        guideImageView.image = UIImage(contentsOfFile: guide.thumbnailPath)
-        titleLabel.text = guide.title
-        favoriteButton.setImage(guide.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"), for: .normal)
-        favoriteButton.tintColor = guide.isFavorite ? .yellow : .lightGray
-        tagLabel.isHidden = !guide.isRecent
-    }
     
 }
-
