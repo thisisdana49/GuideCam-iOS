@@ -23,7 +23,7 @@ final class CreateGuideView: BaseView {
     let redoButton = UIButton()
     
     let penButton = UIButton()
-    let eraserButton = UIButton()
+    let eraserButton = UIButton() // Added eraserButton
     let shapeButton = UIButton()
     let colorButton = UIButton()
     
@@ -78,7 +78,7 @@ final class CreateGuideView: BaseView {
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
-        drawingStackView.addArrangedSubview(eraserButton)
+        drawingStackView.addArrangedSubview(eraserButton) // Added eraserButton to drawingStackView
         drawingStackView.addArrangedSubview(shapeButton)
         drawingStackView.addArrangedSubview(colorButton)
         drawingStackView.addArrangedSubview(imageModeButton)
@@ -240,7 +240,7 @@ final class CreateGuideView: BaseView {
         penButton.tintColor = .white
         penButton.isHidden = true
         
-        eraserButton.setImage(UIImage(systemName: "eraser"), for: .normal)
+        eraserButton.setImage(UIImage(systemName: "eraser"), for: .normal) // Added configuration for eraserButton
         eraserButton.tintColor = .white
         eraserButton.isHidden = true
         

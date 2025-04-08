@@ -17,6 +17,7 @@ final class DrawingCanvasView: UIView {
     private var currentColor: UIColor = .red
     var shapeType: DrawingShapeType = .free
     private var startPoint: CGPoint?
+    private var isEraserModeEnabled = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,22 +37,19 @@ final class DrawingCanvasView: UIView {
         guard let point = touches.first?.location(in: self) else { return }
         startPoint = point
 
-        switch shapeType {
-        case .free:
-            let path = UIBezierPath()
-            path.lineWidth = 3.0
-            path.lineCapStyle = .round
-            path.move(to: point)
-            currentPath = path
-            coloredPaths.append((path, currentColor))
-        default:
-            break
-        }
+        let path = UIBezierPath()
+        path.lineWidth = 3.0
+        path.lineCapStyle = .round
+        path.move(to: point)
+        currentPath = path
 
         setNeedsDisplay()
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isEraserModeEnabled {
+            return
+        }
         print(#function)
         guard let point = touches.first?.location(in: self) else { return }
 
@@ -93,6 +91,14 @@ final class DrawingCanvasView: UIView {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(#function)
+        if isEraserModeEnabled, let point = touches.first?.location(in: self) {
+            coloredPaths.removeAll { path, _ in
+                return path.bounds.insetBy(dx: -10, dy: -10).contains(point)
+            }
+            setNeedsDisplay()
+            return
+        }
+        
         guard let start = startPoint,
               let end = touches.first?.location(in: self) else {
             currentPath = nil
@@ -126,10 +132,9 @@ final class DrawingCanvasView: UIView {
         default:
             break
         }
-
-        if shapeType != .free {
-            currentPath = path
-            coloredPaths.append((path, currentColor))
+        
+        if let finalizedPath = currentPath {
+            coloredPaths.append((finalizedPath, currentColor))
         }
 
         currentPath = nil
@@ -163,5 +168,10 @@ final class DrawingCanvasView: UIView {
     
     func setShapeType(_ type: DrawingShapeType) {
         shapeType = type
+    }
+    
+    func setEraserMode(_ enabled: Bool) {
+        isEraserModeEnabled = enabled
+        shapeType = .free // Erase mode only available in free draw mode
     }
 }
