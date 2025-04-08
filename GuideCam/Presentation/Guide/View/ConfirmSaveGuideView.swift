@@ -88,7 +88,8 @@ final class ConfirmSaveGuideView: BaseView {
         titleField.font = .boldSystemFont(ofSize: 20)
         titleField.borderStyle = .none
         titleField.textAlignment = .center
-        titleField.isUserInteractionEnabled = false
+        titleField.isUserInteractionEnabled = true
+        titleField.returnKeyType = .done
 
         renameButton.setImage(UIImage(systemName: "pencil"), for: .normal)
         renameButton.tintColor = .white

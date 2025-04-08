@@ -53,4 +53,8 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         navigationItem.rightBarButtonItem = menuItem
     }
     
+    func refreshGuideList() {
+        viewModel.loadGuides()
+    }
+    
 }

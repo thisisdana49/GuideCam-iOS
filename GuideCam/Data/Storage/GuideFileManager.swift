@@ -32,7 +32,7 @@ final class GuideFileManager {
 
         do {
             try data.write(to: url)
-            return url.path
+            return name  // Only return file name
         } catch {
             print("❌ 이미지 저장 실패: \(error)")
             return nil
@@ -41,15 +41,15 @@ final class GuideFileManager {
 
     // MARK: - Load
 
-    func loadImage(from path: String) -> UIImage? {
-        let url = URL(fileURLWithPath: path)
+    func loadImage(from filename: String) -> UIImage? {
+        let url = documentsDirectory.appendingPathComponent(filename)
         return UIImage(contentsOfFile: url.path)
     }
 
     // MARK: - Delete
 
-    func deleteImage(at path: String) {
-        let url = URL(fileURLWithPath: path)
+    func deleteImage(at filename: String) {
+        let url = documentsDirectory.appendingPathComponent(filename)
         if fileManager.fileExists(atPath: url.path) {
             do {
                 try fileManager.removeItem(at: url)

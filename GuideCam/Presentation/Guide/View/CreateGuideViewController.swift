@@ -128,7 +128,10 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         }
 
         let newGuide = GuideEntity()
-        newGuide.title = "내 가이드 \(Date().timeIntervalSince1970)"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd"
+        let dateString = formatter.string(from: Date())
+        newGuide.title = "새로운 가이드_\(dateString)"
         newGuide.thumbnailPath = imagePath
         newGuide.isFavorite = false
         newGuide.isRecent = true

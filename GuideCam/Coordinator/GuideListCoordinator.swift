@@ -11,6 +11,7 @@ protocol GuideListCoordinating: AnyObject {
     func showCreateGuide()
     func showSaveConfirm(thumbnailPath: String, title: String)
     func didFinishCreateGuide()
+    func returnToGuideListRoot()
 }
 
 final class GuideListCoordinator: Coordinator {
@@ -41,6 +42,7 @@ extension GuideListCoordinator: GuideListCoordinating {
     func showSaveConfirm(thumbnailPath: String, title: String) {
         let confirmViewModel = ConfirmSaveGuideViewModel()
         let confirmVC = ConfirmSaveGuideViewController(thumbnailPath: thumbnailPath, title: title, viewModel: confirmViewModel)
+        confirmVC.coordinator = self
         confirmVC.hidesBottomBarWhenPushed = true
         navigationController.setNavigationBarHidden(false, animated: false)
         navigationController.pushViewController(confirmVC, animated: true)
@@ -49,5 +51,14 @@ extension GuideListCoordinator: GuideListCoordinating {
     func didFinishCreateGuide() {
         navigationController.setNavigationBarHidden(false, animated: false)
         navigationController.popViewController(animated: true)
+    }
+    
+    func returnToGuideListRoot() {
+        navigationController.popToRootViewController(animated: true)
+        if let guideListVC = navigationController.viewControllers.first as? GuideListViewController {
+            DispatchQueue.main.async {
+                guideListVC.refreshGuideList()
+            }
+        }
     }
 }
