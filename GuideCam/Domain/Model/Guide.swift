@@ -8,6 +8,7 @@
 import Foundation
 
 struct Guide {
+    let id: String
     let title: String
     let thumbnailPath: String
     let isFavorite: Bool

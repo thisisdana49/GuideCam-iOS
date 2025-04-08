@@ -33,14 +33,34 @@ final class GuideListView: BaseView {
         return label
     }()
 
+    let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete Guide", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .yellow
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.layer.cornerRadius = 12
+        button.isHidden = true
+        return button
+    }()
+
     override func configureHierarchy() {
         addSubview(collectionView)
         addSubview(emptyStateLabel)
+        addSubview(deleteButton)
     }
 
     override func configureLayout() {
-        collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalTo(safeAreaLayoutGuide).inset(16)
+        deleteButton.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(44)
+            $0.width.equalTo(200)
+        }
+
+        collectionView.snp.remakeConstraints {
+            $0.top.equalTo(deleteButton.snp.bottom).offset(16)
+            $0.leading.trailing.bottom.equalTo(safeAreaLayoutGuide).inset(16)
         }
 
         emptyStateLabel.snp.makeConstraints {

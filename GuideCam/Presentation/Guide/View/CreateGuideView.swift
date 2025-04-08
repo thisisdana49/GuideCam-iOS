@@ -393,4 +393,10 @@ final class CreateGuideView: BaseView {
 //        photoEditMaskView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
     }
     
+    func isCanvasEmpty() -> Bool {
+        let isDrawingEmpty = drawingCanvasView.isEmpty()
+        let isImageEmpty = editableImageView.image == nil
+        return isDrawingEmpty && isImageEmpty
+    }
+    
 }

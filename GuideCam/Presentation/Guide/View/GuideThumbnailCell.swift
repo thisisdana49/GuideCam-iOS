@@ -1,4 +1,3 @@
-//
 //  GuideThumbnailCell.swift
 //  GuideCam
 //
@@ -24,6 +23,15 @@ final class GuideThumbnailCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with guide: Guide) {
+        print("***ThumnailPath,", guide.thumbnailPath)
+        guideImageView.image = GuideFileManager.shared.loadImage(from: guide.thumbnailPath)
+        titleLabel.text = guide.title
+        favoriteButton.setImage(guide.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"), for: .normal)
+        favoriteButton.tintColor = guide.isFavorite ? .yellow : .lightGray
+        tagLabel.isHidden = !guide.isRecent
     }
 
     private func setupViews() {
@@ -77,14 +85,11 @@ final class GuideThumbnailCell: UICollectionViewCell {
         tagLabel.textAlignment = .center
         tagLabel.isHidden = true
     }
-
-    func configure(with guide: Guide) {
-        guideImageView.image = UIImage(contentsOfFile: guide.thumbnailPath)
-        titleLabel.text = guide.title
-        favoriteButton.setImage(guide.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"), for: .normal)
-        favoriteButton.tintColor = guide.isFavorite ? .yellow : .lightGray
-        tagLabel.isHidden = !guide.isRecent
+    
+    func updateSelectedState(_ isSelected: Bool) {
+        print(#function)
+        layer.borderWidth = isSelected ? 2 : 0
+        layer.borderColor = isSelected ? UIColor.red.cgColor : UIColor.clear.cgColor
     }
     
 }
-

@@ -58,6 +58,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
 
         mainView.undoButton.addTarget(self, action: #selector(undoDrawing), for: .touchUpInside)
         mainView.redoButton.addTarget(self, action: #selector(redoDrawing), for: .touchUpInside)
+        
+        mainView.drawingCanvasView.onDrawingChanged = { [weak self] in
+            self?.updateSaveButtonState()
+        }
+        
+        updateSaveButtonState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +86,12 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
         present(picker, animated: true)
+    }
+    
+    private func updateSaveButtonState() {
+        let isBlank = mainView.isCanvasEmpty()
+        mainView.saveButton.isEnabled = !isBlank
+        mainView.saveButton.alpha = isBlank ? 0.4 : 1.0
     }
     
     @objc private func ratioButtonTapped(_ sender: UIButton) {
@@ -107,7 +119,28 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
     
     @objc private func saveButtonTapped() {
-        coordinator?.showSaveConfirm()
+        guard let thumbnailImage = mainView.canvasView.asImage() else { return }
+
+        let filename = GuideFileManager.shared.makeImageFilename()
+        guard let imagePath = GuideFileManager.shared.saveImage(thumbnailImage, withName: filename) else {
+            print("❌ 이미지 저장 실패")
+            return
+        }
+
+        let newGuide = GuideEntity()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd"
+        let dateString = formatter.string(from: Date())
+        newGuide.title = "새로운 가이드_\(dateString)"
+        newGuide.thumbnailPath = imagePath
+        newGuide.isFavorite = false
+        newGuide.isRecent = true
+
+        let repository = GuideRepositoryImpl()
+        repository.save(newGuide)
+
+        print("이미지 저장 완료")
+        coordinator?.showSaveConfirm(thumbnailPath: imagePath, title: newGuide.title)
     }
     
     @objc private func toggleDrawingMode() {
@@ -119,6 +152,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.drawingCanvasView.isUserInteractionEnabled = mainView.isDrawingMode
         mainView.imageModeButton.isEnabled = !mainView.isDrawingMode
         mainView.imageModeButton.alpha = mainView.isDrawingMode ? 0.4 : 1.0
+        updateSaveButtonState()
     }
     
     @objc private func toggleColorPalette() {
@@ -131,6 +165,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.selectedColor = color
         mainView.drawingCanvasView.setStrokeColor(color)
         mainView.colorPaletteView.isHidden = true
+        updateSaveButtonState()
     }
     
     @objc private func toggleImageEditMode() {
@@ -166,6 +201,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.reselectButton.isHidden = !mainView.isImageEditMode
         mainView.drawModeButton.isEnabled = !mainView.isImageEditMode
         mainView.drawModeButton.alpha = mainView.isImageEditMode ? 0.4 : 1.0
+        updateSaveButtonState()
     }
 
     @objc private func applyImageEdit() {
@@ -221,6 +257,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.editableImageView.isHidden = true
         mainView.editableImageView.removeImageFrameBorder()
         mainView.updatePhotoEditMask()
+        updateSaveButtonState()
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -245,6 +282,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
                 self?.mainView.editableImageView.removeImageFrameBorder()
                 self?.mainView.editableImageView.addImageFrameBorder()
                 self?.mainView.editableImageView.isHidden = false
+                self?.updateSaveButtonState()
             }
         }
     }
@@ -275,9 +313,11 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
 
     @objc private func undoDrawing() {
         mainView.drawingCanvasView.undo()
+        updateSaveButtonState()
     }
 
     @objc private func redoDrawing() {
         mainView.drawingCanvasView.redo()
+        updateSaveButtonState()
     }
 }
