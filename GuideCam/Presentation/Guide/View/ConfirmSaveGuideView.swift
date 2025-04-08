@@ -102,6 +102,6 @@ final class ConfirmSaveGuideView: BaseView {
         viewGuideListButton.setTitle("View Guide List", for: .normal)
         viewGuideListButton.setTitleColor(.white, for: .normal)
         viewGuideListButton.titleLabel?.font = .systemFont(ofSize: 14)
-        viewGuideListButton.titleLabel?.underlineStyle = .single
+//        viewGuideListButton.titleLabel?.underlineStyle = .single
     }
 }

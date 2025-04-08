@@ -137,7 +137,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         repository.save(newGuide)
 
         print("이미지 저장 완료")
-        coordinator?.didFinishCreateGuide()
+        coordinator?.showSaveConfirm(thumbnailPath: imagePath, title: newGuide.title)
     }
     
     @objc private func toggleDrawingMode() {
