@@ -18,6 +18,8 @@ final class DrawingCanvasView: UIView {
     var shapeType: DrawingShapeType = .free
     private var startPoint: CGPoint?
     private var isEraserModeEnabled = false
+    private var pathHistory: [[(UIBezierPath, UIColor)]] = []
+    private var historyIndex: Int = -1
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -135,10 +137,35 @@ final class DrawingCanvasView: UIView {
         
         if let finalizedPath = currentPath {
             coloredPaths.append((finalizedPath, currentColor))
+            updateHistory(with: coloredPaths)
         }
 
         currentPath = nil
         startPoint = nil
+        setNeedsDisplay()
+    }
+
+    // MARK: - History Management
+
+    private func updateHistory(with paths: [(UIBezierPath, UIColor)]) {
+        if historyIndex < pathHistory.count - 1 {
+            pathHistory.removeSubrange((historyIndex + 1)...pathHistory.count - 1)
+        }
+        pathHistory.append(paths)
+        historyIndex += 1
+    }
+
+    func undo() {
+        guard historyIndex > 0 else { return }
+        historyIndex -= 1
+        coloredPaths = pathHistory[historyIndex]
+        setNeedsDisplay()
+    }
+
+    func redo() {
+        guard historyIndex < pathHistory.count - 1 else { return }
+        historyIndex += 1
+        coloredPaths = pathHistory[historyIndex]
         setNeedsDisplay()
     }
 
@@ -159,6 +186,8 @@ final class DrawingCanvasView: UIView {
 
     func clear() {
         coloredPaths.removeAll()
+        pathHistory.removeAll()
+        historyIndex = -1
         setNeedsDisplay()
     }
     

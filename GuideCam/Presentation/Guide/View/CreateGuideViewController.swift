@@ -55,6 +55,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.reselectButton.addTarget(self, action: #selector(reselectImage), for: .touchUpInside)
         mainView.eraserButton.addTarget(self, action: #selector(activateEraserMode), for: .touchUpInside)
         mainView.penButton.addTarget(self, action: #selector(activatePenMode), for: .touchUpInside)
+
+        mainView.undoButton.addTarget(self, action: #selector(undoDrawing), for: .touchUpInside)
+        mainView.redoButton.addTarget(self, action: #selector(redoDrawing), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -268,5 +271,13 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.colorButton.isSelected = false
         mainView.colorPaletteView.isHidden = true
         mainView.shapePaletteView.isHidden = true
+    }
+
+    @objc private func undoDrawing() {
+        mainView.drawingCanvasView.undo()
+    }
+
+    @objc private func redoDrawing() {
+        mainView.drawingCanvasView.redo()
     }
 }
