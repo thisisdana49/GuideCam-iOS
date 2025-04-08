@@ -20,6 +20,7 @@ final class DrawingCanvasView: UIView {
     private var isEraserModeEnabled = false
     private var pathHistory: [[(UIBezierPath, UIColor)]] = []
     private var historyIndex: Int = -1
+    var onDrawingChanged: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,6 +33,10 @@ final class DrawingCanvasView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func isEmpty() -> Bool {
+        return coloredPaths.isEmpty
+    }
+    
     // MARK: - Touch Handling
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -143,6 +148,8 @@ final class DrawingCanvasView: UIView {
         currentPath = nil
         startPoint = nil
         setNeedsDisplay()
+        
+        onDrawingChanged?()
     }
 
     // MARK: - History Management
