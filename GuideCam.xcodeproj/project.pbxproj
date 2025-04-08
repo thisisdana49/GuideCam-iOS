@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */; };
 		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
 		3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA82D9E778300681B6B /* Localizable.strings */; };
 		3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAE2D9E778300681B6B /* LaunchScreen.storyboard */; };
@@ -44,6 +45,9 @@
 		3EFA030F2DA018180087A708 /* CreateGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA030E2DA018180087A708 /* CreateGuideView.swift */; };
 		3EFA03112DA123CC0087A708 /* ConfirmSaveGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03102DA123CC0087A708 /* ConfirmSaveGuideViewController.swift */; };
 		3EFA03132DA123F00087A708 /* ConfirmSaveGuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03122DA123F00087A708 /* ConfirmSaveGuideViewModel.swift */; };
+		3EFA03152DA157600087A708 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03142DA157600087A708 /* DrawingCanvasView.swift */; };
+		3EFA03172DA26B840087A708 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03162DA26B840087A708 /* UIColor+Hex.swift */; };
+		3EFA03192DA26BA60087A708 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA03182DA26BA60087A708 /* AppColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE1EBA62D9E778300681B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3EE1EBA72D9E778300681B6B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -69,9 +74,7 @@
 		3EE1EBAD2D9E778300681B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3EE1EBAF2D9E778300681B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3EE1EBC12D9E781300681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBC32D9E782A00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		3EE1EBC52D9E783600681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3EE1EBCC2D9E78EE00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBCE2D9E78EF00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
@@ -103,6 +106,9 @@
 		3EFA030E2DA018180087A708 /* CreateGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGuideView.swift; sourceTree = "<group>"; };
 		3EFA03102DA123CC0087A708 /* ConfirmSaveGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSaveGuideViewController.swift; sourceTree = "<group>"; };
 		3EFA03122DA123F00087A708 /* ConfirmSaveGuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSaveGuideViewModel.swift; sourceTree = "<group>"; };
+		3EFA03142DA157600087A708 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
+		3EFA03162DA26B840087A708 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		3EFA03182DA26BA60087A708 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +244,7 @@
 		3EE1EBBE2D9E77AE00681B6B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3EE1EBC12D9E781300681B6B /* .gitkeep */,
+				3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -254,7 +260,7 @@
 		3EE1EBC02D9E77B800681B6B /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				3EE1EBC52D9E783600681B6B /* .gitkeep */,
+				3EFA03182DA26BA60087A708 /* AppColor.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -352,7 +358,9 @@
 				3EFA03062DA000160087A708 /* GuideThumbnailCell.swift */,
 				3EFA030A2DA008AA0087A708 /* CreateGuideViewController.swift */,
 				3EFA030E2DA018180087A708 /* CreateGuideView.swift */,
+				3EFA03162DA26B840087A708 /* UIColor+Hex.swift */,
 				3EFA03102DA123CC0087A708 /* ConfirmSaveGuideViewController.swift */,
+				3EFA03142DA157600087A708 /* DrawingCanvasView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -505,10 +513,13 @@
 				3EFA03132DA123F00087A708 /* ConfirmSaveGuideViewModel.swift in Sources */,
 				3EFA02FD2D9FF0A90087A708 /* AlbumViewModel.swift in Sources */,
 				3EFA03072DA000160087A708 /* GuideThumbnailCell.swift in Sources */,
+				3EFA03192DA26BA60087A708 /* AppColor.swift in Sources */,
 				3EFA02D42D9FECE90087A708 /* CoordinatorProtocol.swift in Sources */,
 				3EFA03002D9FF7CD0087A708 /* CustomTabBarController.swift in Sources */,
 				3EFA02E42D9FEFD10087A708 /* GuideListViewController.swift in Sources */,
+				3EFA03152DA157600087A708 /* DrawingCanvasView.swift in Sources */,
 				3EFA02F52D9FF0130087A708 /* CameraViewController.swift in Sources */,
+				3EFA03172DA26B840087A708 /* UIColor+Hex.swift in Sources */,
 				3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */,
 				3EFA02DC2D9FEF3A0087A708 /* AlbumCoordinator.swift in Sources */,
 				3EFA03092DA000910087A708 /* Guide.swift in Sources */,
@@ -524,6 +535,7 @@
 				3EFA02F72D9FF02F0087A708 /* AlbumViewController.swift in Sources */,
 				3EFA03052D9FFE480087A708 /* GuideListView.swift in Sources */,
 				3EFA03112DA123CC0087A708 /* ConfirmSaveGuideViewController.swift in Sources */,
+				3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */,
 				3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */,
 				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
