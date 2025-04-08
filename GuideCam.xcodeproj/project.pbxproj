@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E21EB492DA501F200FB9881 /* GuideEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB482DA501F200FB9881 /* GuideEntity.swift */; };
+		3E21EB4B2DA502A400FB9881 /* GuideRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB4A2DA502A400FB9881 /* GuideRepository.swift */; };
 		3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */; };
 		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
 		3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA82D9E778300681B6B /* Localizable.strings */; };
@@ -65,6 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E21EB482DA501F200FB9881 /* GuideEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideEntity.swift; sourceTree = "<group>"; };
+		3E21EB4A2DA502A400FB9881 /* GuideRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideRepository.swift; sourceTree = "<group>"; };
 		3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE1EBA62D9E778300681B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,8 +80,6 @@
 		3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3EE1EBC32D9E782A00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		3EE1EBCC2D9E78EE00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		3EE1EBCE2D9E78EF00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD02D9E78F000681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD52D9E7DA700681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD72D9E7DA800681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
@@ -268,7 +270,7 @@
 		3EE1EBC92D9E78C700681B6B /* RepositoryImpl */ = {
 			isa = PBXGroup;
 			children = (
-				3EE1EBCC2D9E78EE00681B6B /* .gitkeep */,
+				3E21EB4A2DA502A400FB9881 /* GuideRepository.swift */,
 			);
 			path = RepositoryImpl;
 			sourceTree = "<group>";
@@ -276,7 +278,7 @@
 		3EE1EBCA2D9E78D100681B6B /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				3EE1EBCE2D9E78EF00681B6B /* .gitkeep */,
+				3E21EB482DA501F200FB9881 /* GuideEntity.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -529,6 +531,7 @@
 				3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */,
 				3EFA03032D9FF7FB0087A708 /* CustomTabBarView.swift in Sources */,
 				3EFA02F92D9FF03E0087A708 /* GuideListViewModel.swift in Sources */,
+				3E21EB492DA501F200FB9881 /* GuideEntity.swift in Sources */,
 				3EFA02D22D9E8A080087A708 /* BaseView.swift in Sources */,
 				3EFA030F2DA018180087A708 /* CreateGuideView.swift in Sources */,
 				3EFA02D62D9FED270087A708 /* TabBarCoordinator.swift in Sources */,
@@ -538,6 +541,7 @@
 				3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */,
 				3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */,
 				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
+				3E21EB4B2DA502A400FB9881 /* GuideRepository.swift in Sources */,
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
 				3EFA02FB2D9FF0900087A708 /* CameraViewModel.swift in Sources */,
 				3EFA02D02D9E87CD0087A708 /* BaseViewController.swift in Sources */,
