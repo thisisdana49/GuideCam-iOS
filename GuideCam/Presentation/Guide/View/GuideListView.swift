@@ -62,6 +62,13 @@ final class GuideListView: BaseView {
         label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
+    
+    let toggleDeleteModeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.tintColor = .white
+        return button
+    }()
 
     override func configureHierarchy() {
         addSubview(collectionView)
@@ -69,6 +76,7 @@ final class GuideListView: BaseView {
         addSubview(deleteButton)
         addSubview(createGuideButton)
         addSubview(sectionHeaderLabel)
+        addSubview(toggleDeleteModeButton)
     }
 
     override func configureLayout() {
@@ -86,6 +94,12 @@ final class GuideListView: BaseView {
         sectionHeaderLabel.snp.makeConstraints {
             $0.top.equalTo(createGuideButton.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(20)
+        }
+        
+        toggleDeleteModeButton.snp.makeConstraints {
+            $0.centerY.equalTo(sectionHeaderLabel)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.height.equalTo(24)
         }
 
         collectionView.snp.remakeConstraints {

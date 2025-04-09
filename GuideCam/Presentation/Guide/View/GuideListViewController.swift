@@ -18,6 +18,7 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         viewModel.loadGuides()
         mainView.deleteButton.addTarget(self, action: #selector(deleteSelectedGuides), for: .touchUpInside)
         mainView.createGuideButton.addTarget(self, action: #selector(createNewGuide), for: .touchUpInside)
+        mainView.toggleDeleteModeButton.addTarget(self, action: #selector(toggleDeleteMode), for: .touchUpInside)
     }
 
     override func bind() {
@@ -42,6 +43,7 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
             .subscribe(onNext: { [weak self] isDeleteMode in
                 self?.mainView.deleteButton.isHidden = !isDeleteMode
                 self?.mainView.createGuideButton.isHidden = isDeleteMode
+//                self?.mainView.toggleDeleteModeButton.isEnabled = !isDeleteMode
             })
             .disposed(by: disposeBag)
 
@@ -77,11 +79,12 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         }
 
         let menu = UIMenu(title: "", options: .displayInline, children: [createAction, deleteAction])
-        let menuItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
+        // let menuItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
 
-        let settingItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingTapped))
-
-        navigationItem.rightBarButtonItems = [menuItem, settingItem]
+        let settingItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingTapped))
+        settingItem.tintColor = .white
+        
+        navigationItem.rightBarButtonItems = [settingItem]
         
         let homeTitleLabel = UILabel()
         homeTitleLabel.text = "Home"
@@ -98,8 +101,13 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         coordinator?.showCreateGuide()
     }
 
+    @objc private func toggleDeleteMode() {
+        viewModel.toggleDeleteMode()
+    }
+
     @objc private func settingTapped() {
-        print("⚙️ 설정 버튼이 눌렸습니다 (추후 설정 화면 이동 예정)")
+        let settingsVC = SettingsViewController()
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     func refreshGuideList() {
