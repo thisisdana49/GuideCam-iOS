@@ -55,7 +55,7 @@ final class GuideListView: BaseView {
             $0.top.equalTo(safeAreaLayoutGuide).offset(16)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(44)
-            $0.width.equalTo(200)
+            $0.width.equalTo(safeAreaLayoutGuide).inset(20)
         }
 
         collectionView.snp.remakeConstraints {
@@ -72,4 +72,21 @@ final class GuideListView: BaseView {
         backgroundColor = .black
     }
     
+    // TODO: Button Config로 리팩토링
+    func updateDeleteButtonStyle(for count: Int) {
+        if count == 0 {
+            deleteButton.setTitle("Select Guide to delete", for: .normal)
+            deleteButton.isEnabled = false
+            deleteButton.backgroundColor = .black
+            deleteButton.setTitleColor(.gray, for: .normal)
+            deleteButton.layer.borderWidth = 1
+            deleteButton.layer.borderColor = UIColor.gray.cgColor
+        } else {
+            deleteButton.setTitle("Delete Guide(\(count))", for: .normal)
+            deleteButton.isEnabled = true
+            deleteButton.backgroundColor = .yellow
+            deleteButton.setTitleColor(.black, for: .normal)
+            deleteButton.layer.borderWidth = 0
+        }
+    }
 }

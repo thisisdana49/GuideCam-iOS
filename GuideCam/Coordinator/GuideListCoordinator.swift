@@ -1,4 +1,3 @@
-//
 //  GuideListCoordinator.swift
 //  GuideCam
 //

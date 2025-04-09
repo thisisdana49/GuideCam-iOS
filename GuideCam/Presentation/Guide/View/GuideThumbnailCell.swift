@@ -87,9 +87,8 @@ final class GuideThumbnailCell: UICollectionViewCell {
     }
     
     func updateSelectedState(_ isSelected: Bool) {
-        print(#function)
-        layer.borderWidth = isSelected ? 2 : 0
-        layer.borderColor = isSelected ? UIColor.red.cgColor : UIColor.clear.cgColor
+        guideImageView.layer.borderWidth = isSelected ? 2 : 0
+        guideImageView.layer.borderColor = isSelected ? UIColor.red.cgColor : UIColor.clear.cgColor
     }
     
 }

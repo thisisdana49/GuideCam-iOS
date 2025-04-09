@@ -56,6 +56,13 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
                 }
             })
             .disposed(by: disposeBag)
+
+        viewModel.selectedGuidesCount
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] count in
+                self?.mainView.updateDeleteButtonStyle(for: count)
+            })
+            .disposed(by: disposeBag)
     }
   
     override func configure() {
