@@ -156,7 +156,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     private func setupOverlayView() {
         let overlayView = UIView()
         overlayView.backgroundColor = .clear
-        overlayView.isUserInteractionEnabled = true
+        overlayView.isUserInteractionEnabled = false
         view.addSubview(overlayView)
 
         overlayView.snp.makeConstraints { make in
@@ -291,7 +291,10 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
 
         let guideVC = GuideSelectionViewController(viewModel: BaseViewModel())
         let nav = UINavigationController(rootViewController: guideVC)
+        nav.modalPresentationStyle = .pageSheet
         nav.presentationController?.delegate = self
+        nav.isModalInPresentation = false
+        nav.presentationController?.presentedViewController.isModalInPresentation = false
 
         nav.modalPresentationStyle = .pageSheet
 
@@ -299,7 +302,6 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
             sheet.preferredCornerRadius = 20
-            sheet.largestUndimmedDetentIdentifier = .medium
         }
 
         present(nav, animated: true)

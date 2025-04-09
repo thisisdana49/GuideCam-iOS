@@ -14,6 +14,7 @@ final class GuideSelectionViewController: BaseViewController<BaseView, BaseViewM
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = false
         setupCollectionView()
     }
     
