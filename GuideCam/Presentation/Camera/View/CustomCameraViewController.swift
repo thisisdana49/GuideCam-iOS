@@ -17,6 +17,11 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     private var permissionRequiredView: UIView?
     private var photoOutput: AVCapturePhotoOutput?
 
+    private var zoomButton: UIButton!
+    private var guideToggleButton: UIButton!
+    private var shutterButton: UIButton!
+    private var guideSelectButton: UIButton!
+
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewDidLoad()
@@ -101,6 +106,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         setupTopControlButtons()
         setupZoomButton()
         setupGuideToggleButton()
+        setupGuideSelectionButton()
     }
 
     private func setupPreviewView() {
@@ -171,11 +177,12 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
 
         shutterButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(40)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(60)
             make.width.height.equalTo(70)
         }
         
         shutterButton.addTarget(self, action: #selector(shutterButtonTapped), for: .touchUpInside)
+        self.shutterButton = shutterButton
     }
 
     @objc private func shutterButtonTapped() {
@@ -238,6 +245,8 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(140)
         }
+        
+        self.zoomButton = zoomButton
     }
 
     private func setupGuideToggleButton() {
@@ -252,8 +261,48 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         view.addSubview(guideToggle)
         guideToggle.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
-            make.centerY.equalToSuperview().offset(200)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(140)
         }
+        
+        self.guideToggleButton = guideToggle
+    }
+
+    private func setupGuideSelectionButton() {
+        let selectButton = UIButton(type: .system)
+        selectButton.setImage(UIImage(systemName: "square.grid.2x2"), for: .normal)
+        selectButton.tintColor = .white
+        selectButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        selectButton.layer.cornerRadius = 20
+        selectButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        selectButton.addTarget(self, action: #selector(presentGuideSelection), for: .touchUpInside)
+
+        view.addSubview(selectButton)
+        selectButton.snp.makeConstraints { make in
+            make.leading.equalTo(view.snp.centerX).offset(70)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(60)
+            make.width.height.equalTo(40)
+        }
+        
+        self.guideSelectButton = selectButton
+    }
+
+    @objc private func presentGuideSelection() {
+        setBottomControlsHidden(true)
+
+        let guideVC = GuideSelectionViewController(viewModel: BaseViewModel())
+        let nav = UINavigationController(rootViewController: guideVC)
+        nav.presentationController?.delegate = self
+
+        nav.modalPresentationStyle = .pageSheet
+
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 20
+            sheet.largestUndimmedDetentIdentifier = .medium
+        }
+
+        present(nav, animated: true)
     }
 
     private func savePhotoToAlbum(_ image: UIImage) {
@@ -299,6 +348,13 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
 
         present(alert, animated: true)
     }
+
+    private func setBottomControlsHidden(_ hidden: Bool) {
+        zoomButton?.isHidden = hidden
+        guideToggleButton?.isHidden = hidden
+        shutterButton?.isHidden = hidden
+        guideSelectButton?.isHidden = hidden
+    }
 }
 
 extension CustomCameraViewController: AVCapturePhotoCaptureDelegate {
@@ -326,5 +382,11 @@ extension CustomCameraViewController: AVCapturePhotoCaptureDelegate {
         } else {
             print("✅ 사진이 앨범에 저장되었습니다.")
         }
+    }
+}
+
+extension CustomCameraViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        setBottomControlsHidden(false)
     }
 }
