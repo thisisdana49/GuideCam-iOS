@@ -44,22 +44,52 @@ final class GuideListView: BaseView {
         return button
     }()
 
+    let createGuideButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("＋ Create New Guide", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.layer.cornerRadius = 12
+        button.isHidden = false
+        return button
+    }()
+
+    let sectionHeaderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Guides"
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: 20)
+        return label
+    }()
+
     override func configureHierarchy() {
         addSubview(collectionView)
         addSubview(emptyStateLabel)
         addSubview(deleteButton)
+        addSubview(createGuideButton)
+        addSubview(sectionHeaderLabel)
     }
 
     override func configureLayout() {
-        deleteButton.snp.makeConstraints {
+        createGuideButton.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(16)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(44)
             $0.width.equalTo(safeAreaLayoutGuide).inset(20)
         }
 
+        deleteButton.snp.makeConstraints {
+            $0.edges.equalTo(createGuideButton)
+        }
+
+        sectionHeaderLabel.snp.makeConstraints {
+            $0.top.equalTo(createGuideButton.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(20)
+        }
+
         collectionView.snp.remakeConstraints {
-            $0.top.equalTo(deleteButton.snp.bottom).offset(16)
+            $0.top.equalTo(sectionHeaderLabel.snp.bottom).offset(12)
             $0.leading.trailing.bottom.equalTo(safeAreaLayoutGuide).inset(16)
         }
 
