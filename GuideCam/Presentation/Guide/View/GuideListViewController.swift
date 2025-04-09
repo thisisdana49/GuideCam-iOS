@@ -17,6 +17,7 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         super.viewDidLoad()
         viewModel.loadGuides()
         mainView.deleteButton.addTarget(self, action: #selector(deleteSelectedGuides), for: .touchUpInside)
+        mainView.createGuideButton.addTarget(self, action: #selector(createNewGuide), for: .touchUpInside)
     }
 
     override func bind() {
@@ -40,6 +41,7 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isDeleteMode in
                 self?.mainView.deleteButton.isHidden = !isDeleteMode
+                self?.mainView.createGuideButton.isHidden = isDeleteMode
             })
             .disposed(by: disposeBag)
 
@@ -56,28 +58,48 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
                 }
             })
             .disposed(by: disposeBag)
+
+        viewModel.selectedGuidesCount
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] count in
+                self?.mainView.updateDeleteButtonStyle(for: count)
+            })
+            .disposed(by: disposeBag)
     }
   
     override func configure() {
         let createAction = UIAction(title: "생성", image: UIImage(systemName: "plus")) { [weak self] _ in
-            print("가이드 생성 버튼 클릭됨")
-            print(self?.coordinator)
             self?.coordinator?.showCreateGuide()
         }
 
         let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
-            print("가이드 삭제 버튼 클릭됨")
             self?.viewModel.toggleDeleteMode()
         }
 
         let menu = UIMenu(title: "", options: .displayInline, children: [createAction, deleteAction])
         let menuItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
 
-        navigationItem.rightBarButtonItem = menuItem
+        let settingItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingTapped))
+
+        navigationItem.rightBarButtonItems = [menuItem, settingItem]
+        
+        let homeTitleLabel = UILabel()
+        homeTitleLabel.text = "Home"
+        homeTitleLabel.textColor = .white
+        homeTitleLabel.font = .boldSystemFont(ofSize: 28)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: homeTitleLabel)
     }
     
     @objc private func deleteSelectedGuides() {
         viewModel.deleteSelectedGuides()
+    }
+
+    @objc private func createNewGuide() {
+        coordinator?.showCreateGuide()
+    }
+
+    @objc private func settingTapped() {
+        print("⚙️ 설정 버튼이 눌렸습니다 (추후 설정 화면 이동 예정)")
     }
     
     func refreshGuideList() {

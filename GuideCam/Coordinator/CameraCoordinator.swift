@@ -17,7 +17,7 @@ final class CameraCoordinator: Coordinator {
 
     func start() {
         let viewModel = CameraViewModel()
-        let viewController = CameraViewController(viewModel: viewModel)
+        let viewController = CustomCameraViewController(viewModel: viewModel)
         navigationController.viewControllers = [viewController]
     }
 }

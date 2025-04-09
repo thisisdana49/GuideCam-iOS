@@ -18,6 +18,10 @@ final class GuideListViewModel: BaseViewModel {
         self.repository = repository
     }
 
+    var selectedGuidesCount: Observable<Int> {
+        selectedGuides.map { $0.count }.distinctUntilChanged()
+    }
+
     func loadGuides() {
         let allGuides = repository.fetchAll().map { $0.toModel() }
         guides.accept(allGuides)

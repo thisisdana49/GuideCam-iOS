@@ -12,6 +12,9 @@
 		3E21EB4D2DA504AE00FB9881 /* GuideFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB4C2DA504AE00FB9881 /* GuideFileManager.swift */; };
 		3E21EB4F2DA5105300FB9881 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB4E2DA5105300FB9881 /* UIView+Extension.swift */; };
 		3E21EB512DA54C7900FB9881 /* ConfirmSaveGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB502DA54C7900FB9881 /* ConfirmSaveGuideView.swift */; };
+		3E21ECB72DA6D8D700FB9881 /* GuideSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21ECB62DA6D8D700FB9881 /* GuideSelectionViewController.swift */; };
+		3E21ECB92DA6E42500FB9881 /* GuideSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21ECB82DA6E42500FB9881 /* GuideSelectionViewModel.swift */; };
+		3E21ECBB2DA6E9ED00FB9881 /* GuideSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21ECBA2DA6E9ED00FB9881 /* GuideSelectionCell.swift */; };
 		3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */; };
 		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
 		3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA82D9E778300681B6B /* Localizable.strings */; };
@@ -35,7 +38,7 @@
 		3EFA02DA2D9FEF200087A708 /* CameraCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02D92D9FEF200087A708 /* CameraCoordinator.swift */; };
 		3EFA02DC2D9FEF3A0087A708 /* AlbumCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02DB2D9FEF3A0087A708 /* AlbumCoordinator.swift */; };
 		3EFA02E42D9FEFD10087A708 /* GuideListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02E22D9FEFD10087A708 /* GuideListViewController.swift */; };
-		3EFA02F52D9FF0130087A708 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02F42D9FF0130087A708 /* CameraViewController.swift */; };
+		3EFA02F52D9FF0130087A708 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02F42D9FF0130087A708 /* CustomCameraViewController.swift */; };
 		3EFA02F72D9FF02F0087A708 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02F62D9FF02F0087A708 /* AlbumViewController.swift */; };
 		3EFA02F92D9FF03E0087A708 /* GuideListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02F82D9FF03E0087A708 /* GuideListViewModel.swift */; };
 		3EFA02FB2D9FF0900087A708 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA02FA2D9FF0900087A708 /* CameraViewModel.swift */; };
@@ -75,6 +78,9 @@
 		3E21EB4C2DA504AE00FB9881 /* GuideFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideFileManager.swift; sourceTree = "<group>"; };
 		3E21EB4E2DA5105300FB9881 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3E21EB502DA54C7900FB9881 /* ConfirmSaveGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSaveGuideView.swift; sourceTree = "<group>"; };
+		3E21ECB62DA6D8D700FB9881 /* GuideSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSelectionViewController.swift; sourceTree = "<group>"; };
+		3E21ECB82DA6E42500FB9881 /* GuideSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSelectionViewModel.swift; sourceTree = "<group>"; };
+		3E21ECBA2DA6E9ED00FB9881 /* GuideSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSelectionCell.swift; sourceTree = "<group>"; };
 		3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE1EBA62D9E778300681B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,7 +104,7 @@
 		3EFA02D92D9FEF200087A708 /* CameraCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCoordinator.swift; sourceTree = "<group>"; };
 		3EFA02DB2D9FEF3A0087A708 /* AlbumCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCoordinator.swift; sourceTree = "<group>"; };
 		3EFA02E22D9FEFD10087A708 /* GuideListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideListViewController.swift; sourceTree = "<group>"; };
-		3EFA02F42D9FF0130087A708 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3EFA02F42D9FF0130087A708 /* CustomCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraViewController.swift; sourceTree = "<group>"; };
 		3EFA02F62D9FF02F0087A708 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		3EFA02F82D9FF03E0087A708 /* GuideListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideListViewModel.swift; sourceTree = "<group>"; };
 		3EFA02FA2D9FF0900087A708 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
@@ -387,7 +393,9 @@
 		3EFA02E92D9FEFE60087A708 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3EFA02F42D9FF0130087A708 /* CameraViewController.swift */,
+				3EFA02F42D9FF0130087A708 /* CustomCameraViewController.swift */,
+				3E21ECBA2DA6E9ED00FB9881 /* GuideSelectionCell.swift */,
+				3E21ECB62DA6D8D700FB9881 /* GuideSelectionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -396,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				3EFA02FA2D9FF0900087A708 /* CameraViewModel.swift */,
+				3E21ECB82DA6E42500FB9881 /* GuideSelectionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -527,13 +536,14 @@
 				3EFA03002D9FF7CD0087A708 /* CustomTabBarController.swift in Sources */,
 				3EFA02E42D9FEFD10087A708 /* GuideListViewController.swift in Sources */,
 				3EFA03152DA157600087A708 /* DrawingCanvasView.swift in Sources */,
-				3EFA02F52D9FF0130087A708 /* CameraViewController.swift in Sources */,
+				3EFA02F52D9FF0130087A708 /* CustomCameraViewController.swift in Sources */,
 				3E21EB4D2DA504AE00FB9881 /* GuideFileManager.swift in Sources */,
 				3EFA03172DA26B840087A708 /* UIColor+Hex.swift in Sources */,
 				3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */,
 				3EFA02DC2D9FEF3A0087A708 /* AlbumCoordinator.swift in Sources */,
 				3EFA03092DA000910087A708 /* Guide.swift in Sources */,
 				3EFA02DA2D9FEF200087A708 /* CameraCoordinator.swift in Sources */,
+				3E21ECB72DA6D8D700FB9881 /* GuideSelectionViewController.swift in Sources */,
 				3EFA02CE2D9E87870087A708 /* BaseViewModel.swift in Sources */,
 				3EFA02D82D9FEF080087A708 /* GuideListCoordinator.swift in Sources */,
 				3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */,
@@ -548,6 +558,7 @@
 				3EFA03112DA123CC0087A708 /* ConfirmSaveGuideViewController.swift in Sources */,
 				3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */,
 				3E21EB512DA54C7900FB9881 /* ConfirmSaveGuideView.swift in Sources */,
+				3E21ECBB2DA6E9ED00FB9881 /* GuideSelectionCell.swift in Sources */,
 				3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */,
 				3E21EB4F2DA5105300FB9881 /* UIView+Extension.swift in Sources */,
 				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
@@ -555,6 +566,7 @@
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
 				3EFA02FB2D9FF0900087A708 /* CameraViewModel.swift in Sources */,
 				3EFA02D02D9E87CD0087A708 /* BaseViewController.swift in Sources */,
+				3E21ECB92DA6E42500FB9881 /* GuideSelectionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
