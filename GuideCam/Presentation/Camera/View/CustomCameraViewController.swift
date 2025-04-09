@@ -37,6 +37,8 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     private var permissionRequiredView: UIView?
     private var photoOutput: AVCapturePhotoOutput?
     
+    private var currentCameraPosition: AVCaptureDevice.Position = .back
+    
     private var overlayContainerView: UIView! // Added property
     private var isGuideVisible = true // Added property
 
@@ -52,6 +54,53 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     // Flash
     private var currentFlashMode: FlashMode = .auto
     private var flashButton: UIButton!
+    
+    // Timer
+    private enum TimerOption: Int, CaseIterable {
+        case off = 0
+        case seconds3 = 3
+        case seconds5 = 5
+        case seconds10 = 10
+
+        var label: String {
+            switch self {
+            case .off: return "0"
+            case .seconds3: return "3"
+            case .seconds5: return "5"
+            case .seconds10: return "10"
+            }
+        }
+
+        var iconName: String {
+            switch self {
+            case .off: return "timer"
+            case .seconds3: return "3.circle"
+            case .seconds5: return "5.circle"
+            case .seconds10: return "10.circle"
+            }
+        }
+    }
+    
+    private var currentTimerOption: TimerOption = .off
+    private var timerLabel: UILabel!
+    private var countdownTimer: Timer?
+    private var remainingSeconds: Int = 0
+
+    // AspectRatio
+    private enum CameraAspectRatio: CaseIterable {
+        case ratio4x3, square, ratio16x9
+
+        var label: String {
+            switch self {
+            case .ratio4x3: return "4:3"
+            case .square: return "1:1"
+            case .ratio16x9: return "16:9"
+            }
+        }
+    }
+    
+    private var currentAspectRatio: CameraAspectRatio = .ratio4x3
+    private var aspectButton: UIButton!
 
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -73,6 +122,56 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             currentFlashMode = allModes[nextIndex]
         }
         flashButton.setImage(currentFlashMode.icon, for: .normal)
+    }
+
+    @objc private func timerButtonTapped() {
+        let allOptions = TimerOption.allCases
+        if let currentIndex = allOptions.firstIndex(of: currentTimerOption) {
+            let nextIndex = (currentIndex + 1) % allOptions.count
+            currentTimerOption = allOptions[nextIndex]
+            print("⏱️ 타이머 설정: \(currentTimerOption.label)초")
+            if let timerButton = (view.subviews.compactMap({ $0 as? UIStackView }).first?.arrangedSubviews.compactMap({ $0 as? UIButton }).dropFirst().first) {
+                timerButton.setImage(UIImage(systemName: currentTimerOption.iconName), for: .normal)
+            }
+        }
+    }
+    
+    @objc private func aspectButtonTapped() {
+        let allRatios = CameraAspectRatio.allCases
+        if let currentIndex = allRatios.firstIndex(of: currentAspectRatio) {
+            let nextIndex = (currentIndex + 1) % allRatios.count
+            currentAspectRatio = allRatios[nextIndex]
+            aspectButton.setTitle(currentAspectRatio.label, for: .normal)
+            updatePreviewAspect()
+        }
+    }
+    
+    private func updatePreviewAspect() {
+        guard let previewLayer = previewLayer else { return }
+
+        let screenSize = view.bounds.size
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        var targetSize: CGSize
+        
+        switch currentAspectRatio {
+        case .ratio4x3:
+            // 가로 기준 3:4로 비율 계산
+            let height = screenWidth * 4 / 3
+            targetSize = CGSize(width: screenWidth, height: height)
+            
+        case .square:
+            let size = min(screenWidth, screenHeight)
+            targetSize = CGSize(width: size, height: size)
+            
+        case .ratio16x9:
+            // 화면 전체를 채움 (9:16 = 화면 비율)
+            targetSize = screenSize
+        }
+
+        let x = (screenWidth - targetSize.width) / 2
+        let y = (screenHeight - targetSize.height) / 2
+        previewLayer.frame = CGRect(x: x, y: y, width: targetSize.width, height: targetSize.height)
     }
 
     private func checkCameraPermission(completion: @escaping (Bool) -> Void) {
@@ -147,6 +246,17 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         setupZoomButton()
         setupGuideToggleButton()
         setupGuideSelectionButton()
+        
+        timerLabel = UILabel()
+        timerLabel.font = UIFont.systemFont(ofSize: 64, weight: .bold)
+        timerLabel.textColor = .white
+        timerLabel.textAlignment = .center
+        timerLabel.isHidden = true
+        view.addSubview(timerLabel)
+        
+        timerLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 
     private func setupPreviewView() {
@@ -227,12 +337,37 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         guard let output = photoOutput else { return }
         let settings = AVCapturePhotoSettings()
         settings.flashMode = currentFlashMode.avFlashMode
-        output.capturePhoto(with: settings, delegate: self)
+        if currentTimerOption == .off {
+            output.capturePhoto(with: settings, delegate: self)
+        } else {
+            startCountdown(seconds: currentTimerOption.rawValue) {
+                output.capturePhoto(with: settings, delegate: self)
+            }
+        }
         
         // 진동 피드백
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
         generator.impactOccurred()
+    }
+
+    private func startCountdown(seconds: Int, completion: @escaping () -> Void) {
+        remainingSeconds = seconds
+        timerLabel.text = "\(remainingSeconds)"
+        timerLabel.isHidden = false
+
+        countdownTimer?.invalidate()
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+            self.remainingSeconds -= 1
+            if self.remainingSeconds > 0 {
+                self.timerLabel.text = "\(self.remainingSeconds)"
+            } else {
+                timer.invalidate()
+                self.timerLabel.isHidden = true
+                completion()
+            }
+        }
     }
 
     private func setupTopControlButtons() {
@@ -251,14 +386,17 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         let timerButton = UIButton()
         timerButton.setImage(UIImage(systemName: "timer"), for: .normal)
         timerButton.tintColor = .white
+        timerButton.addTarget(self, action: #selector(timerButtonTapped), for: .touchUpInside)
 
-        let aspectButton = UIButton()
-        aspectButton.setTitle("4:3", for: .normal)
+        aspectButton = UIButton()
+        aspectButton.setTitle(currentAspectRatio.label, for: .normal)
         aspectButton.setTitleColor(.white, for: .normal)
+        aspectButton.addTarget(self, action: #selector(aspectButtonTapped), for: .touchUpInside)
 
         let switchButton = UIButton()
         switchButton.setImage(UIImage(systemName: "arrow.triangle.2.circlepath.camera"), for: .normal)
         switchButton.tintColor = .white
+        switchButton.addTarget(self, action: #selector(switchCameraTapped), for: .touchUpInside)
 
         [flashButton, timerButton, aspectButton, switchButton].forEach {
             topStackView.addArrangedSubview($0)
@@ -446,6 +584,31 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         shutterButton?.isHidden = hidden
         guideSelectButton?.isHidden = hidden
     }
+
+    @objc private func switchCameraTapped() {
+        guard let session = captureSession else { return }
+
+        session.beginConfiguration()
+
+        // Remove existing input
+        if let currentInput = session.inputs.first as? AVCaptureDeviceInput {
+            session.removeInput(currentInput)
+
+            // Toggle camera position
+            currentCameraPosition = (currentInput.device.position == .back) ? .front : .back
+
+            // Add new input
+            if let newDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: currentCameraPosition),
+               let newInput = try? AVCaptureDeviceInput(device: newDevice),
+               session.canAddInput(newInput) {
+                session.addInput(newInput)
+            } else {
+                print("❌ 새 카메라 입력 추가 실패")
+            }
+        }
+
+        session.commitConfiguration()
+    }
 }
 
 extension CustomCameraViewController: AVCapturePhotoCaptureDelegate {
@@ -481,3 +644,4 @@ extension CustomCameraViewController: UIAdaptivePresentationControllerDelegate {
         setBottomControlsHidden(false)
     }
 }
+
