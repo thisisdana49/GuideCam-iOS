@@ -13,12 +13,81 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private var previewContainerView: UIView!
+    private var permissionRequiredView: UIView?
 
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewDidLoad()
-        setupUI()
+        checkCameraPermission { granted in
+            if granted {
+                self.setupUI()
+            } else {
+                self.showPermissionRequiredUI()
+            }
+        }
         print(#function, self)
+    }
+
+    private func checkCameraPermission(completion: @escaping (Bool) -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            completion(true)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    completion(granted)
+                }
+            }
+        case .denied, .restricted:
+            completion(false)
+        @unknown default:
+            completion(false)
+        }
+    }
+
+    private func showPermissionRequiredUI() {
+        let container = UIView()
+        container.backgroundColor = .black
+        view.addSubview(container)
+        container.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        let label = UILabel()
+        label.text = "카메라 권한이 필요합니다.\n설정에서 권한을 허용해주세요."
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+
+        let button = UIButton(type: .system)
+        button.setTitle("설정으로 이동", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.addTarget(self, action: #selector(openAppSettings), for: .touchUpInside)
+
+        container.addSubview(label)
+        container.addSubview(button)
+
+        label.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+
+        button.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(label.snp.bottom).offset(20)
+        }
+
+        self.permissionRequiredView = container
+    }
+
+    @objc private func openAppSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString),
+           UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
 
     private func setupUI() {
