@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class GuideSelectionViewController: BaseViewController<BaseView, BaseViewModel> {
+final class GuideSelectionViewController: BaseViewController<BaseView, GuideSelectionViewModel> {
     
     private var collectionView: UICollectionView!
 
@@ -16,6 +16,8 @@ final class GuideSelectionViewController: BaseViewController<BaseView, BaseViewM
         super.viewDidLoad()
         isModalInPresentation = false
         setupCollectionView()
+        viewModel.loadGuides()
+        collectionView.reloadData()
     }
     
     private func setupCollectionView() {
@@ -28,7 +30,7 @@ final class GuideSelectionViewController: BaseViewController<BaseView, BaseViewM
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(GuideSelectionCell.self, forCellWithReuseIdentifier: "GuideSelectionCell")
         collectionView.dataSource = self
         collectionView.delegate = self
 
@@ -42,13 +44,15 @@ final class GuideSelectionViewController: BaseViewController<BaseView, BaseViewM
 
 extension GuideSelectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12 // TODO: Replace with actual guide count
+        return viewModel.guides.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.backgroundColor = .lightGray
-        cell.layer.cornerRadius = 8
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GuideSelectionCell", for: indexPath) as? GuideSelectionCell else {
+            return UICollectionViewCell()
+        }
+        let guide = viewModel.guides[indexPath.item]
+        cell.configure(with: guide)
         return cell
     }
 }

@@ -289,7 +289,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     @objc private func presentGuideSelection() {
         setBottomControlsHidden(true)
 
-        let guideVC = GuideSelectionViewController(viewModel: BaseViewModel())
+        let guideVC = GuideSelectionViewController(viewModel: GuideSelectionViewModel())
         let nav = UINavigationController(rootViewController: guideVC)
         nav.modalPresentationStyle = .pageSheet
         nav.presentationController?.delegate = self

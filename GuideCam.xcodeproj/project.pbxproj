@@ -13,6 +13,8 @@
 		3E21EB4F2DA5105300FB9881 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB4E2DA5105300FB9881 /* UIView+Extension.swift */; };
 		3E21EB512DA54C7900FB9881 /* ConfirmSaveGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB502DA54C7900FB9881 /* ConfirmSaveGuideView.swift */; };
 		3E21ECB72DA6D8D700FB9881 /* GuideSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21ECB62DA6D8D700FB9881 /* GuideSelectionViewController.swift */; };
+		3E21ECB92DA6E42500FB9881 /* GuideSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21ECB82DA6E42500FB9881 /* GuideSelectionViewModel.swift */; };
+		3E21ECBB2DA6E9ED00FB9881 /* GuideSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21ECBA2DA6E9ED00FB9881 /* GuideSelectionCell.swift */; };
 		3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */; };
 		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
 		3EE1EBB52D9E778300681B6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA82D9E778300681B6B /* Localizable.strings */; };
@@ -77,6 +79,8 @@
 		3E21EB4E2DA5105300FB9881 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3E21EB502DA54C7900FB9881 /* ConfirmSaveGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSaveGuideView.swift; sourceTree = "<group>"; };
 		3E21ECB62DA6D8D700FB9881 /* GuideSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSelectionViewController.swift; sourceTree = "<group>"; };
+		3E21ECB82DA6E42500FB9881 /* GuideSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSelectionViewModel.swift; sourceTree = "<group>"; };
+		3E21ECBA2DA6E9ED00FB9881 /* GuideSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSelectionCell.swift; sourceTree = "<group>"; };
 		3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		3EE1EB6D2D9E47B000681B6B /* GuideCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE1EBA62D9E778300681B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				3EFA02F42D9FF0130087A708 /* CustomCameraViewController.swift */,
+				3E21ECBA2DA6E9ED00FB9881 /* GuideSelectionCell.swift */,
 				3E21ECB62DA6D8D700FB9881 /* GuideSelectionViewController.swift */,
 			);
 			path = View;
@@ -399,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				3EFA02FA2D9FF0900087A708 /* CameraViewModel.swift */,
+				3E21ECB82DA6E42500FB9881 /* GuideSelectionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				3EFA03112DA123CC0087A708 /* ConfirmSaveGuideViewController.swift in Sources */,
 				3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */,
 				3E21EB512DA54C7900FB9881 /* ConfirmSaveGuideView.swift in Sources */,
+				3E21ECBB2DA6E9ED00FB9881 /* GuideSelectionCell.swift in Sources */,
 				3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */,
 				3E21EB4F2DA5105300FB9881 /* UIView+Extension.swift in Sources */,
 				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
@@ -559,6 +566,7 @@
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
 				3EFA02FB2D9FF0900087A708 /* CameraViewModel.swift in Sources */,
 				3EFA02D02D9E87CD0087A708 /* BaseViewController.swift in Sources */,
+				3E21ECB92DA6E42500FB9881 /* GuideSelectionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
