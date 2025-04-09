@@ -27,7 +27,9 @@ final class GuideThumbnailCell: UICollectionViewCell {
     
     func configure(with guide: Guide) {
 //        print("***ThumnailPath,", guide.thumbnailPath)
-        guideImageView.image = GuideFileManager.shared.loadImage(from: guide.thumbnailPath)
+        if let transparentImage = GuideFileManager.shared.loadImage(from: guide.thumbnailPath) {
+            guideImageView.image = transparentImage.withBackgroundColor(.white)
+        }
         titleLabel.text = guide.title
 //        favoriteButton.setImage(guide.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart"), for: .normal)
 //        favoriteButton.tintColor = guide.isFavorite ? .yellow : .lightGray

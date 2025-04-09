@@ -7,11 +7,18 @@
 
 import UIKit
 
-extension UIView {
-    func asImage() -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        return renderer.image { rendererContext in
-            layer.render(in: rendererContext.cgContext)
+extension UIImage {
+    func withBackgroundColor(_ color: UIColor) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = self.scale
+        format.opaque = false
+
+        let renderer = UIGraphicsImageRenderer(size: self.size, format: format)
+        return renderer.image { context in
+            color.setFill()
+            context.fill(CGRect(origin: .zero, size: self.size))
+            self.draw(at: .zero)
         }
     }
 }
+

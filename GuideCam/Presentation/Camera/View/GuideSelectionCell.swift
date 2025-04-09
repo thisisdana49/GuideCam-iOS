@@ -25,7 +25,9 @@ final class GuideSelectionCell: UICollectionViewCell {
     }
 
     func configure(with guide: Guide) {
-        thumbnailImageView.image = GuideFileManager.shared.loadImage(from: guide.thumbnailPath)
+        if let transparentImage = GuideFileManager.shared.loadImage(from: guide.thumbnailPath) {
+            thumbnailImageView.image = transparentImage.withBackgroundColor(.white)
+        }
         titleLabel.text = guide.title
     }
 
@@ -47,7 +49,7 @@ final class GuideSelectionCell: UICollectionViewCell {
     }
 
     private func configureStyle() {
-        thumbnailImageView.contentMode = .scaleAspectFit
+        thumbnailImageView.contentMode = .scaleAspectFill
         thumbnailImageView.clipsToBounds = true
         thumbnailImageView.layer.cornerRadius = 8
         thumbnailImageView.layer.borderColor = UIColor.white.cgColor

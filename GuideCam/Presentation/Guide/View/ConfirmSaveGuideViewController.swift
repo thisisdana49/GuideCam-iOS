@@ -27,9 +27,10 @@ final class ConfirmSaveGuideViewController: BaseViewController<ConfirmSaveGuideV
         super.viewDidLoad()
         self.title = "저장 완료"
         self.navigationItem.hidesBackButton = true
-        
-        mainView.savedImageView.image = GuideFileManager.shared.loadImage(from: thumbnailPath)
-        mainView.titleField.text = titleText
+
+        if let transparentImage = GuideFileManager.shared.loadImage(from: thumbnailPath) {
+            mainView.savedImageView.image = transparentImage.withBackgroundColor(.white)
+        }
         
         mainView.viewGuideListButton.addTarget(self, action: #selector(goBackToGuideList), for: .touchUpInside)
 //         mainView.homeButton.addTarget(self, action: #selector(goBackToGuideList), for: .touchUpInside)

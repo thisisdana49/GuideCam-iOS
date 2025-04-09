@@ -84,7 +84,6 @@ final class ConfirmSaveGuideView: BaseView {
 //        statusLabel.textColor = .yellow
 //        statusLabel.font = .systemFont(ofSize: 14, weight: .semibold)
 
-        titleField.text = "Heart_1"
         titleField.textColor = .white
         titleField.font = .boldSystemFont(ofSize: 20)
         titleField.borderStyle = .none
