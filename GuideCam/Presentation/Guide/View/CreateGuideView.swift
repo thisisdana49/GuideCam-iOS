@@ -1,3 +1,4 @@
+//
 //  CreateGuideView.swift
 //  GuideCam
 //
@@ -19,8 +20,8 @@ final class CreateGuideView: BaseView {
 
     let drawModeButton = UIButton()
     let imageModeButton = UIButton()
-    let undoButton = UIButton()
-    let redoButton = UIButton()
+//    let undoButton = UIButton() // Commented out
+//    let redoButton = UIButton() // Commented out
     
     let penButton = UIButton()
     let eraserButton = UIButton() // Added eraserButton
@@ -65,8 +66,8 @@ final class CreateGuideView: BaseView {
     override func configureHierarchy() {
         addSubview(canvasView)
         addSubview(drawingStackView)
-        addSubview(undoButton)
-        addSubview(redoButton)
+//        addSubview(undoButton) // Commented out
+//        addSubview(redoButton) // Commented out
         addSubview(backButton)
         addSubview(ratioStackView)
         addSubview(saveButton)
@@ -125,22 +126,22 @@ final class CreateGuideView: BaseView {
         }
         
         imageTrashButton.snp.makeConstraints {
-            $0.leading.equalTo(drawingStackView.snp.trailing).offset(12)
-            $0.centerY.equalTo(drawingStackView)
-            $0.width.height.equalTo(32)
-        }
-
-        redoButton.snp.makeConstraints {
+            $0.top.equalTo(ratioStackView.snp.bottom).offset(12)
             $0.trailing.equalToSuperview().inset(16)
-            $0.centerY.equalTo(drawingStackView)
-            $0.width.height.equalTo(40)
+            $0.width.height.equalTo(44)
         }
 
-        undoButton.snp.makeConstraints {
-            $0.trailing.equalTo(redoButton.snp.leading).offset(-16)
-            $0.centerY.equalTo(redoButton)
-            $0.width.height.equalTo(40)
-        }
+//        redoButton.snp.makeConstraints { // Commented out
+//            $0.trailing.equalToSuperview().inset(16)
+//            $0.centerY.equalTo(drawingStackView)
+//            $0.width.height.equalTo(40)
+//        }
+
+//        undoButton.snp.makeConstraints { // Commented out
+//            $0.trailing.equalTo(redoButton.snp.leading).offset(-16)
+//            $0.centerY.equalTo(redoButton)
+//            $0.width.height.equalTo(40)
+//        }
         
         drawingCanvasView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -229,11 +230,11 @@ final class CreateGuideView: BaseView {
         imageModeButton.setImage(UIImage(systemName: "plus.rectangle.on.rectangle"), for: .normal)
         imageModeButton.tintColor = .white
 
-        undoButton.setImage(UIImage(systemName: "arrow.uturn.backward"), for: .normal)
-        undoButton.tintColor = .white
+//        undoButton.setImage(UIImage(systemName: "arrow.uturn.backward"), for: .normal) // Commented out
+//        undoButton.tintColor = .white // Commented out
 
-        redoButton.setImage(UIImage(systemName: "arrow.uturn.forward"), for: .normal)
-        redoButton.tintColor = .white
+//        redoButton.setImage(UIImage(systemName: "arrow.uturn.forward"), for: .normal) // Commented out
+//        redoButton.tintColor = .white // Commented out
         
         // New drawing tool buttons configuration
         penButton.setImage(UIImage(systemName: "applepencil"), for: .normal)
@@ -248,9 +249,19 @@ final class CreateGuideView: BaseView {
         shapeButton.tintColor = .white
         shapeButton.isHidden = true
         
-        colorButton.setImage(UIImage(systemName: "paintbrush"), for: .normal)
+        colorButton.setImage(UIImage(systemName: "paintpalette.fill"), for: .normal)
         colorButton.tintColor = .white
         colorButton.isHidden = true
+        
+        let toolButtons = [drawModeButton, penButton, eraserButton, shapeButton, colorButton, imageModeButton]
+        toolButtons.forEach {
+            $0.snp.makeConstraints {
+                $0.width.height.equalTo(44)
+            }
+            $0.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            $0.layer.cornerRadius = 22
+            $0.clipsToBounds = true
+        }
         
         drawingToolButtons = [penButton, eraserButton, shapeButton, colorButton]
         
@@ -317,9 +328,12 @@ final class CreateGuideView: BaseView {
         imageDeleteButton.tintColor = .yellow
         imageDeleteButton.isHidden = true
 
-        imageTrashButton.setImage(UIImage(systemName: "trash.circle.fill"), for: .normal)
+        imageTrashButton.setImage(UIImage(systemName: "trash.fill"), for: .normal)
         imageTrashButton.tintColor = .white
         imageTrashButton.isHidden = true
+        imageTrashButton.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        imageTrashButton.layer.cornerRadius = 22
+        imageTrashButton.clipsToBounds = true
     }
     
     override func layoutSubviews() {
