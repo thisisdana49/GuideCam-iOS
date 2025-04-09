@@ -46,7 +46,8 @@ final class GuideListView: BaseView {
 
     let createGuideButton: UIButton = {
         let button = UIButton()
-        button.setTitle("＋ Create New Guide", for: .normal)
+//        button.setTitle("＋ Create New Guide", for: .normal)
+        button.setTitle("＋ 새로운 가이드 만들기", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
@@ -119,14 +120,14 @@ final class GuideListView: BaseView {
     // TODO: Button Config로 리팩토링
     func updateDeleteButtonStyle(for count: Int) {
         if count == 0 {
-            deleteButton.setTitle("Select Guide to delete", for: .normal)
+            deleteButton.setTitle("삭제할 가이드 선택하기", for: .normal)
             deleteButton.isEnabled = false
             deleteButton.backgroundColor = .black
             deleteButton.setTitleColor(.gray, for: .normal)
             deleteButton.layer.borderWidth = 1
             deleteButton.layer.borderColor = UIColor.gray.cgColor
         } else {
-            deleteButton.setTitle("Delete Guide(\(count))", for: .normal)
+            deleteButton.setTitle("가이드 \(count)개 삭제하기", for: .normal)
             deleteButton.isEnabled = true
             deleteButton.backgroundColor = .yellow
             deleteButton.setTitleColor(.black, for: .normal)

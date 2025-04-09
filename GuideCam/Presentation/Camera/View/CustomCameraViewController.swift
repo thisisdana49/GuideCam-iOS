@@ -346,7 +346,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         }
         
         // 진동 피드백
-        let generator = UIImpactFeedbackGenerator(style: .light)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.prepare()
         generator.impactOccurred()
     }
@@ -422,7 +422,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         view.addSubview(zoomButton)
         zoomButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(140)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(140)
         }
         
         zoomButton.addTarget(self, action: #selector(zoomButtonTapped), for: .touchUpInside) // Connected zoom action
@@ -475,24 +475,38 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         guideToggleButton.setTitle(title, for: .normal)
     }
 
-    private func setupGuideSelectionButton() {
-        let selectButton = UIButton(type: .system)
-        selectButton.setImage(UIImage(systemName: "square.grid.2x2"), for: .normal)
-        selectButton.tintColor = .white
-        selectButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        selectButton.layer.cornerRadius = 20
-        selectButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        selectButton.addTarget(self, action: #selector(presentGuideSelection), for: .touchUpInside)
+private func setupGuideSelectionButton() {
+    let selectButton = UIButton(type: .system)
+    selectButton.tintColor = .white
+    selectButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+    selectButton.layer.cornerRadius = 28
+    selectButton.layer.borderColor = UIColor.yellow.cgColor
+    selectButton.layer.borderWidth = 2
+    selectButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    selectButton.clipsToBounds = true
 
-        view.addSubview(selectButton)
-        selectButton.snp.makeConstraints { make in
-            make.leading.equalTo(view.snp.centerX).offset(70)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(60)
-            make.width.height.equalTo(40)
-        }
-        
-        self.guideSelectButton = selectButton
+    // Load latest guide's thumbnail
+    if let latestGuide = GuideRepositoryImpl().fetchAll().sorted(by: { $0.createdAt > $1.createdAt }).first,
+       let thumbnail = GuideFileManager.shared.loadImage(from: latestGuide.thumbnailPath) {
+        selectButton.setImage(thumbnail, for: .normal)
+        selectButton.imageView?.contentMode = .scaleAspectFill
+    } else {
+        let placeholderImage = UIImage(systemName: "square.grid.2x2")
+        selectButton.setImage(placeholderImage, for: .normal)
+        selectButton.imageView?.contentMode = .scaleAspectFit
     }
+
+    selectButton.addTarget(self, action: #selector(presentGuideSelection), for: .touchUpInside)
+
+    view.addSubview(selectButton)
+    selectButton.snp.makeConstraints { make in
+        make.centerY.equalTo(shutterButton.snp.centerY)
+        make.centerX.equalTo(guideToggleButton.snp.centerX)
+        make.width.height.equalTo(56)
+    }
+
+    self.guideSelectButton = selectButton
+}
 
     @objc private func presentGuideSelection() {
         setBottomControlsHidden(true)
