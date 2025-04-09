@@ -1,4 +1,3 @@
-//
 //  GuideSelectionViewModel.swift
 //  GuideCam
 //

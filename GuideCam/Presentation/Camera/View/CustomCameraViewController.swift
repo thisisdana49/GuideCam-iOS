@@ -10,6 +10,26 @@ import SnapKit
 import AVFoundation
 import Photos
 
+private enum FlashMode: CaseIterable {
+    case auto, on, off
+
+    var icon: UIImage? {
+        switch self {
+        case .auto: return UIImage(systemName: "bolt.badge.a.fill")
+        case .on: return UIImage(systemName: "bolt.fill")
+        case .off: return UIImage(systemName: "bolt.slash.fill")
+        }
+    }
+
+    var avFlashMode: AVCaptureDevice.FlashMode {
+        switch self {
+        case .auto: return .auto
+        case .on: return .on
+        case .off: return .off
+        }
+    }
+}
+
 final class CustomCameraViewController: BaseViewController<BaseView, CameraViewModel> {
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer?
@@ -18,11 +38,20 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     private var photoOutput: AVCapturePhotoOutput?
     
     private var overlayContainerView: UIView! // Added property
+    private var isGuideVisible = true // Added property
 
     private var zoomButton: UIButton!
     private var guideToggleButton: UIButton!
     private var shutterButton: UIButton!
     private var guideSelectButton: UIButton!
+
+    private let zoomLevels: [CGFloat] = [1.0, 2.0, 3.0] // Added zoom state tracking
+//    private let zoomLevels: [CGFloat] = [1.0, 2.0, 3.0, 0.5] // Added zoom state tracking
+    private var currentZoomIndex = 0 // Added zoom state tracking
+    
+    // Flash
+    private var currentFlashMode: FlashMode = .auto
+    private var flashButton: UIButton!
 
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -35,6 +64,15 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             }
         }
         print(#function, self)
+    }
+
+    @objc private func flashButtonTapped() {
+        let allModes = FlashMode.allCases
+        if let currentIndex = allModes.firstIndex(of: currentFlashMode) {
+            let nextIndex = (currentIndex + 1) % allModes.count
+            currentFlashMode = allModes[nextIndex]
+        }
+        flashButton.setImage(currentFlashMode.icon, for: .normal)
     }
 
     private func checkCameraPermission(completion: @escaping (Bool) -> Void) {
@@ -188,6 +226,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     @objc private func shutterButtonTapped() {
         guard let output = photoOutput else { return }
         let settings = AVCapturePhotoSettings()
+        settings.flashMode = currentFlashMode.avFlashMode
         output.capturePhoto(with: settings, delegate: self)
         
         // 진동 피드백
@@ -206,6 +245,8 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         let flashButton = UIButton()
         flashButton.setImage(UIImage(systemName: "bolt.badge.a"), for: .normal)
         flashButton.tintColor = .white
+        flashButton.addTarget(self, action: #selector(flashButtonTapped), for: .touchUpInside)
+        self.flashButton = flashButton
 
         let timerButton = UIButton()
         timerButton.setImage(UIImage(systemName: "timer"), for: .normal)
@@ -246,7 +287,28 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             make.bottom.equalToSuperview().inset(140)
         }
         
+        zoomButton.addTarget(self, action: #selector(zoomButtonTapped), for: .touchUpInside) // Connected zoom action
         self.zoomButton = zoomButton
+    }
+
+    @objc private func zoomButtonTapped() { // Added zoom handler method
+        currentZoomIndex = (currentZoomIndex + 1) % zoomLevels.count
+        let zoomFactor = zoomLevels[currentZoomIndex]
+        zoomButton.setTitle("\(zoomFactor)x", for: .normal)
+        applyZoom(factor: zoomFactor)
+    }
+
+    private func applyZoom(factor: CGFloat) { // Added zoom logic
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+
+        do {
+            try device.lockForConfiguration()
+            let clampedFactor = min(max(factor, device.minAvailableVideoZoomFactor), device.maxAvailableVideoZoomFactor)
+            device.videoZoomFactor = clampedFactor
+            device.unlockForConfiguration()
+        } catch {
+            print("❌ 줌 설정 실패: \(error.localizedDescription)")
+        }
     }
 
     private func setupGuideToggleButton() {
@@ -264,7 +326,15 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(140)
         }
         
+        guideToggle.addTarget(self, action: #selector(toggleGuideOverlay), for: .touchUpInside) // Added toggle action
         self.guideToggleButton = guideToggle
+    }
+
+    @objc private func toggleGuideOverlay() { // Added toggle handler method
+        isGuideVisible.toggle()
+        overlayContainerView.isHidden = !isGuideVisible
+        let title = isGuideVisible ? "가이드 OFF" : "가이드 ON"
+        guideToggleButton.setTitle(title, for: .normal)
     }
 
     private func setupGuideSelectionButton() {
