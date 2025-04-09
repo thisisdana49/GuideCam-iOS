@@ -82,6 +82,12 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         let settingItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingTapped))
 
         navigationItem.rightBarButtonItems = [menuItem, settingItem]
+        
+        let homeTitleLabel = UILabel()
+        homeTitleLabel.text = "Home"
+        homeTitleLabel.textColor = .white
+        homeTitleLabel.font = .boldSystemFont(ofSize: 28)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: homeTitleLabel)
     }
     
     @objc private func deleteSelectedGuides() {

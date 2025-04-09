@@ -25,7 +25,7 @@ final class CustomTabBarController: UITabBarController, UINavigationControllerDe
             customTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             customTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             customTabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            customTabBar.heightAnchor.constraint(equalToConstant: 80)
+            customTabBar.heightAnchor.constraint(equalToConstant: 44)
         ])
 
         customTabBar.delegate = self
