@@ -217,7 +217,7 @@ final class CreateGuideView: BaseView {
 
         // 상단 저장 버튼
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.tintColor = .white
+        backButton.tintColor = .gray
 
         saveButton.setTitle("Save", for: .normal)
         saveButton.backgroundColor = .lightGray
