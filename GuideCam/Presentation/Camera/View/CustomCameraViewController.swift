@@ -8,12 +8,14 @@
 import UIKit
 import SnapKit
 import AVFoundation
+import Photos
 
 final class CustomCameraViewController: BaseViewController<BaseView, CameraViewModel> {
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private var previewContainerView: UIView!
     private var permissionRequiredView: UIView?
+    private var photoOutput: AVCapturePhotoOutput?
 
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -129,6 +131,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         let output = AVCapturePhotoOutput()
         if session.canAddOutput(output) {
             session.addOutput(output)
+            self.photoOutput = output
         }
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -171,6 +174,19 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(40)
             make.width.height.equalTo(70)
         }
+        
+        shutterButton.addTarget(self, action: #selector(shutterButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func shutterButtonTapped() {
+        guard let output = photoOutput else { return }
+        let settings = AVCapturePhotoSettings()
+        output.capturePhoto(with: settings, delegate: self)
+        
+        // 진동 피드백
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.prepare()
+        generator.impactOccurred()
     }
 
     private func setupTopControlButtons() {
@@ -237,6 +253,78 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         guideToggle.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview().offset(200)
+        }
+    }
+
+    private func savePhotoToAlbum(_ image: UIImage) {
+        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+
+        switch status {
+        case .authorized, .limited:
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { newStatus in
+                DispatchQueue.main.async {
+                    if newStatus == .authorized || newStatus == .limited {
+                        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                    } else {
+                        self.presentPhotoAccessDeniedAlert()
+                    }
+                }
+            }
+
+        case .denied, .restricted:
+            presentPhotoAccessDeniedAlert()
+
+        @unknown default:
+            presentPhotoAccessDeniedAlert()
+        }
+    }
+
+    private func presentPhotoAccessDeniedAlert() {
+        let alert = UIAlertController(
+            title: "사진 저장 권한이 필요해요",
+            message: "설정에서 사진 권한을 허용해야 앨범에 저장할 수 있어요.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "설정으로 이동", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        })
+
+        present(alert, animated: true)
+    }
+}
+
+extension CustomCameraViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard error == nil else {
+            print("❌ 사진 촬영 실패: \(error!.localizedDescription)")
+            return
+        }
+
+        guard let imageData = photo.fileDataRepresentation(),
+              let image = UIImage(data: imageData) else {
+            print("⚠️ 이미지 변환 실패")
+            return
+        }
+
+        print("✅ 사진 촬영 성공: \(image.size)")
+
+        // 사진을 앨범에 저장
+        savePhotoToAlbum(image)
+    }
+
+    @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            print("❌ 사진 저장 실패: \(error.localizedDescription)")
+        } else {
+            print("✅ 사진이 앨범에 저장되었습니다.")
         }
     }
 }
