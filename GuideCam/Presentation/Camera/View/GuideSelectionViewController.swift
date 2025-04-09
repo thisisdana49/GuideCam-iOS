@@ -10,6 +10,8 @@ import SnapKit
 
 final class GuideSelectionViewController: BaseViewController<BaseView, GuideSelectionViewModel> {
     
+    var onGuideSelected: ((Guide) -> Void)?
+
     private var collectionView: UICollectionView!
 
     override func viewDidLoad() {
@@ -54,5 +56,24 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
         let guide = viewModel.guides[indexPath.item]
         cell.configure(with: guide)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedGuide = viewModel.guides[indexPath.item]
+
+        // 선택 시 하이라이트 표시
+        if let cell = collectionView.cellForItem(at: indexPath) as? GuideSelectionCell {
+            cell.updateSelectedState(true)
+        }
+
+        // 콜백 전달 후 모달 닫기
+        onGuideSelected?(selectedGuide)
+        dismiss(animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? GuideSelectionCell {
+            cell.updateSelectedState(false)
+        }
     }
 }

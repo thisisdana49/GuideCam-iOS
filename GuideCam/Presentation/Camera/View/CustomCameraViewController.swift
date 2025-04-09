@@ -16,6 +16,8 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     private var previewContainerView: UIView!
     private var permissionRequiredView: UIView?
     private var photoOutput: AVCapturePhotoOutput?
+    
+    private var overlayContainerView: UIView! // Added property
 
     private var zoomButton: UIButton!
     private var guideToggleButton: UIButton!
@@ -154,16 +156,14 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     }
 
     private func setupOverlayView() {
-        let overlayView = UIView()
-        overlayView.backgroundColor = .clear
-        overlayView.isUserInteractionEnabled = false
-        view.addSubview(overlayView)
+        overlayContainerView = UIView() // Updated to keep a reference
+        overlayContainerView.backgroundColor = .clear
+        overlayContainerView.isUserInteractionEnabled = false
+        view.addSubview(overlayContainerView)
 
-        overlayView.snp.makeConstraints { make in
+        overlayContainerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-
-        // 오버레이 이미지 뷰는 이 뷰의 서브뷰로 추가될 예정
     }
 
     private func setupShutterButton() {
@@ -290,6 +290,12 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         setBottomControlsHidden(true)
 
         let guideVC = GuideSelectionViewController(viewModel: GuideSelectionViewModel())
+        guideVC.onGuideSelected = { [weak self] selectedGuide in
+            self?.setBottomControlsHidden(false)
+            if let image = GuideFileManager.shared.loadImage(from: selectedGuide.thumbnailPath) { // Added to apply overlay image
+                self?.applyOverlayImage(image)
+            }
+        }
         let nav = UINavigationController(rootViewController: guideVC)
         nav.modalPresentationStyle = .pageSheet
         nav.presentationController?.delegate = self
@@ -305,6 +311,19 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         }
 
         present(nav, animated: true)
+    }
+
+    private func applyOverlayImage(_ image: UIImage) { // New method
+        overlayContainerView.subviews.forEach { $0.removeFromSuperview() }
+
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.alpha = 0.5
+        overlayContainerView.addSubview(imageView)
+
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     private func savePhotoToAlbum(_ image: UIImage) {
