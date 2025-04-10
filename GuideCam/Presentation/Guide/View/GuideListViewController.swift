@@ -19,6 +19,16 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         mainView.deleteButton.addTarget(self, action: #selector(deleteSelectedGuides), for: .touchUpInside)
         mainView.createGuideButton.addTarget(self, action: #selector(createNewGuide), for: .touchUpInside)
         mainView.toggleDeleteModeButton.addTarget(self, action: #selector(toggleDeleteMode), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(forName: .didExitDeleteMode, object: nil, queue: .main) { [weak self] _ in
+            self?.mainView.collectionView.reloadData()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        navigationController?.hidesBottomBarWhenPushed = true
+//        hidesBottomBarWhenPushed = true
     }
 
     override func bind() {
@@ -32,6 +42,12 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
             }
             .disposed(by: disposeBag)
 
+        viewModel.guides
+            .map { !$0.isEmpty }
+            .observe(on: MainScheduler.instance)
+            .bind(to: mainView.emptyStateLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+
         mainView.collectionView.rx.modelSelected(Guide.self)
             .subscribe(onNext: { guide in
                 print("Selected guide: \(guide.title)")
@@ -43,6 +59,8 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
             .subscribe(onNext: { [weak self] isDeleteMode in
                 self?.mainView.deleteButton.isHidden = !isDeleteMode
                 self?.mainView.createGuideButton.isHidden = isDeleteMode
+                let iconName = isDeleteMode ? "trash.slash" : "trash"
+                self?.mainView.toggleDeleteModeButton.setImage(UIImage(systemName: iconName), for: .normal)
 //                self?.mainView.toggleDeleteModeButton.isEnabled = !isDeleteMode
             })
             .disposed(by: disposeBag)
@@ -114,4 +132,8 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         viewModel.loadGuides()
     }
     
+}
+
+extension Notification.Name {
+    static let didExitDeleteMode = Notification.Name("didExitDeleteMode")
 }

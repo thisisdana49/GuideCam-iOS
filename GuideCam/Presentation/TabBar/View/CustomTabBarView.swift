@@ -22,6 +22,7 @@ final class CustomTabBarView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        print(#function)
         setupViews()
         setupLayout()
     }
@@ -31,6 +32,7 @@ final class CustomTabBarView: UIView {
     }
 
     private func setupViews() {
+        print(#function)
         backgroundColor = .black
 
         homeButton.setTitle("Home", for: .normal)
@@ -52,6 +54,7 @@ final class CustomTabBarView: UIView {
     }
 
     private func setupLayout() {
+        print(#function)
         homeButton.translatesAutoresizingMaskIntoConstraints = false
         cameraButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -75,6 +78,7 @@ final class CustomTabBarView: UIView {
     }
 
     private func updateSelectionUI(to index: Int) {
+        print(#function)
         let selectedButton = index == 0 ? homeButton : cameraButton
 
         homeButton.titleLabel?.font = .systemFont(ofSize: 16, weight: index == 0 ? .bold : .semibold)
@@ -96,6 +100,7 @@ final class CustomTabBarView: UIView {
     }
 
     @objc private func tabButtonTapped(_ sender: UIButton) {
+        print(#function)
         updateSelectionUI(to: sender.tag)
         delegate?.didSelectTab(index: sender.tag)
     }

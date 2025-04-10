@@ -119,27 +119,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
     
     private func combineDrawnGuideImage() -> UIImage? {
-        let size = mainView.canvasView.bounds.size
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = UIScreen.main.scale
-        format.opaque = false
- 
-        let renderer = UIGraphicsImageRenderer(size: size, format: format)
- 
-        return renderer.image { context in
-            let context = context.cgContext
-            context.clear(CGRect(origin: .zero, size: size))
- 
-            // editableImageView
-            if let image = mainView.editableImageView.image {
-                let frame = mainView.editableImageView.frame.offsetBy(dx: -mainView.canvasView.frame.origin.x,
-                                                                      dy: -mainView.canvasView.frame.origin.y)
-                image.draw(in: frame)
-            }
- 
-            // drawingCanvasView
-            mainView.drawingCanvasView.layer.render(in: context)
-        }
+        return mainView.canvasView.asImage()
     }
     
     @objc private func saveButtonTapped() {

@@ -25,7 +25,8 @@ final class GuideListView: BaseView {
 
     let emptyStateLabel: UILabel = {
         let label = UILabel()
-        label.text = "No guides yet"
+        label.text = "아직 가이드가 없어요.\n 나만의 가이드를 만들어볼까요? 😎"
+        label.numberOfLines = 0
         label.textColor = .gray
         label.font = .systemFont(ofSize: 14)
         label.textAlignment = .center

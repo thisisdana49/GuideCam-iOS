@@ -17,7 +17,7 @@ final class CustomTabBarController: UITabBarController, UINavigationControllerDe
     }
 
     private func setupCustomTabBar() {
-        tabBar.isHidden = true
+//        tabBar.isHidden = true
         view.addSubview(customTabBar)
 
         customTabBar.translatesAutoresizingMaskIntoConstraints = false
@@ -35,10 +35,10 @@ final class CustomTabBarController: UITabBarController, UINavigationControllerDe
         self.selectedIndex = index
     }
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let shouldHideTabBar = viewController.hidesBottomBarWhenPushed
-        customTabBar.isHidden = shouldHideTabBar
-    }
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        let shouldHideTabBar = viewController.hidesBottomBarWhenPushed
+//        customTabBar.isHidden = shouldHideTabBar
+//    }
 }
 
 extension CustomTabBarController: CustomTabBarDelegate {

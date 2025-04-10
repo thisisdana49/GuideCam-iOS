@@ -31,6 +31,7 @@ final class GuideListViewModel: BaseViewModel {
         isInDeleteMode.accept(!isInDeleteMode.value)
         if isInDeleteMode.value == false {
             selectedGuides.accept([])
+            NotificationCenter.default.post(name: .didExitDeleteMode, object: nil)
         }
     }
 

@@ -12,7 +12,7 @@ extension UIImage {
         let format = UIGraphicsImageRendererFormat()
         format.scale = self.scale
         format.opaque = false
-
+        
         let renderer = UIGraphicsImageRenderer(size: self.size, format: format)
         return renderer.image { context in
             color.setFill()
@@ -22,3 +22,15 @@ extension UIImage {
     }
 }
 
+extension UIView {
+    func asImage() -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = UIScreen.main.scale
+        format.opaque = false
+        
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size, format: format)
+        return renderer.image { context in
+            self.layer.render(in: context.cgContext)
+        }
+    }
+}
