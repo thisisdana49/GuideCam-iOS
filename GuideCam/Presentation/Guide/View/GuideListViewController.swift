@@ -99,7 +99,7 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         navigationItem.rightBarButtonItems = [settingItem]
         
         let homeTitleLabel = UILabel()
-        homeTitleLabel.text = "Home"
+        homeTitleLabel.text = "Guidro"
         homeTitleLabel.textColor = .white
         homeTitleLabel.font = .boldSystemFont(ofSize: 28)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: homeTitleLabel)
