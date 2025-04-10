@@ -119,7 +119,16 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     }
     
     private func combineDrawnGuideImage() -> UIImage? {
-        return mainView.canvasView.asImage()
+        // 캔버스의 배경색을 투명하게 설정
+        mainView.canvasView.backgroundColor = .clear
+        
+        // 그려진 가이드만 이미지로 변환
+        let image = mainView.canvasView.asImage()
+        
+        // 캔버스의 배경색을 다시 흰색으로 복원
+        mainView.canvasView.backgroundColor = .white
+        
+        return image
     }
     
     @objc private func saveButtonTapped() {
