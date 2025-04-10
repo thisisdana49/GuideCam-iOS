@@ -25,12 +25,6 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        navigationController?.hidesBottomBarWhenPushed = true
-//        hidesBottomBarWhenPushed = true
-    }
-
     override func bind() {
         viewModel.guides
             .bind(to: mainView.collectionView.rx.items(
