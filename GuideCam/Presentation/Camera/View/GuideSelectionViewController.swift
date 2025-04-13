@@ -23,6 +23,7 @@ final class GuideSelectionViewController: BaseViewController<BaseView, GuideSele
     }
     
     private func setupCollectionView() {
+        view.backgroundColor = .black.withAlphaComponent(0.2)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 12

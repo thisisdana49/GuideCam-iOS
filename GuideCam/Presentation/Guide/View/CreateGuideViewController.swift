@@ -56,8 +56,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.eraserButton.addTarget(self, action: #selector(activateEraserMode), for: .touchUpInside)
         mainView.penButton.addTarget(self, action: #selector(activatePenMode), for: .touchUpInside)
 
-        mainView.undoButton.addTarget(self, action: #selector(undoDrawing), for: .touchUpInside)
-        mainView.redoButton.addTarget(self, action: #selector(redoDrawing), for: .touchUpInside)
+        // mainView.undoButton.addTarget(self, action: #selector(undoDrawing), for: .touchUpInside)
+        // mainView.redoButton.addTarget(self, action: #selector(redoDrawing), for: .touchUpInside)
         
         mainView.drawingCanvasView.onDrawingChanged = { [weak self] in
             self?.updateSaveButtonState()
@@ -118,8 +118,21 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         coordinator?.didFinishCreateGuide()
     }
     
+    private func combineDrawnGuideImage() -> UIImage? {
+        // 캔버스의 배경색을 투명하게 설정
+        mainView.canvasView.backgroundColor = .clear
+        
+        // 그려진 가이드만 이미지로 변환
+        let image = mainView.canvasView.asImage()
+        
+        // 캔버스의 배경색을 다시 흰색으로 복원
+        mainView.canvasView.backgroundColor = .white
+        
+        return image
+    }
+    
     @objc private func saveButtonTapped() {
-        guard let thumbnailImage = mainView.canvasView.asImage() else { return }
+        guard let thumbnailImage = combineDrawnGuideImage() else { return }
 
         let filename = GuideFileManager.shared.makeImageFilename()
         guard let imagePath = GuideFileManager.shared.saveImage(thumbnailImage, withName: filename) else {
@@ -150,6 +163,8 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.drawModeButton.tintColor = drawTint
         mainView.drawingToolButtons.forEach { $0.isHidden = !mainView.isDrawingMode }
         mainView.drawingCanvasView.isUserInteractionEnabled = mainView.isDrawingMode
+        mainView.colorPaletteView.isHidden = true
+        mainView.shapePaletteView.isHidden = true
         mainView.imageModeButton.isEnabled = !mainView.isDrawingMode
         mainView.imageModeButton.alpha = mainView.isDrawingMode ? 0.4 : 1.0
         updateSaveButtonState()
@@ -158,6 +173,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     @objc private func toggleColorPalette() {
         print(#function)
         mainView.colorPaletteView.isHidden.toggle()
+        if !mainView.colorPaletteView.isHidden {
+            mainView.shapePaletteView.isHidden = true
+        }
     }
     
     @objc private func colorButtonTapped(_ sender: UIButton) {
@@ -194,9 +212,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.imageApplyButton.isHidden = !mainView.isImageEditMode
         mainView.saveButton.isHidden = mainView.isImageEditMode
         mainView.ratioStackView.isHidden = mainView.isImageEditMode
-        mainView.undoButton.isHidden = mainView.isImageEditMode
-        mainView.redoButton.isHidden = mainView.isImageEditMode
-//        mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
+        // mainView.undoButton.isHidden = mainView.isImageEditMode
+        // mainView.redoButton.isHidden = mainView.isImageEditMode
+        // mainView.imageDeleteButton.isHidden = !mainView.isImageEditMode
         mainView.imageTrashButton.isHidden = !mainView.isImageEditMode
         mainView.reselectButton.isHidden = !mainView.isImageEditMode
         mainView.drawModeButton.isEnabled = !mainView.isImageEditMode
@@ -229,6 +247,9 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
     
     @objc private func toggleShapePalette() {
         mainView.shapePaletteView.isHidden.toggle()
+        if !mainView.shapePaletteView.isHidden {
+            mainView.colorPaletteView.isHidden = true
+        }
     }
 
     @objc private func shapeButtonTapped(_ sender: UIButton) {
@@ -249,7 +270,10 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         }
 
         mainView.shapePaletteView.isHidden = true
-        print("Selected shape:", selectedShape)
+        mainView.shapeButton.tintColor = .yellow
+        mainView.penButton.tintColor = .white
+        mainView.eraserButton.tintColor = .white
+        mainView.colorButton.tintColor = .white
     }
     
     @objc private func trashButtonTapped() {
@@ -299,6 +323,10 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.colorButton.isSelected = false
         mainView.colorPaletteView.isHidden = true
         mainView.shapePaletteView.isHidden = true
+        mainView.penButton.tintColor = .white
+        mainView.shapeButton.tintColor = .white
+        mainView.colorButton.tintColor = .white
+        mainView.eraserButton.tintColor = .yellow
     }
 
     @objc private func activatePenMode() {
@@ -309,15 +337,19 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         mainView.colorButton.isSelected = false
         mainView.colorPaletteView.isHidden = true
         mainView.shapePaletteView.isHidden = true
+        mainView.penButton.tintColor = .yellow
+        mainView.shapeButton.tintColor = .white
+        mainView.colorButton.tintColor = .white
+        mainView.eraserButton.tintColor = .white
     }
 
-    @objc private func undoDrawing() {
-        mainView.drawingCanvasView.undo()
-        updateSaveButtonState()
-    }
+    // @objc private func undoDrawing() {
+    //     mainView.drawingCanvasView.undo()
+    //     updateSaveButtonState()
+    // }
 
-    @objc private func redoDrawing() {
-        mainView.drawingCanvasView.redo()
-        updateSaveButtonState()
-    }
+    // @objc private func redoDrawing() {
+    //     mainView.drawingCanvasView.redo()
+    //     updateSaveButtonState()
+    // }
 }

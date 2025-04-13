@@ -22,6 +22,7 @@ final class GuideListCoordinator: Coordinator {
     }
 
     func start() {
+        print(#function)
         let viewModel = GuideListViewModel()
         let viewController = GuideListViewController(viewModel: viewModel)
         viewController.coordinator = self
@@ -34,7 +35,7 @@ extension GuideListCoordinator: GuideListCoordinating {
         let createViewModel = CreateGuideViewModel()
         let createVC = CreateGuideViewController(viewModel: createViewModel)
         createVC.coordinator = self
-        createVC.hidesBottomBarWhenPushed = true
+       createVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(createVC, animated: true)
     }
     
@@ -42,7 +43,7 @@ extension GuideListCoordinator: GuideListCoordinating {
         let confirmViewModel = ConfirmSaveGuideViewModel()
         let confirmVC = ConfirmSaveGuideViewController(thumbnailPath: thumbnailPath, title: title, viewModel: confirmViewModel)
         confirmVC.coordinator = self
-        confirmVC.hidesBottomBarWhenPushed = true
+       confirmVC.hidesBottomBarWhenPushed = true
         navigationController.setNavigationBarHidden(false, animated: false)
         navigationController.pushViewController(confirmVC, animated: true)
     }

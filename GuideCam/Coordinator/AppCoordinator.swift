@@ -16,6 +16,7 @@ final class AppCoordinator: Coordinator {
     }
 
     func start() {
+        print(#function)
         let tabBarCoordinator = TabBarCoordinator()
         childCoordinators.append(tabBarCoordinator)
         tabBarCoordinator.start()
