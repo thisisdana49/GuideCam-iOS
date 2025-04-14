@@ -336,7 +336,14 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
     @objc private func shutterButtonTapped() {
         guard let output = photoOutput else { return }
         let settings = AVCapturePhotoSettings()
-        settings.flashMode = currentFlashMode.avFlashMode
+        
+        // ✅ 플래시 모드 안전하게 설정
+        if output.supportedFlashModes.contains(currentFlashMode.avFlashMode) {
+            settings.flashMode = currentFlashMode.avFlashMode
+        } else {
+            settings.flashMode = .off
+        }
+        
         if currentTimerOption == .off {
             output.capturePhoto(with: settings, delegate: self)
         } else {
@@ -344,7 +351,7 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
                 output.capturePhoto(with: settings, delegate: self)
             }
         }
-        
+
         // 진동 피드백
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.prepare()
@@ -381,6 +388,10 @@ final class CustomCameraViewController: BaseViewController<BaseView, CameraViewM
         flashButton.setImage(UIImage(systemName: "bolt.badge.a"), for: .normal)
         flashButton.tintColor = .white
         flashButton.addTarget(self, action: #selector(flashButtonTapped), for: .touchUpInside)
+        // Disable flashButton if flash is not supported
+        if let device = AVCaptureDevice.default(for: .video), !device.hasFlash {
+            flashButton.isHidden = true
+        }
         self.flashButton = flashButton
 
         let timerButton = UIButton()
