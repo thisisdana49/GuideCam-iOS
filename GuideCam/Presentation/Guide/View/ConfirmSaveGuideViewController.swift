@@ -37,6 +37,7 @@ final class ConfirmSaveGuideViewController: BaseViewController<ConfirmSaveGuideV
     }
     
     @objc private func goBackToGuideList() {
+        print(#function, coordinator)
         coordinator?.returnToGuideListRoot()
     }
     

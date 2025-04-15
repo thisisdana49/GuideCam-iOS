@@ -35,17 +35,19 @@ extension GuideListCoordinator: GuideListCoordinating {
         let createViewModel = CreateGuideViewModel()
         let createVC = CreateGuideViewController(viewModel: createViewModel)
         createVC.coordinator = self
-       createVC.hidesBottomBarWhenPushed = true
+        createVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(createVC, animated: true)
+        print(#function, navigationController.viewControllers)
     }
     
     func showSaveConfirm(thumbnailPath: String, title: String) {
         let confirmViewModel = ConfirmSaveGuideViewModel()
         let confirmVC = ConfirmSaveGuideViewController(thumbnailPath: thumbnailPath, title: title, viewModel: confirmViewModel)
         confirmVC.coordinator = self
-       confirmVC.hidesBottomBarWhenPushed = true
+        confirmVC.hidesBottomBarWhenPushed = true
         navigationController.setNavigationBarHidden(false, animated: false)
         navigationController.pushViewController(confirmVC, animated: true)
+        print(#function, navigationController.viewControllers)
     }
     
     func didFinishCreateGuide() {
@@ -54,11 +56,13 @@ extension GuideListCoordinator: GuideListCoordinating {
     }
     
     func returnToGuideListRoot() {
-        navigationController.popToRootViewController(animated: true)
-        if let guideListVC = navigationController.viewControllers.first as? GuideListViewController {
+        if let guideListVC = navigationController.viewControllers.first(where: { $0 is GuideListViewController }) {
+            navigationController.popToViewController(guideListVC, animated: true)
             DispatchQueue.main.async {
-                guideListVC.refreshGuideList()
+                (guideListVC as? GuideListViewController)?.refreshGuideList()
             }
+        } else {
+            print("GuideListViewController not found in stack")
         }
     }
 }
