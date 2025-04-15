@@ -521,8 +521,9 @@ private func setupGuideSelectionButton() {
 
     @objc private func presentGuideSelection() {
         setBottomControlsHidden(true)
-
+        
         let guideVC = GuideSelectionViewController(viewModel: GuideSelectionViewModel())
+        
         guideVC.onGuideSelected = { [weak self] selectedGuide in
             self?.setBottomControlsHidden(false)
             if let image = GuideFileManager.shared.loadImage(from: selectedGuide.thumbnailPath) { // Added to apply overlay image
@@ -530,6 +531,11 @@ private func setupGuideSelectionButton() {
             }
             self?.dismiss(animated: true)
         }
+        
+        guideVC.onDismiss = { [weak self] in
+            self?.setBottomControlsHidden(false)
+        }
+        
         let nav = UINavigationController(rootViewController: guideVC)
         nav.modalPresentationStyle = .overFullScreen
 //        nav.modalTransitionStyle = .crossDissolve
@@ -599,7 +605,7 @@ private func setupGuideSelectionButton() {
         present(alert, animated: true)
     }
 
-    private func setBottomControlsHidden(_ hidden: Bool) {
+    func setBottomControlsHidden(_ hidden: Bool) {
         zoomButton?.isHidden = hidden
         guideToggleButton?.isHidden = hidden
         shutterButton?.isHidden = hidden

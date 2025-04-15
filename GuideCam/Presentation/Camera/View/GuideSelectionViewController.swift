@@ -10,12 +10,13 @@ import SnapKit
 
 final class GuideSelectionViewController: BaseViewController<BaseView, GuideSelectionViewModel> {
     
+    var onDismiss: (() -> Void)?
     var onGuideSelected: ((Guide) -> Void)?
     
     private let dimmingView = UIView()
-
+    
     private var collectionView: UICollectionView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         isModalInPresentation = false
@@ -25,7 +26,10 @@ final class GuideSelectionViewController: BaseViewController<BaseView, GuideSele
         collectionView.reloadData()
     }
     
-    // Removed setupCollectionView() method. New modal setup methods added below.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 }
 
 extension GuideSelectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -45,13 +49,12 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedGuide = viewModel.guides[indexPath.item]
         
-        // 선택 시 하이라이트 표시
         if let cell = collectionView.cellForItem(at: indexPath) as? GuideSelectionCell {
             cell.updateSelectedState(true)
         }
-        
-        // 콜백 전달 후 모달 닫기
+
         onGuideSelected?(selectedGuide)
+        onDismiss?()
         dismiss(animated: true)
     }
     
@@ -72,6 +75,8 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
     }
     
     @objc private func dismissSelf() {
+        print(#function)
+        onDismiss?()
         dismiss(animated: true)
     }
     
