@@ -528,20 +528,16 @@ private func setupGuideSelectionButton() {
             if let image = GuideFileManager.shared.loadImage(from: selectedGuide.thumbnailPath) { // Added to apply overlay image
                 self?.applyOverlayImage(image)
             }
+            self?.dismiss(animated: true)
         }
         let nav = UINavigationController(rootViewController: guideVC)
-        nav.modalPresentationStyle = .pageSheet
+        nav.modalPresentationStyle = .overFullScreen
+//        nav.modalTransitionStyle = .crossDissolve
         nav.presentationController?.delegate = self
         nav.isModalInPresentation = false
         nav.presentationController?.presentedViewController.isModalInPresentation = false
-
-        nav.modalPresentationStyle = .pageSheet
-
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersGrabberVisible = true
-            sheet.preferredCornerRadius = 20
-        }
+        
+        // Removed sheetPresentationController configuration for .overFullScreen
 
         present(nav, animated: true)
     }

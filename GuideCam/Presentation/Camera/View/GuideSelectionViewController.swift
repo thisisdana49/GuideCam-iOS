@@ -11,45 +11,28 @@ import SnapKit
 final class GuideSelectionViewController: BaseViewController<BaseView, GuideSelectionViewModel> {
     
     var onGuideSelected: ((Guide) -> Void)?
+    
+    private let dimmingView = UIView()
 
     private var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         isModalInPresentation = false
-        setupCollectionView()
+        setupDimmingView()
+        setupModalContainer()
         viewModel.loadGuides()
         collectionView.reloadData()
     }
     
-    private func setupCollectionView() {
-        view.backgroundColor = .black.withAlphaComponent(0.2)
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 12
-        layout.minimumInteritemSpacing = 12
-        let itemSize = (UIScreen.main.bounds.width - 12 * 6) / 5
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.register(GuideSelectionCell.self, forCellWithReuseIdentifier: "GuideSelectionCell")
-        collectionView.dataSource = self
-        collectionView.delegate = self
-
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.verticalEdges.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(20)
-        }
-    }
+    // Removed setupCollectionView() method. New modal setup methods added below.
 }
 
 extension GuideSelectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.guides.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GuideSelectionCell", for: indexPath) as? GuideSelectionCell else {
             return UICollectionViewCell()
@@ -61,12 +44,12 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedGuide = viewModel.guides[indexPath.item]
-
+        
         // 선택 시 하이라이트 표시
         if let cell = collectionView.cellForItem(at: indexPath) as? GuideSelectionCell {
             cell.updateSelectedState(true)
         }
-
+        
         // 콜백 전달 후 모달 닫기
         onGuideSelected?(selectedGuide)
         dismiss(animated: true)
@@ -77,4 +60,51 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
             cell.updateSelectedState(false)
         }
     }
+    
+    
+    private func setupDimmingView() {
+        dimmingView.backgroundColor = .clear
+        view.addSubview(dimmingView)
+        dimmingView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissSelf))
+        dimmingView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func dismissSelf() {
+        dismiss(animated: true)
+    }
+    
+    private func setupModalContainer() {
+        let container = UIView()
+        container.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        container.layer.cornerRadius = 20
+        container.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        container.clipsToBounds = true
+        view.addSubview(container)
+        
+        container.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.5)
+        }
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 12
+        layout.minimumInteritemSpacing = 12
+        let itemSize = (UIScreen.main.bounds.width - 12 * 6) / 5
+        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.register(GuideSelectionCell.self, forCellWithReuseIdentifier: "GuideSelectionCell")
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        container.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(20)
+        }
+    }
+    
 }
