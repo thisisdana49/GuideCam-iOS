@@ -14,6 +14,16 @@ final class GuideSelectionViewController: BaseViewController<BaseView, GuideSele
     var onGuideSelected: ((Guide) -> Void)?
     
     private let dimmingView = UIView()
+    private let emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "저장된 가이드가 없어요.\n먼저 가이드를 만들어볼까요? 😊"
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
     
     private var collectionView: UICollectionView!
     
@@ -24,6 +34,7 @@ final class GuideSelectionViewController: BaseViewController<BaseView, GuideSele
         setupModalContainer()
         viewModel.loadGuides()
         collectionView.reloadData()
+        updateEmptyState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +75,10 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
         }
     }
     
+    private func updateEmptyState() {
+        let isEmpty = viewModel.guides.isEmpty
+        emptyStateLabel.isHidden = !isEmpty
+    }
     
     private func setupDimmingView() {
         dimmingView.backgroundColor = .clear
@@ -109,6 +124,11 @@ extension GuideSelectionViewController: UICollectionViewDataSource, UICollection
         container.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(20)
+        }
+        
+        container.addSubview(emptyStateLabel)
+        emptyStateLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     

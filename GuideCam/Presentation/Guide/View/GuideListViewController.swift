@@ -13,6 +13,17 @@ final class GuideListViewController: BaseViewController<GuideListView, GuideList
     
     weak var coordinator: GuideListCoordinating?
 
+    private let emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "저장된 가이드가 없어요.\n먼저 가이드를 만들어볼까요? 😊"
+        label.numberOfLines = 0
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.loadGuides()
