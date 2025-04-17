@@ -22,7 +22,6 @@ final class GuideListCoordinator: Coordinator {
     }
 
     func start() {
-        print(#function)
         let viewModel = GuideListViewModel()
         let viewController = GuideListViewController(viewModel: viewModel)
         viewController.coordinator = self
