@@ -9,7 +9,6 @@ import UIKit
 
 extension UIColor {
     /// HEX 문자열로부터 UIColor 생성
-    /// 예: UIColor(hex: "#0ACD00")
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
