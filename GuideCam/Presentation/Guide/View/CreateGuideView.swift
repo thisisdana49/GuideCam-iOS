@@ -71,11 +71,11 @@ final class CreateGuideView: BaseView {
         addSubview(backButton)
         addSubview(ratioStackView)
         addSubview(saveButton)
-        addSubview(colorPaletteView) // Added colorPaletteView to hierarchy
-        addSubview(shapePaletteView) // Added shapePaletteView to hierarchy
+        addSubview(colorPaletteView)
+        addSubview(shapePaletteView)
         addSubview(imageApplyButton)
-        addSubview(imageTrashButton) // Added to hierarchy
-        addSubview(reselectButton) // Added reselectButton to hierarchy
+        addSubview(imageTrashButton)
+        addSubview(reselectButton)
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)

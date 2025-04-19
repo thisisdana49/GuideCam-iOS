@@ -152,6 +152,7 @@ final class CreateGuideViewController: BaseViewController<CreateGuideView, Creat
         let repository = GuideRepositoryImpl()
         repository.save(newGuide)
 
+//        print("이미지 저장 완료")
         print("이미지 저장 완료")
         coordinator?.showSaveConfirm(thumbnailPath: imagePath, title: newGuide.title)
     }
