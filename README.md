@@ -80,6 +80,45 @@ Guidro는 **“개인 데이터는 오직 나만 알고, 나만 쓴다”**는 �
 
 ## 3. 기술 스택 및 아키텍처 설명
 
+### ⚙️ 사용 기술 스택
+
+| 항목 | 기술 |
+|------|------|
+| UI 프레임워크 | UIKit |
+| 아키텍처 | MVVM + RxSwift |
+| 비동기 처리 | RxSwift, RxCocoa |
+| 카메라 기능 | AVFoundation |
+| 로컬 데이터 저장 | Realm, FileManager |
+| 의존성 주입 | DIContainer, 생성자 주입 방식 |
+| 디자인 패턴 | Repository Pattern |
+| 기타 | Custom View, BaseViewController 구조화 |
+
+
+### 🧱 아키텍처 개요
+
+- 전체 앱은 **MVVM 아키텍처**로 구성되어 ViewController의 역할을 최소화하고,  
+  ViewModel을 통해 UI와 비즈니스 로직을 분리했습니다.
+- 데이터 계층은 **Repository 패턴**을 적용하여  
+  Realm 및 FileManager에 대한 직접적인 접근을 차단하고,  
+  ViewModel에서는 추상화된 인터페이스만 사용합니다.
+- 의존성 주입은 **DIContainer를 기반으로 한 생성자 주입** 방식을 통해  
+  테스트 용이성과 모듈화 구조를 강화했습니다.
+
+---
+
+
+### 🧩 주요 기술 선택 이유 및 역할
+
+- **RxSwift**: 
+- **Realm**: 
+- **FileManager**: 
+- **AVFoundation**: 
+- **Custom View + Base 구조화**: 
+
+※ 각 항목별 구체적인 사용 이유와 효과를 작성해주세요.
+
+---
+
 
 
 ## 4. 폴더 구조
