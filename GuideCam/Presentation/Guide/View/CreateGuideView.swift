@@ -79,15 +79,15 @@ final class CreateGuideView: BaseView {
         
         drawingStackView.addArrangedSubview(drawModeButton)
         drawingStackView.addArrangedSubview(penButton)
-        drawingStackView.addArrangedSubview(eraserButton) // Added eraserButton to drawingStackView
+        drawingStackView.addArrangedSubview(eraserButton)
         drawingStackView.addArrangedSubview(shapeButton)
         drawingStackView.addArrangedSubview(colorButton)
         drawingStackView.addArrangedSubview(imageModeButton)
         
-        canvasView.addSubview(photoEditMaskView) // Moved photoEditMaskView here
+        canvasView.addSubview(photoEditMaskView)
         canvasView.addSubview(editableImageView)
         canvasView.addSubview(drawingCanvasView)
-        editableImageView.addSubview(imageDeleteButton) // Added imageDeleteButton to editableImageView
+        editableImageView.addSubview(imageDeleteButton)
     }
 
     override func configureLayout() {
@@ -161,7 +161,7 @@ final class CreateGuideView: BaseView {
             $0.height.equalTo(32)
         }
 
-        photoEditMaskView.snp.makeConstraints { // Changed constraint for photoEditMaskView
+        photoEditMaskView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 
@@ -172,7 +172,7 @@ final class CreateGuideView: BaseView {
             $0.width.equalTo(80)
         }
         
-        reselectButton.snp.makeConstraints { // Added constraints for reselectButton
+        reselectButton.snp.makeConstraints {
             $0.trailing.equalTo(imageApplyButton.snp.leading).offset(-8)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(44)
