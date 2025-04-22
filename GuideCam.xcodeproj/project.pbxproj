@@ -19,11 +19,9 @@
 		3E83FB092DA3C73B0008892E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83FB082DA3C73B0008892E /* UIImageView+Extension.swift */; };
 		3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBA62D9E778300681B6B /* Assets.xcassets */; };
 		3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAE2D9E778300681B6B /* LaunchScreen.storyboard */; };
-		3EE1EBB82D9E778300681B6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB02D9E778300681B6B /* Main.storyboard */; };
 		3EE1EBB92D9E778300681B6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */; };
 		3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */; };
 		3EE1EBC82D9E788C00681B6B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */; };
-		3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1EBDC2D9E821000681B6B /* ViewController.swift */; };
 		3EE1EBE02D9E840900681B6B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBDF2D9E840900681B6B /* SnapKit */; };
 		3EE1EBE32D9E841900681B6B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE22D9E841900681B6B /* RxCocoa */; };
 		3EE1EBE52D9E841900681B6B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE1EBE42D9E841900681B6B /* RxSwift */; };
@@ -88,13 +86,11 @@
 		3EE1EBAA2D9E778300681B6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3EE1EBAD2D9E778300681B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3EE1EBAF2D9E778300681B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3EE1EBC32D9E782A00681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBC72D9E788C00681B6B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3EE1EBD52D9E7DA700681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		3EE1EBD72D9E7DA800681B6B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		3EE1EBDC2D9E821000681B6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3EFA02CD2D9E87870087A708 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		3EFA02CF2D9E87CD0087A708 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3EFA02D12D9E8A080087A708 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -168,6 +164,7 @@
 			children = (
 				3EE1EBAC2D9E778300681B6B /* AppDelegate.swift */,
 				3EE1EBB12D9E778300681B6B /* SceneDelegate.swift */,
+				3EE1EBA12D9E778300681B6B /* Coordinator */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -188,9 +185,11 @@
 		3EE1EBA22D9E778300681B6B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3EE1EBDB2D9E7DB600681B6B /* Base */,
 				3EE1EBBE2D9E77AE00681B6B /* Extension */,
 				3EE1EBBF2D9E77B300681B6B /* Utils */,
 				3EE1EBC02D9E77B800681B6B /* Constants */,
+				3EE1EBAB2D9E778300681B6B /* Support */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -198,9 +197,9 @@
 		3EE1EBA32D9E778300681B6B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3EE1EBC92D9E78C700681B6B /* RepositoryImpl */,
+				3EE1EBC92D9E78C700681B6B /* Repositories */,
 				3EE1EBCA2D9E78D100681B6B /* Realm */,
-				3EE1EBCB2D9E78DA00681B6B /* Storage */,
+				3EE1EBCB2D9E78DA00681B6B /* FileStorage */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -223,8 +222,6 @@
 				3EFA02DE2D9FEFA00087A708 /* Camera */,
 				3E21ECBC2DA6FB7F00FB9881 /* Settings */,
 				3EFA02DF2D9FEFA60087A708 /* Album */,
-				3EE1EBDB2D9E7DB600681B6B /* Base */,
-				3EE1EBDC2D9E821000681B6B /* ViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -253,11 +250,8 @@
 				3EE1EBA52D9E778300681B6B /* Presentation */,
 				3EE1EBA42D9E778300681B6B /* Domain */,
 				3EE1EBA32D9E778300681B6B /* Data */,
-				3EE1EBA12D9E778300681B6B /* Coordinator */,
 				3EE1EBA22D9E778300681B6B /* Core */,
 				3EE1EBA92D9E778300681B6B /* Resources */,
-				3EE1EBAB2D9E778300681B6B /* Support */,
-				3EE1EBB02D9E778300681B6B /* Main.storyboard */,
 			);
 			path = GuideCam;
 			sourceTree = "<group>";
@@ -288,12 +282,12 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		3EE1EBC92D9E78C700681B6B /* RepositoryImpl */ = {
+		3EE1EBC92D9E78C700681B6B /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				3E21EB4A2DA502A400FB9881 /* GuideRepository.swift */,
 			);
-			path = RepositoryImpl;
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		3EE1EBCA2D9E78D100681B6B /* Realm */ = {
@@ -304,12 +298,12 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		3EE1EBCB2D9E78DA00681B6B /* Storage */ = {
+		3EE1EBCB2D9E78DA00681B6B /* FileStorage */ = {
 			isa = PBXGroup;
 			children = (
 				3E21EB4C2DA504AE00FB9881 /* GuideFileManager.swift */,
 			);
-			path = Storage;
+			path = FileStorage;
 			sourceTree = "<group>";
 		};
 		3EE1EBD22D9E78FC00681B6B /* Model */ = {
@@ -523,7 +517,6 @@
 			files = (
 				3EE1EBB42D9E778300681B6B /* Assets.xcassets in Resources */,
 				3EE1EBB72D9E778300681B6B /* LaunchScreen.storyboard in Resources */,
-				3EE1EBB82D9E778300681B6B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,7 +562,6 @@
 				3E21ECBB2DA6E9ED00FB9881 /* GuideSelectionCell.swift in Sources */,
 				3EFA030B2DA008AA0087A708 /* CreateGuideViewController.swift in Sources */,
 				3E21EB4F2DA5105300FB9881 /* UIView+Extension.swift in Sources */,
-				3EE1EBDD2D9E821000681B6B /* ViewController.swift in Sources */,
 				3E21EB4B2DA502A400FB9881 /* GuideRepository.swift in Sources */,
 				3EE1EBBA2D9E778300681B6B /* SceneDelegate.swift in Sources */,
 				3EFA02FB2D9FF0900087A708 /* CameraViewModel.swift in Sources */,
@@ -589,14 +581,6 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		3EE1EBB02D9E778300681B6B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EE1EBAF2D9E778300681B6B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -609,7 +593,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = CP9THWX4QS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				INFOPLIST_FILE = GuideCam/Core/Support/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Guidro;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -643,7 +627,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = CP9THWX4QS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				INFOPLIST_FILE = GuideCam/Core/Support/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Guidro;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -720,7 +704,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				INFOPLIST_FILE = GuideCam/Core/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -778,7 +762,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = GuideCam/Support/Info.plist;
+				INFOPLIST_FILE = GuideCam/Core/Support/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
