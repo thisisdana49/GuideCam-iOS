@@ -159,11 +159,8 @@ Guidro는 **“개인 데이터는 오직 나만 알고, 나만 쓴다”**는 �
 ---
 
 
-## 4. 폴더 구조
-
-
-
-## 5. 핵심 구현 내용 (트러블슈팅, 설계 방향 등)
+## 5. Guidro의 기술적 도전기
+- [드로잉 기능의 구현 방식 선택](https://github.com/thisisdana49/GuideCam-iOS/wiki/기술적-도전기#%EF%B8%8F-드로잉-기능의-구현-방식-선택--pencilkit-vs-custom-engine)
 
 
 
