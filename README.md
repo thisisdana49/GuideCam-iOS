@@ -160,5 +160,5 @@ Guidro는 **“개인 데이터는 오직 나만 알고, 나만 쓴다”**는 �
 
 
 ## 5. Guidro의 기술적 도전기
-- [드로잉 기능의 구현 방식 선택](https://github.com/thisisdana49/GuideCam-iOS/wiki/기술적-도전기#%EF%B8%8F-드로잉-기능의-구현-방식-선택--pencilkit-vs-custom-engine)
-- [Guidro의 데이터 3분할 저장 전략: 메타, 파일, 결과물](https://github.com/thisisdana49/GuideCam-iOS/wiki/로컬-저장-방식의-분리-설계)
+- [드로잉 기능의 구현 방식 선택](https://github.com/thisisdana49/GuideCam-iOS/wiki/드로잉-기능의-구현-방식-선택-–-PencilKit-vs-Custom-Engine)
+- [Guidro의 데이터 3분할 저장 전략: 메타, 파일, 결과물](https://github.com/thisisdana49/GuideCam-iOS/wiki/데이터-3분할-저장-전략:-Realm---FileManager---Photos)
