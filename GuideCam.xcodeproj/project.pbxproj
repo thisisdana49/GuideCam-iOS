@@ -12,6 +12,11 @@
 		3E14291C2DCC899200345FBD /* GuidePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14291B2DCC899200345FBD /* GuidePhoto.swift */; };
 		3E1429322DCC9BF600345FBD /* GuideCamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14292F2DCC9BF600345FBD /* GuideCamTests.swift */; };
 		3E1429332DCC9BF600345FBD /* RealmMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1429302DCC9BF600345FBD /* RealmMigrationTests.swift */; };
+		3E1429362DCC9E0B00345FBD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3E1429352DCC9E0B00345FBD /* SnapKit */; };
+		3E1429382DCC9E1500345FBD /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3E1429372DCC9E1500345FBD /* RxCocoa */; };
+		3E14293A2DCC9E1800345FBD /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E1429392DCC9E1800345FBD /* RxSwift */; };
+		3E14293C2DCC9E1C00345FBD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E14293B2DCC9E1C00345FBD /* RealmSwift */; };
+		3E14293E2DCC9E1D00345FBD /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 3E14293B2DCC9E1C00345FBD /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3E21EB492DA501F200FB9881 /* GuideEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB482DA501F200FB9881 /* GuideEntity.swift */; };
 		3E21EB4B2DA502A400FB9881 /* GuideRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB4A2DA502A400FB9881 /* GuideRepository.swift */; };
 		3E21EB4D2DA504AE00FB9881 /* GuideFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21EB4C2DA504AE00FB9881 /* GuideFileManager.swift */; };
@@ -72,6 +77,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		3E14293D2DCC9E1C00345FBD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3E14293E2DCC9E1D00345FBD /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3EE1EBEA2D9E845C00681B6B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,6 +162,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E14293C2DCC9E1C00345FBD /* RealmSwift in Frameworks */,
+				3E14293A2DCC9E1800345FBD /* RxSwift in Frameworks */,
+				3E1429382DCC9E1500345FBD /* RxCocoa in Frameworks */,
+				3E1429362DCC9E0B00345FBD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +192,13 @@
 			path = GuideCamTests;
 			sourceTree = "<group>";
 		};
+		3E1429342DCC9E0B00345FBD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3E21ECBC2DA6FB7F00FB9881 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +212,7 @@
 			children = (
 				3EE1EBB32D9E778300681B6B /* GuideCam */,
 				3E1429312DCC9BF600345FBD /* GuideCamTests */,
+				3E1429342DCC9E0B00345FBD /* Frameworks */,
 				3EE1EB6E2D9E47B000681B6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -496,6 +524,7 @@
 				3E1429202DCC9BC200345FBD /* Sources */,
 				3E1429212DCC9BC200345FBD /* Frameworks */,
 				3E1429222DCC9BC200345FBD /* Resources */,
+				3E14293D2DCC9E1C00345FBD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -504,6 +533,10 @@
 			);
 			name = GuideCamTests;
 			packageProductDependencies = (
+				3E1429352DCC9E0B00345FBD /* SnapKit */,
+				3E1429372DCC9E1500345FBD /* RxCocoa */,
+				3E1429392DCC9E1800345FBD /* RxSwift */,
+				3E14293B2DCC9E1C00345FBD /* RealmSwift */,
 			);
 			productName = GuideCamTests;
 			productReference = 3E1429242DCC9BC200345FBD /* GuideCamTests.xctest */;
@@ -963,6 +996,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3E1429352DCC9E0B00345FBD /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		3E1429372DCC9E1500345FBD /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		3E1429392DCC9E1800345FBD /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE12D9E841900681B6B /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		3E14293B2DCC9E1C00345FBD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EE1EBE62D9E844E00681B6B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		3EE1EBDF2D9E840900681B6B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3EE1EBDE2D9E840900681B6B /* XCRemoteSwiftPackageReference "SnapKit" */;
