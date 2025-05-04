@@ -10,9 +10,10 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Realm 설정
+        RealmConfiguration.configure()
+        
         // Override point for customization after application launch.
         
         let navBarAppearance = UINavigationBarAppearance()
