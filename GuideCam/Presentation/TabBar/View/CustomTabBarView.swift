@@ -22,7 +22,6 @@ final class CustomTabBarView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print(#function, "여기다!!!!!!!!!!!")
         setupViews()
         setupLayout()
     }
